@@ -11,6 +11,7 @@
   display: flex;
   width: 100%;
   gap: 15vw;
+  flex-wrap: wrap;
 }
 
 h6 {
@@ -63,6 +64,7 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .blue-logo img {
@@ -78,6 +80,7 @@ a:hover {
 .social-links {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .social-links img {
@@ -94,8 +97,6 @@ a:hover {
   color: #0e2d22;
   margin-top: 19px;
   position: absolute;
-  width: 84px;
-  height: 44px;
   left: 29px;
   bottom: 9px;
 }
