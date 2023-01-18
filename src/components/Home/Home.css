@@ -1,0 +1,59 @@
+.home-container {
+  height: 100vh;
+  display: flex;
+}
+
+.home-image {
+  height: 100%;
+  width: 50%;
+}
+
+.home-image img {
+  height: 100%;
+  width: 100%;
+}
+
+.main-text {
+  width: 50%;
+  padding: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  justify-content: center;
+}
+
+.text-header {
+  font-family: "Times New Roman";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 66px;
+  line-height: 69px;
+  letter-spacing: 1.72235px;
+  color: #0e2d22;
+  width: 419px;
+  height: 138px;
+}
+
+.main-paragraph {
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0e2d22;
+  width: 494px;
+  height: 96px;
+}
+
+.shop-button {
+  background: #0e2d22;
+  border-radius: 1000px;
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #cbddbf;
+  padding: 5px 40px 11px 40px;
+}
