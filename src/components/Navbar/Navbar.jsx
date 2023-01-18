@@ -5,7 +5,7 @@ import koala from "./../../assets/koala.png";
 
 export default function Navbar() {
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <div className="logo-and-menu">
         <div className="burger-menu">
           <img src={hamburger} alt="hamburger" />
@@ -18,10 +18,10 @@ export default function Navbar() {
         <input type="text" placeholder="Search for products" />
       </div>
       <div className="login">
-        <div>How It Works</div>
-        <div>Sign in</div>
+        <a href="#">How It Works</a>
+        <a href="#">Sign in</a>
         <button className="count-button">0</button>
       </div>
-    </div>
+    </nav>
   );
 }

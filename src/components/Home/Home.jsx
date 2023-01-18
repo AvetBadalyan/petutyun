@@ -1,13 +1,13 @@
 import React from "react";
 import "./Home.css";
-import dog from "./../../assets/dog-medicine.webp";
+import dog from "./../../assets/dog-medicine.jpg"
 import Navbar from "../Navbar/Navbar";
 
 export default function Home() {
   return (
     <div className="home">
       <Navbar />
-      <div className="home-container">
+      <main className="home-container">
         <div className="home-image">
           <img src={dog} alt="dog" />
         </div>
@@ -23,7 +23,7 @@ export default function Home() {
             <button className="shop-button">Shop for your pet →</button>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
