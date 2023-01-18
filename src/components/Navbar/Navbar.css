@@ -1,0 +1,87 @@
+.navbar {
+  position: absolute;
+  background: transparent;
+  z-index: 999;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.logo-and-menu,
+.search-field,
+.login {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo-and-menu {
+  justify-content: flex-start;
+  gap: 19px;
+}
+
+.logo-and-menu .burger-menu img {
+  height: 15px;
+}
+
+.logo-and-menu .logo img {
+  height: 29px;
+}
+
+.search-field {
+  justify-content: center;
+}
+
+.search-field input {
+  width: 227px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #d1dbd6;
+  border-radius: 1000px;
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0e2d22;
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+:-moz-placeholder {
+  text-align: center;
+}
+
+.login {
+  gap: 25px;
+  justify-content: flex-end;
+}
+
+.login div {
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #0e2d22;
+}
+
+.count-button {
+  width: 44px;
+  height: 26px;
+  background: #0e2d22;
+  border-radius: 1000px;
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+  color: #f4f1ed;
+}
