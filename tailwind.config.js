@@ -1,0 +1,88 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+	darkMode: 'class',
+	theme: {
+		extend: {
+			colors: {
+				// PetCare Hub palette — warm coral/orange + teal
+				coral: {
+					50: '#fff5f2',
+					100: '#ffe8e1',
+					200: '#ffd1c7',
+					300: '#ffb09e',
+					400: '#ff8567',
+					500: '#ff6b35', // primary brand orange
+					600: '#ed5520',
+					700: '#c74316',
+					800: '#a33916',
+					900: '#873418',
+					950: '#4a1709'
+				},
+				teal: {
+					50: '#effefa',
+					100: '#c8fff1',
+					200: '#92fee5',
+					300: '#53f5d5',
+					400: '#21e2c1',
+					500: '#2ec4b6', // primary teal accent
+					600: '#069e91',
+					700: '#0a7e75',
+					800: '#0e645e',
+					900: '#11534e',
+					950: '#033331'
+				},
+				neutral: {
+					50: '#fafaf9',
+					100: '#f5f5f4',
+					200: '#e7e5e4',
+					300: '#d6d3d1',
+					400: '#a8a29e',
+					500: '#78716c',
+					600: '#57534e',
+					700: '#44403c',
+					800: '#292524',
+					900: '#1c1917',
+					950: '#0c0a09'
+				},
+				// Keep cream/sage for compatibility during transition
+				cream: {
+					DEFAULT: '#fafaf9',
+					dark: '#f5f5f4'
+				},
+				sage: {
+					DEFAULT: '#d6d3d1',
+					soft: '#e7e5e4'
+				}
+			},
+			fontFamily: {
+				serif: ['"Georgia"', '"Times New Roman"', 'serif'],
+				sans: [
+					'Inter',
+					'Segoe UI',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'Roboto',
+					'Helvetica Neue',
+					'sans-serif'
+				]
+			},
+			borderRadius: {
+				pill: '1000px'
+			},
+			boxShadow: {
+				card: '0 4px 24px -8px rgba(0, 0, 0, 0.08)',
+				'card-hover': '0 12px 36px -10px rgba(0, 0, 0, 0.15)'
+			},
+			keyframes: {
+				shimmer: {
+					'100%': { transform: 'translateX(100%)' }
+				}
+			},
+			animation: {
+				shimmer: 'shimmer 1.5s infinite'
+			}
+		}
+	},
+	plugins: []
+}
