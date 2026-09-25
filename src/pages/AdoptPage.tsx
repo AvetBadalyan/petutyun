@@ -356,7 +356,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 				hidden: { opacity: 0, y: 20 },
 				show: { opacity: 1, y: 0 }
 			}}
-			className="card group overflow-hidden"
+			className="card group flex flex-col overflow-hidden"
 		>
 			{/* Image */}
 			<div className="relative aspect-[4/3] overflow-hidden">
@@ -391,20 +391,20 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 				</span>
 			</div>
 
-			{/* Info */}
-			<div className="p-4">
+			{/* Info - flex-grow to fill available space */}
+			<div className="flex flex-1 flex-col p-4">
 				<div className="flex items-start justify-between">
-					<div>
+					<div className="min-w-0 flex-1">
 						<h3 className="font-serif text-xl text-neutral-900 dark:text-white">
 							{pet.name}
 						</h3>
-						<p className="text-sm text-neutral-500 dark:text-neutral-400">
+						<p className="truncate text-sm text-neutral-500 dark:text-neutral-400">
 							{pet.breed} · {pet.age}
 						</p>
 					</div>
 					<span
 						className={cn(
-							'rounded-full px-2 py-1 text-xs font-medium',
+							'ml-2 shrink-0 rounded-full px-2 py-1 text-xs font-medium',
 							pet.size === 'small' &&
 								'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300',
 							pet.size === 'medium' &&
@@ -417,12 +417,12 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 					</span>
 				</div>
 
-				<p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400 flex items-center gap-1">
+				<p className="mt-2 flex items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400">
 					<MapPin size={12} /> {pet.location}
 				</p>
 
-				{/* Tags */}
-				<div className="mt-3 flex flex-wrap gap-1">
+				{/* Tags - fixed height to ensure alignment */}
+				<div className="mt-3 flex min-h-[28px] flex-wrap gap-1">
 					{pet.goodWithKids && (
 						<span className="chip-teal text-xs">Kids OK</span>
 					)}
@@ -431,10 +431,10 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 					)}
 				</div>
 
-				{/* CTA */}
+				{/* CTA - pushed to bottom with mt-auto */}
 				<Link
 					to={`/adopt/${pet.id}`}
-					className="btn-primary mt-4 w-full text-center"
+					className="btn-primary mt-auto w-full pt-4 text-center"
 				>
 					Meet {pet.name}
 				</Link>

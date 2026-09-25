@@ -42,12 +42,66 @@ interface PetsState {
 const generateId = (prefix: string) =>
 	`${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
 
+// Default demo pets so portfolio isn't empty on first visit
+const defaultPets: Pet[] = [
+	{
+		id: 'demo-pet-1',
+		name: 'Archie',
+		species: 'dog',
+		breed: 'Golden Retriever',
+		age: 3,
+		weight: 28,
+		photo:
+			'https://images.unsplash.com/photo-1552053831-71594a27632d?w=200&h=200&fit=crop'
+	},
+	{
+		id: 'demo-pet-2',
+		name: 'Luna',
+		species: 'cat',
+		breed: 'Persian',
+		age: 2,
+		weight: 4.5,
+		photo:
+			'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&h=200&fit=crop'
+	},
+	{
+		id: 'demo-pet-3',
+		name: 'Max',
+		species: 'dog',
+		breed: 'German Shepherd',
+		age: 5,
+		weight: 35,
+		photo:
+			'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=200&h=200&fit=crop'
+	}
+]
+
+// Default medications for demo
+const defaultMedications: PetMedication[] = [
+	{
+		id: 'demo-med-1',
+		medicationId: 'carprofen',
+		petId: 'demo-pet-1',
+		startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+		active: true,
+		notes: 'For arthritis - 2 weeks course'
+	},
+	{
+		id: 'demo-med-2',
+		medicationId: 'omega3',
+		petId: 'demo-pet-1',
+		startDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+		active: true,
+		notes: 'Daily supplement'
+	}
+]
+
 export const usePets = create<PetsState>()(
 	persist(
 		(set, get) => ({
-			pets: [],
-			activePetId: null,
-			medications: [],
+			pets: defaultPets,
+			activePetId: 'demo-pet-1',
+			medications: defaultMedications,
 
 			addPet: petData => {
 				const newPet: Pet = {

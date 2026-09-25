@@ -3,12 +3,34 @@ import type { AdoptablePet } from '@/types'
 /**
  * Mock adoptable pets from shelters across Armenia.
  * In a real app this would come from an API like Petfinder.
+ * Using Unsplash for reliable, high-quality images.
  */
 
-const petImage = (seed: string) => `https://placedog.net/400/300?id=${seed}`
+// Reliable dog images from Unsplash
+const dogImages = [
+	'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=300&fit=crop', // Golden Retriever
+	'https://images.unsplash.com/photo-1568572933382-74d440642117?w=400&h=300&fit=crop', // Husky
+	'https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?w=400&h=300&fit=crop', // Lab
+	'https://images.unsplash.com/photo-1534351450181-ea9f78427fe8?w=400&h=300&fit=crop', // Puppies
+	'https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?w=400&h=300&fit=crop', // German Shepherd
+	'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=300&fit=crop', // Dalmatian
+	'https://images.unsplash.com/photo-1561037404-61cd46aa615b?w=400&h=300&fit=crop', // Golden
+	'https://images.unsplash.com/photo-1544568100-847a948585b9?w=400&h=300&fit=crop', // Corgi
+	'https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=400&h=300&fit=crop', // Lab
+	'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&h=300&fit=crop', // Golden puppy
+	'https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?w=400&h=300&fit=crop', // Husky
+	'https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?w=400&h=300&fit=crop', // Boxer
+	'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=400&h=300&fit=crop' // Mixed
+]
 
-const catImage = (seed: string) =>
-	`https://placekitten.com/400/300?image=${seed}`
+const catImages = [
+	'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop', // Orange cat
+	'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=300&fit=crop', // Tabby
+	'https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400&h=300&fit=crop', // Black cat
+	'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400&h=300&fit=crop', // Blue eyes
+	'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=300&fit=crop', // White
+	'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&h=300&fit=crop' // Grey
+]
 
 export const adoptablePets: AdoptablePet[] = [
 	// === DOGS ===
@@ -20,7 +42,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '3 years',
 		size: 'large',
 		gender: 'male',
-		photo: petImage('1'),
+		photo: dogImages[0],
 		bio: 'Bidzo is a proud Armenian Gampr — a gentle giant bred to guard flocks in the highlands. He loves long mountain walks and thinks he is a lap dog. Great with older kids and endlessly loyal.',
 		goodWithKids: true,
 		goodWithPets: false,
@@ -35,7 +57,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '2 years',
 		size: 'medium',
 		gender: 'female',
-		photo: petImage('2'),
+		photo: dogImages[1],
 		bio: 'Nairi is an energetic sweetheart who loves to play fetch in the park and cuddle on the couch. She is house-trained, knows basic commands, and gives the best kisses!',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -50,7 +72,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '4 years',
 		size: 'large',
 		gender: 'male',
-		photo: petImage('3'),
+		photo: dogImages[2],
 		bio: 'Vazgen is a certified therapy dog who brings joy everywhere he goes. He is calm, well-trained, and perfect for a family looking for a mature, loving companion.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -65,7 +87,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '1 year',
 		size: 'large',
 		gender: 'male',
-		photo: petImage('4'),
+		photo: dogImages[3],
 		bio: 'Tsolak is a playful young Lab who loves swimming in Lake Sevan, fetching, and making new friends. He has endless energy and would love an active family!',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -80,7 +102,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '5 years',
 		size: 'large',
 		gender: 'male',
-		photo: petImage('5'),
+		photo: dogImages[4],
 		bio: 'Aram is intelligent and loyal. He knows over 20 commands and is looking for someone who appreciates a well-trained companion. Great guard-dog instincts.',
 		goodWithKids: true,
 		goodWithPets: false,
@@ -95,7 +117,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '6 years',
 		size: 'medium',
 		gender: 'female',
-		photo: petImage('6'),
+		photo: dogImages[5],
 		bio: 'Manushak is a sweet senior girl who still has plenty of pep! She loves sniffing around the yard and curling up by your feet. Low maintenance and full of love.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -110,7 +132,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '2 years',
 		size: 'large',
 		gender: 'male',
-		photo: petImage('7'),
+		photo: dogImages[6],
 		bio: 'Areg is the definition of a good boy. Friendly with everyone he meets, loves kids, and dreams of a family with a big yard in the countryside to explore.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -125,7 +147,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '3 years',
 		size: 'small',
 		gender: 'female',
-		photo: petImage('8'),
+		photo: dogImages[7],
 		bio: 'Loosik is a charming little lady who loves attention. She is great for apartment living in the city, does not need much exercise, and has the cutest snore!',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -140,7 +162,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '1 year',
 		size: 'large',
 		gender: 'male',
-		photo: petImage('9'),
+		photo: dogImages[8],
 		bio: 'Zoravar is a young pup with tons of potential! He is eager to learn, loves training sessions with treats, and bonds deeply with his people. Looking for his forever home.',
 		goodWithKids: true,
 		goodWithPets: false,
@@ -155,7 +177,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '4 years',
 		size: 'small',
 		gender: 'female',
-		photo: petImage('10'),
+		photo: dogImages[9],
 		bio: 'Chalik may be small but she has a big personality! She is sassy, loves to burrow under blankets, and will be your devoted shadow.',
 		goodWithKids: false,
 		goodWithPets: true,
@@ -170,7 +192,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '2 years',
 		size: 'large',
 		gender: 'male',
-		photo: petImage('11'),
+		photo: dogImages[10],
 		bio: 'Arjuk is a gorgeous Husky who loves to run through the snow of the highlands and howl! He needs an experienced owner who understands the breed. Escape artist extraordinaire.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -185,7 +207,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '5 years',
 		size: 'large',
 		gender: 'female',
-		photo: petImage('12'),
+		photo: dogImages[11],
 		bio: 'Shoghik is a goofy, lovable Boxer who will make you laugh every day. She is great with kids and loves being part of family activities.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -202,7 +224,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '2 years',
 		size: 'medium',
 		gender: 'male',
-		photo: catImage('1'),
+		photo: catImages[0],
 		bio: 'Mirouk is a curious explorer who loves watching birds from the window over the old city. He is independent but enjoys evening cuddle sessions.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -217,7 +239,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '3 years',
 		size: 'large',
 		gender: 'female',
-		photo: catImage('2'),
+		photo: catImages[1],
 		bio: 'Nazeli is a fluffy sweetheart who goes limp when you pick her up (true to her breed!). She loves being held and will follow you room to room.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -232,7 +254,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '1 year',
 		size: 'medium',
 		gender: 'male',
-		photo: catImage('3'),
+		photo: catImages[2],
 		bio: 'Storun is a sleek, playful cat who loves chasing laser pointers and toy mice. He is bonded with his sister Nairi and they would love to be adopted together!',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -247,7 +269,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '6 years',
 		size: 'medium',
 		gender: 'female',
-		photo: catImage('4'),
+		photo: catImages[3],
 		bio: 'Takouhi lives up to her name (it means "queen") — she expects the royal treatment! A quiet home with gentle handling would be perfect for this elegant lady.',
 		goodWithKids: false,
 		goodWithPets: false,
@@ -262,7 +284,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '4 years',
 		size: 'large',
 		gender: 'male',
-		photo: catImage('5'),
+		photo: catImages[4],
 		bio: 'Kcitten is a big orange boy with an even bigger appetite for love (and treats). He is laid-back, friendly, and gets along with everyone.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -277,7 +299,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '2 years',
 		size: 'medium',
 		gender: 'female',
-		photo: catImage('6'),
+		photo: catImages[5],
 		bio: 'Sona is vocal and will chat with you all day! She is intelligent, loves puzzle feeders, and needs mental stimulation to stay happy.',
 		goodWithKids: true,
 		goodWithPets: true,
@@ -376,7 +398,7 @@ export const adoptablePets: AdoptablePet[] = [
 		age: '2 years',
 		size: 'medium',
 		gender: 'female',
-		photo: petImage('13'),
+		photo: dogImages[12],
 		bio: 'Tsaghik (meaning "flower") is a gorgeous girl with impeccable manners. She is gentle, loves car rides through the mountains, and will be your best adventure buddy.',
 		goodWithKids: true,
 		goodWithPets: true,

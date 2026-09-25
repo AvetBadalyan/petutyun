@@ -255,7 +255,7 @@ export function HomePage() {
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
-							className="card group overflow-hidden"
+							className="card group flex flex-col overflow-hidden"
 						>
 							<div className="relative aspect-[4/3] overflow-hidden">
 								<img
@@ -287,7 +287,7 @@ export function HomePage() {
 									/>
 								</button>
 							</div>
-							<div className="p-4">
+							<div className="flex flex-1 flex-col p-4">
 								<h3 className="font-serif text-xl text-neutral-900 dark:text-white">
 									{pet.name}
 								</h3>
@@ -299,7 +299,7 @@ export function HomePage() {
 								</p>
 								<Link
 									to={`/adopt/${pet.id}`}
-									className="btn-primary mt-4 w-full text-center"
+									className="btn-primary mt-auto pt-4 w-full text-center"
 								>
 									Meet {pet.name}
 								</Link>
