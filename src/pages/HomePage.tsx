@@ -1,8 +1,11 @@
+import { adoptablePets } from '@/data/adoptablePets'
+import { useFavorites } from '@/store/favorites'
 import { usePets } from '@/store/pets'
 import { motion } from 'framer-motion'
 import {
 	ArrowRight,
 	Heart,
+	MapPin,
 	Package,
 	PawPrint,
 	Star,
@@ -59,6 +62,12 @@ const speciesEmoji: Record<string, string> = {
 export function HomePage() {
 	const { pets, activePetId, setActivePet } = usePets()
 	const activePet = pets.find(p => p.id === activePetId)
+	const { toggle, has } = useFavorites()
+
+	// Get 3 random featured pets for adoption
+	const featuredPets = adoptablePets
+		.filter(p => p.species === 'dog') // Prioritize dogs for featured
+		.slice(0, 3)
 
 	return (
 		<div>
@@ -242,6 +251,92 @@ export function HomePage() {
 					</div>
 				</section>
 			)}
+
+			{/* Featured Adoptable Pets */}
+			<section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+				<div className="flex items-end justify-between">
+					<div>
+						<h2 className="font-serif text-3xl text-neutral-900 dark:text-white">
+							Pets Looking for Homes
+						</h2>
+						<p className="mt-1 text-neutral-600 dark:text-neutral-400">
+							Give a pet a second chance at happiness
+						</p>
+					</div>
+					<Link
+						to="/adopt"
+						className="btn-ghost hidden sm:flex"
+					>
+						View all <ArrowRight size={14} />
+					</Link>
+				</div>
+
+				<div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+					{featuredPets.map(pet => (
+						<motion.div
+							key={pet.id}
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							className="card group overflow-hidden"
+						>
+							<div className="relative aspect-[4/3] overflow-hidden">
+								<img
+									src={pet.photo}
+									alt={pet.name}
+									className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+									onError={e => {
+										e.currentTarget.src = `https://placehold.co/400x300/f5f5f4/a8a29e?text=${encodeURIComponent(pet.name)}`
+									}}
+								/>
+								<button
+									onClick={e => {
+										e.preventDefault()
+										toggle(pet.id)
+									}}
+									className={`absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-full transition-all ${
+										has(pet.id)
+											? 'bg-coral-500 text-white'
+											: 'bg-white/90 text-neutral-600 hover:bg-coral-100 hover:text-coral-600'
+									}`}
+									aria-label={
+										has(pet.id) ? 'Remove from favorites' : 'Add to favorites'
+									}
+								>
+									<Heart
+										size={20}
+										fill={has(pet.id) ? 'currentColor' : 'none'}
+									/>
+								</button>
+							</div>
+							<div className="p-4">
+								<h3 className="font-serif text-xl text-neutral-900 dark:text-white">
+									{pet.name}
+								</h3>
+								<p className="text-sm text-neutral-500 dark:text-neutral-400">
+									{pet.breed} · {pet.age}
+								</p>
+								<p className="mt-1 flex items-center gap-1 text-xs text-neutral-400">
+									<MapPin size={12} /> {pet.location}
+								</p>
+								<Link
+									to={`/adopt/${pet.id}`}
+									className="btn-primary mt-4 w-full text-center"
+								>
+									Meet {pet.name}
+								</Link>
+							</div>
+						</motion.div>
+					))}
+				</div>
+
+				<Link
+					to="/adopt"
+					className="btn-secondary mx-auto mt-6 flex sm:hidden"
+				>
+					View All Pets <ArrowRight size={16} />
+				</Link>
+			</section>
 		</div>
 	)
 }

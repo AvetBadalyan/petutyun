@@ -1,86 +1,152 @@
-# 🐨 Koala · Pet Pharmacy
+# 🐾 PetCare Hub
 
-A full-featured, trustworthy pet medication e-commerce app. Vet-grade catalog,
-personalized weight-based dosing, subscription refills, and medication
-interaction warnings — built as a portfolio piece.
+An all-in-one pet care companion app. Manage your pets, check symptoms, find
+adoptable pets, and build personalized wellness boxes.
 
-> Illustrative demo. All medical/dosage content is mock data and **not**
-> veterinary advice.
+**Live Demo:** [Coming Soon]
 
-## Tech stack
+![PetCare Hub Screenshot](./screenshot.png)
 
-- **React 19** + **Vite 6** + **TypeScript** (strict)
-- **Tailwind CSS** design system (Koala green/teal, dark & light mode)
-- **Zustand** for state (cart, pets, auth, wishlist, orders, theme) with
-  `localStorage` persistence
-- **React Router 7** for navigation (with route-level code splitting)
-- **Framer Motion** for animations
-- **lucide-react** icons
+## ✨ Features
 
-## Features
+### 🐕 My Pets
 
-**Storefront**
+- Add, edit, and delete pet profiles
+- Store pet details: name, species, breed, age, weight, photo
+- Select an "active pet" for personalized features
+- Data persisted in localStorage
 
-- Product catalog across 5 pet types (Dogs, Cats, Birds, Fish, Small Animals)
-  and 5 categories (Flea & Tick, Vitamins, Pain Relief, Dental, Supplements)
-- Search with autocomplete + keyboard navigation
-- Filters: pet type, category, brand, price range, plus sorting
-- Product detail: image gallery, dosage & instructions,
-  warnings/contraindications, frequently bought together, customer reviews
-- Skeleton loaders and smooth page transitions
+### 🩺 Symptom Checker
 
-**Cart & checkout**
+- Step-by-step wizard to assess pet symptoms
+- 5 body areas: Skin, Stomach, Behavior, Mobility, Eyes/Ears
+- Decision tree logic provides guidance and severity levels
+- Recommendations on when to see a vet
+- **Note:** This is for guidance only, not medical advice!
 
-- Slide-in cart drawer with quantity controls
-- Subscribe & save (monthly auto-refill) per item
-- Live medication interaction warnings in the cart
-- Multi-step checkout (shipping → payment → review) with order confirmation
+### ❤️ Pet Adoption Browser
 
-**Pet profiles (the unique selling point)**
+- Browse 25+ adoptable pets (mock data)
+- Filter by species, size, age, and compatibility
+- Search by name or breed
+- Save favorites to revisit later
+- Detailed pet profiles with shelter info
+- Includes pitbulls, cats, birds, and small animals!
 
-- Add pets with species, breed, weight and age
-- **Weight-based dosage calculator** per product
-- Personalized recommendations by species, age and weight
-- Medication schedule with reminders and one-tap refills
-- **Interaction warnings** across a pet's active medications
+### 📦 Wellness Box Builder
 
-**Account & auth**
+- 5-question quiz about your pet
+- Smart algorithm matches products to pet profile
+- Customize your box with swap functionality
+- "Subscribe" flow (demo only)
 
-- Mock sign up / login with protected routes
-- Order history, active subscriptions, saved pets, wishlist
-- Dark / light theme toggle
+### 🎨 Design
 
-## Getting started
+- Warm coral (#FF6B35) and teal (#2EC4B6) color scheme
+- Responsive design for all screen sizes
+- Dark mode support
+- Smooth animations with Framer Motion
+
+## 🛠 Tech Stack
+
+- **React 19** - Latest React features
+- **Vite** - Fast build tool
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first styling
+- **Zustand** - Simple state management
+- **React Router v7** - Client-side routing
+- **Framer Motion** - Animations
+- **Lucide Icons** - Beautiful icons
+- **localStorage** - Data persistence (no backend needed)
+
+## 🚀 Getting Started
 
 ```bash
+# Install dependencies
 npm install
-npm run dev      # start the dev server
-npm run build    # type-check + production build
-npm run preview  # preview the production build
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-## Project structure
+## 📁 Project Structure
 
 ```
 src/
-  assets/          brand images (Koala logo, mascots, social icons)
-  components/
-    auth/          route guard
-    cart/          cart drawer
-    layout/        navbar, footer, search, layout shell
-    pets/          pet form
-    product/       product card, grid, reviews
-    ui/            rating, badge, skeleton, loaders
-  data/            products, taxonomy, interactions (mock data)
-  lib/             dosage calculator, recommendations, search, formatting
-  pages/           route pages
-  store/           Zustand stores (persisted)
-  types/           shared TypeScript types
+├── components/
+│   ├── layout/          # Navbar, Footer, Layout
+│   └── ui/              # Reusable UI components
+├── data/
+│   ├── adoptablePets.ts # Mock adoption data
+│   ├── symptoms.ts      # Symptom checker decision tree
+│   └── wellnessProducts.ts # Wellness box products
+├── lib/
+│   └── format.ts        # Utility functions
+├── pages/
+│   ├── HomePage.tsx
+│   ├── MyPetsPage.tsx
+│   ├── SymptomCheckerPage.tsx
+│   ├── AdoptPage.tsx
+│   ├── AdoptDetailPage.tsx
+│   ├── FavoritesPage.tsx
+│   ├── WellnessBoxPage.tsx
+│   └── ...
+├── store/
+│   ├── pets.ts          # Pet profiles state
+│   ├── favorites.ts     # Adoption favorites
+│   └── theme.ts         # Dark/light mode
+├── types/
+│   └── index.ts         # TypeScript types
+├── App.tsx              # Routes
+└── main.tsx             # Entry point
 ```
 
-## Notes
+## 💡 Interview Talking Points
 
-Originally a static single-page landing built with Create React App for an
-Upwork task. Migrated to Vite + React 19 + TypeScript and expanded into a
-complete pharmacy experience while keeping the original Koala branding and green
-wellness aesthetic.
+### "How does the symptom checker work?"
+
+> "It's a decision tree stored in a data file. Based on the user's answers, I
+> build a lookup key and find the matching result. It's just pattern matching
+> with nested if/else logic — simple but effective."
+
+### "How did you handle state management?"
+
+> "I used Zustand for global state like pets and favorites because it's simpler
+> than Redux. For form state, I just use local useState. Data persists in
+> localStorage so it survives page refreshes."
+
+### "How does the wellness box algorithm work?"
+
+> "Products have targeting tags like 'forSize: large' or 'forHealth: joints'. I
+> filter the products array based on quiz answers, score each product by how
+> many criteria it matches, then return the top 5."
+
+### "Why no backend?"
+
+> "For a portfolio demo, localStorage is sufficient. The architecture is clean
+> enough that swapping localStorage calls with API calls would be
+> straightforward."
+
+## 📝 Notes
+
+- This is a portfolio project — no real adoptions or purchases are processed
+- Pet data is stored locally in your browser
+- Symptom checker is for educational purposes only, not medical advice
+- Mock pet images use placeholder services
+
+## 🙏 Credits
+
+- Pet images: [PlaceDog](https://placedog.net),
+  [Placekitten](https://placekitten.com), [Unsplash](https://unsplash.com)
+- Icons: [Lucide](https://lucide.dev)
+- Fonts: System fonts (Georgia, Inter/Segoe UI)
+
+---
+
+Built with ❤️ for pets everywhere
