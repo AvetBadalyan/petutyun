@@ -1,12 +1,16 @@
 import { adoptablePets } from '@/data/adoptablePets'
 import { cn } from '@/lib/format'
+import { motionTransition } from '@/lib/motion'
 import { imageFallback, speciesEmoji } from '@/lib/species'
 import { useFavorites } from '@/store/favorites'
 import type { AdoptablePet } from '@/types'
 import { motion } from 'framer-motion'
-import { Filter, Heart, MapPin, Search, X } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { Filter, Heart, MapPin, Plus, Search, X } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+// How many pets to show before the "Show more" button
+const PAGE_SIZE = 6
 
 const speciesOptions = [
 	{ value: 'all', label: 'All Pets' },
@@ -72,6 +76,15 @@ export function AdoptPage() {
 			return true
 		})
 	}, [search, species, size, age, goodWithKids, goodWithPets])
+
+	// Show a manageable batch first (esp. on mobile), reveal more on demand.
+	const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+	useEffect(() => {
+		setVisibleCount(PAGE_SIZE)
+	}, [search, species, size, age, goodWithKids, goodWithPets])
+
+	const visiblePets = filteredPets.slice(0, visibleCount)
+	const remaining = filteredPets.length - visiblePets.length
 
 	const activeFilters = [
 		species !== 'all',
@@ -153,7 +166,7 @@ export function AdoptPage() {
 					<select
 						value={species}
 						onChange={e => setSpecies(e.target.value)}
-						className="input w-auto"
+						className="select w-auto"
 					>
 						{speciesOptions.map(opt => (
 							<option key={opt.value} value={opt.value}>
@@ -165,7 +178,7 @@ export function AdoptPage() {
 					<select
 						value={size}
 						onChange={e => setSize(e.target.value)}
-						className="input w-auto"
+						className="select w-auto"
 					>
 						{sizeOptions.map(opt => (
 							<option key={opt.value} value={opt.value}>
@@ -177,7 +190,7 @@ export function AdoptPage() {
 					<select
 						value={age}
 						onChange={e => setAge(e.target.value)}
-						className="input w-auto"
+						className="select w-auto"
 					>
 						{ageOptions.map(opt => (
 							<option key={opt.value} value={opt.value}>
@@ -230,7 +243,7 @@ export function AdoptPage() {
 							<select
 								value={species}
 								onChange={e => setSpecies(e.target.value)}
-								className="input"
+								className="select"
 							>
 								{speciesOptions.map(opt => (
 									<option key={opt.value} value={opt.value}>
@@ -247,7 +260,7 @@ export function AdoptPage() {
 							<select
 								value={size}
 								onChange={e => setSize(e.target.value)}
-								className="input"
+								className="select"
 							>
 								{sizeOptions.map(opt => (
 									<option key={opt.value} value={opt.value}>
@@ -264,7 +277,7 @@ export function AdoptPage() {
 							<select
 								value={age}
 								onChange={e => setAge(e.target.value)}
-								className="input"
+								className="select"
 							>
 								{ageOptions.map(opt => (
 									<option key={opt.value} value={opt.value}>
@@ -322,21 +335,32 @@ export function AdoptPage() {
 					</button>
 				</div>
 			) : (
-				<motion.div
-					initial="hidden"
-					animate="show"
-					variants={{ show: { transition: { staggerChildren: 0.05 } } }}
-					className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-				>
-					{filteredPets.map(pet => (
-						<PetCard
-							key={pet.id}
-							pet={pet}
-							isFavorite={has(pet.id)}
-							onToggleFavorite={() => toggle(pet.id)}
-						/>
-					))}
-				</motion.div>
+				<>
+					<div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+						{visiblePets.map(pet => (
+							<PetCard
+								key={pet.id}
+								pet={pet}
+								isFavorite={has(pet.id)}
+								onToggleFavorite={() => toggle(pet.id)}
+							/>
+						))}
+					</div>
+
+					{remaining > 0 && (
+						<div className="mt-8 flex flex-col items-center gap-3">
+							<button
+								onClick={() => setVisibleCount(c => c + PAGE_SIZE)}
+								className="btn-secondary"
+							>
+								<Plus size={16} /> Show more pets
+							</button>
+							<p className="text-sm text-neutral-500 dark:text-neutral-400">
+								Showing {visiblePets.length} of {filteredPets.length}
+							</p>
+						</div>
+					)}
+				</>
 			)}
 		</div>
 	)
@@ -352,10 +376,9 @@ interface PetCardProps {
 function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 	return (
 		<motion.div
-			variants={{
-				hidden: { opacity: 0, y: 20 },
-				show: { opacity: 1, y: 0 }
-			}}
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={motionTransition.base}
 			className="card group flex flex-col overflow-hidden"
 		>
 			{/* Image */}
@@ -363,7 +386,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 				<img
 					src={pet.photo}
 					alt={pet.name}
-					className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+					className="dim-on-dark h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
 					onError={e => {
 						e.currentTarget.onerror = null
 						e.currentTarget.src = imageFallback()
@@ -386,7 +409,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 					<Heart size={20} fill={isFavorite ? 'currentColor' : 'none'} />
 				</button>
 				{/* Species badge */}
-				<span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-1 text-sm">
+				<span className="absolute left-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/90 text-base shadow-sm dark:bg-neutral-900/80">
 					{speciesEmoji[pet.species]}
 				</span>
 			</div>
@@ -402,17 +425,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 							{pet.breed} · {pet.age}
 						</p>
 					</div>
-					<span
-						className={cn(
-							'ml-2 shrink-0 rounded-full px-2 py-1 text-xs font-medium',
-							pet.size === 'small' &&
-								'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300',
-							pet.size === 'medium' &&
-								'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
-							pet.size === 'large' &&
-								'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300'
-						)}
-					>
+					<span className="ml-2 shrink-0 rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium capitalize text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
 						{pet.size}
 					</span>
 				</div>
@@ -421,7 +434,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 					<MapPin size={12} /> {pet.location}
 				</p>
 
-				{/* Tags - fixed height to ensure alignment */}
+				{/* Tags - fixed height keeps card bodies aligned */}
 				<div className="mt-3 flex min-h-[28px] flex-wrap gap-1">
 					{pet.goodWithKids && (
 						<span className="chip-teal text-xs">Kids OK</span>
@@ -431,11 +444,9 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 					)}
 				</div>
 
-				{/* CTA - pushed to bottom with mt-auto */}
-				<Link
-					to={`/adopt/${pet.id}`}
-					className="btn-primary mt-auto w-full pt-4 text-center"
-				>
+				{/* Spacer pushes the CTA to the bottom; the button keeps a fixed gap above */}
+				<div className="mt-auto" />
+				<Link to={`/adopt/${pet.id}`} className="btn-primary mt-5 w-full">
 					Meet {pet.name}
 				</Link>
 			</div>

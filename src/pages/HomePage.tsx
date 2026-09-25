@@ -15,6 +15,10 @@ import {
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+// Dina photos — the developer's real pitbull mascot
+import dinaCta from '@/assets/dina-images/dina-cta.jpg'
+import dinaHero from '@/assets/dina-images/dina-hero.jpg'
+
 // Feature cards data
 const features = [
 	{
@@ -67,30 +71,59 @@ export function HomePage() {
 			{/* Hero Section */}
 			<section className="relative overflow-hidden bg-gradient-to-br from-coral-50 via-white to-teal-50 dark:from-neutral-900 dark:via-neutral-950 dark:to-neutral-900">
 				<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={motionTransition.base}
-						className="text-center"
-					>
-						<span className="chip mb-4">🐾 Armenia&apos;s Pet Republic</span>
-						<h1 className="font-serif text-5xl text-neutral-900 dark:text-white sm:text-6xl">
-							Welcome to <span className="text-coral-500">Pet</span>
-							<span className="text-teal-500">utyun</span>
-						</h1>
-						<p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
-							Care for your pets, check symptoms, adopt from shelters across
-							Armenia, and build personalized wellness boxes — all in one place.
-						</p>
-						<div className="mt-8 flex flex-wrap justify-center gap-4">
-							<Link to="/my-pets" className="btn-primary">
-								Get Started <ArrowRight size={18} />
-							</Link>
-							<Link to="/adopt" className="btn-secondary">
-								Browse Adoptable Pets
-							</Link>
-						</div>
-					</motion.div>
+					<div className="grid items-center gap-12 lg:grid-cols-2">
+						{/* Text content */}
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={motionTransition.base}
+							className="text-center lg:text-left"
+						>
+							<span className="chip mb-4">🐾 Armenia&apos;s Pet Republic</span>
+							<h1 className="font-serif text-5xl text-neutral-900 dark:text-white sm:text-6xl">
+								Welcome to <span className="text-coral-500">Pet</span>
+								<span className="text-teal-500">utyun</span>
+							</h1>
+							<p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400 lg:mx-0">
+								Care for your pets, check symptoms, adopt from shelters across
+								Armenia, and build personalized wellness boxes — all in one
+								place.
+							</p>
+							<div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
+								<Link to="/my-pets" className="btn-primary">
+									Get Started <ArrowRight size={18} />
+								</Link>
+								<Link to="/adopt" className="btn-secondary">
+									Browse Adoptable Pets
+								</Link>
+							</div>
+						</motion.div>
+
+						{/* Dina the mascot */}
+						<motion.div
+							initial={{ opacity: 0, scale: 0.9 }}
+							animate={{ opacity: 1, scale: 1 }}
+							transition={{ ...motionTransition.base, delay: 0.2 }}
+							className="relative mx-auto lg:mx-0"
+						>
+							<div className="relative pb-6">
+								<img
+									src={dinaHero}
+									alt="Dina the Pitbull with owner"
+									className="w-full max-w-md rounded-3xl object-cover shadow-2xl ring-4 ring-white dark:ring-neutral-800"
+								/>
+								{/* Fun badge — offset clear of the image corner */}
+								<div className="absolute -bottom-3 left-6 rounded-2xl bg-white px-4 py-2.5 shadow-lg ring-1 ring-neutral-200 dark:bg-neutral-800 dark:ring-neutral-700">
+									<p className="text-sm font-medium text-neutral-900 dark:text-white">
+										Meet <span className="text-coral-500">Dina</span> 🦖
+									</p>
+									<p className="text-xs text-neutral-500">
+										The &quot;Dina-saur&quot; mascot
+									</p>
+								</div>
+							</div>
+						</motion.div>
+					</div>
 				</div>
 			</section>
 
@@ -224,7 +257,13 @@ export function HomePage() {
 									Add Your Pet <PawPrint size={18} />
 								</Link>
 							</div>
-							<div className="hidden text-center text-9xl lg:block">🐕</div>
+							<div className="hidden lg:block">
+								<img
+									src={dinaCta}
+									alt="Dina"
+									className="w-48 h-48 rounded-2xl object-cover opacity-90"
+								/>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -259,7 +298,7 @@ export function HomePage() {
 								<img
 									src={pet.photo}
 									alt={pet.name}
-									className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+									className="dim-on-dark h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
 									onError={e => {
 										e.currentTarget.onerror = null
 										e.currentTarget.src = imageFallback()
@@ -295,9 +334,10 @@ export function HomePage() {
 								<p className="mt-1 flex items-center gap-1 text-xs text-neutral-400">
 									<MapPin size={12} /> {pet.location}
 								</p>
+								<div className="mt-auto" />
 								<Link
 									to={`/adopt/${pet.id}`}
-									className="btn-primary mt-auto pt-4 w-full text-center"
+									className="btn-primary mt-5 w-full"
 								>
 									Meet {pet.name}
 								</Link>

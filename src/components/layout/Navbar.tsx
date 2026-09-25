@@ -35,7 +35,7 @@ export function Navbar() {
 			<div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
 				{/* Mobile menu button */}
 				<button
-					className="grid h-10 w-10 place-items-center rounded-xl text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 lg:hidden"
+					className="grid h-10 w-10 place-items-center rounded-xl text-neutral-700 transition-colors duration-200 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 lg:hidden"
 					onClick={() => setMobileOpen(o => !o)}
 					aria-label="Toggle menu"
 				>
@@ -77,7 +77,7 @@ export function Navbar() {
 					{/* Favorites link with badge */}
 					<Link
 						to="/adopt/favorites"
-						className="relative grid h-10 w-10 place-items-center rounded-xl text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
+						className="relative grid h-10 w-10 place-items-center rounded-xl text-neutral-600 transition-colors duration-200 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
 						aria-label="Saved pets"
 					>
 						<Heart size={20} />
@@ -91,7 +91,7 @@ export function Navbar() {
 					{/* Theme toggle */}
 					<button
 						onClick={toggleTheme}
-						className="grid h-10 w-10 place-items-center rounded-xl text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
+						className="grid h-10 w-10 place-items-center rounded-xl text-neutral-600 transition-colors duration-200 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
 						aria-label="Toggle dark mode"
 					>
 						{theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}

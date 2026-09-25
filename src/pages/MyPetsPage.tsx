@@ -180,7 +180,7 @@ export function MyPetsPage() {
 										id="pet-species"
 										value={form.species}
 										onChange={e => handleChange('species', e.target.value)}
-										className="input"
+										className="select"
 									>
 										<option value="dog">🐕 Dog</option>
 										<option value="cat">🐱 Cat</option>
@@ -364,7 +364,7 @@ export function MyPetsPage() {
 							<div className="mt-4 flex gap-2">
 								<Link
 									to={`/my-pets/${pet.id}`}
-									className="flex flex-1 items-center justify-center gap-1 rounded-xl bg-teal-500 py-2 text-sm font-medium text-white hover:bg-teal-600"
+									className="flex flex-1 items-center justify-center gap-1 rounded-xl bg-teal-500 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-teal-600"
 								>
 									<Calculator size={14} /> Medications
 								</Link>
@@ -388,14 +388,14 @@ export function MyPetsPage() {
 								</button>
 								<button
 									onClick={() => startEdit(pet)}
-									className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700"
+									className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-100 text-neutral-600 transition-colors duration-200 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700"
 									aria-label="Edit"
 								>
 									<Pencil size={16} />
 								</button>
 								<button
 									onClick={() => setDeleteConfirm(pet.id)}
-									className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-100 text-neutral-600 hover:bg-red-100 hover:text-red-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-red-950 dark:hover:text-red-400"
+									className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-100 text-neutral-600 transition-colors duration-200 hover:bg-red-100 hover:text-red-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-red-950 dark:hover:text-red-400"
 									aria-label="Delete"
 								>
 									<Trash2 size={16} />
@@ -418,7 +418,7 @@ export function MyPetsPage() {
 											<div className="mt-3 flex justify-center gap-2">
 												<button
 													onClick={() => confirmDelete(pet.id)}
-													className="rounded-xl bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
+													className="rounded-xl bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-red-600"
 												>
 													Delete
 												</button>

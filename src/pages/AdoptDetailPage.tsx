@@ -14,6 +14,7 @@ import {
 	Share2,
 	X
 } from 'lucide-react'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { NotFoundPage } from './NotFoundPage'
 
@@ -21,9 +22,17 @@ export function AdoptDetailPage() {
 	const { id } = useParams()
 	const pet = id ? getAdoptablePetById(id) : undefined
 	const { toggle, has } = useFavorites()
+	const [inquiry, setInquiry] = useState<'inquiry' | 'visit' | null>(null)
+	const [copied, setCopied] = useState(false)
 
 	if (!pet) {
 		return <NotFoundPage />
+	}
+
+	const handleShare = () => {
+		navigator.clipboard?.writeText(window.location.href)
+		setCopied(true)
+		setTimeout(() => setCopied(false), 2000)
 	}
 
 	const isFavorite = has(pet.id)
@@ -75,12 +84,15 @@ export function AdoptDetailPage() {
 
 					{/* Share buttons (mock) */}
 					<div className="mt-4 flex items-center justify-center gap-2">
-						<span className="text-sm text-neutral-500">Share:</span>
+						<span className="text-sm text-neutral-500">
+							{copied ? 'Link copied!' : 'Share:'}
+						</span>
 						<button
+							onClick={handleShare}
 							aria-label={`Share ${pet.name}`}
-							className="grid h-10 w-10 place-items-center rounded-full bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700"
+							className="grid h-10 w-10 place-items-center rounded-full bg-neutral-100 text-neutral-600 transition-colors duration-200 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700"
 						>
-							<Share2 size={18} />
+							{copied ? <Check size={18} /> : <Share2 size={18} />}
 						</button>
 					</div>
 				</motion.div>
@@ -197,16 +209,45 @@ export function AdoptDetailPage() {
 						</div>
 
 						{/* Action Buttons */}
-						<div className="mt-6 flex flex-col gap-3 sm:flex-row">
-							<button className="btn-primary flex-1">
-								Start Adoption Inquiry
-							</button>
-							<button className="btn-secondary flex-1">Schedule a Visit</button>
-						</div>
-
-						<p className="mt-4 text-center text-xs text-neutral-500">
-							This is a demo — no real adoptions are processed.
-						</p>
+						{inquiry ? (
+							<div className="mt-6 flex items-start gap-3 rounded-2xl border-2 border-green-200 bg-green-50 p-4 dark:border-green-900 dark:bg-green-950/50">
+								<Check
+									size={20}
+									className="mt-0.5 shrink-0 text-green-600 dark:text-green-400"
+								/>
+								<div>
+									<p className="font-medium text-green-800 dark:text-green-300">
+										{inquiry === 'inquiry'
+											? `Inquiry sent for ${pet.name}!`
+											: `Visit requested for ${pet.name}!`}
+									</p>
+									<p className="mt-0.5 text-sm text-green-700 dark:text-green-400">
+										{pet.shelter} will be in touch shortly. (Demo — no real
+										request is sent.)
+									</p>
+								</div>
+							</div>
+						) : (
+							<>
+								<div className="mt-6 flex flex-col gap-3 sm:flex-row">
+									<button
+										onClick={() => setInquiry('inquiry')}
+										className="btn-primary flex-1"
+									>
+										Start Adoption Inquiry
+									</button>
+									<button
+										onClick={() => setInquiry('visit')}
+										className="btn-secondary flex-1"
+									>
+										Schedule a Visit
+									</button>
+								</div>
+								<p className="mt-4 text-center text-xs text-neutral-500">
+									This is a demo — no real adoptions are processed.
+								</p>
+							</>
+						)}
 					</div>
 				</motion.div>
 			</div>

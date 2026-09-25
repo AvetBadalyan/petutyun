@@ -336,7 +336,7 @@ export function WellnessBoxPage() {
 																	<button
 																		key={alt.id}
 																		onClick={() => swapItem(item.id, alt)}
-																		className="flex w-full items-center gap-2 rounded-lg p-2 text-left text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800"
+																		className="flex w-full items-center gap-2 rounded-lg p-2 text-left text-sm transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
 																	>
 																		<img
 																			src={alt.image}

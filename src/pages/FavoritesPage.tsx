@@ -125,7 +125,7 @@ export function FavoritesPage() {
 								</Link>
 								<button
 									onClick={() => remove(pet.id)}
-									className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border-2 border-neutral-200 text-neutral-500 hover:border-red-300 hover:bg-red-50 hover:text-red-500 dark:border-neutral-700 dark:hover:border-red-800 dark:hover:bg-red-950"
+									className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border-2 border-neutral-200 text-neutral-500 transition-colors duration-200 hover:border-red-300 hover:bg-red-50 hover:text-red-500 dark:border-neutral-700 dark:hover:border-red-800 dark:hover:bg-red-950"
 									aria-label="Remove from favorites"
 								>
 									<Heart size={18} fill="currentColor" />

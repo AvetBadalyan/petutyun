@@ -138,7 +138,7 @@ export function PetDetailPage() {
 						</Link>
 						<button
 							onClick={() => setDeleteConfirm(true)}
-							className="grid h-11 w-11 place-items-center rounded-xl border-2 border-neutral-200 text-neutral-500 hover:border-red-300 hover:bg-red-50 hover:text-red-500 dark:border-neutral-700"
+							className="grid h-11 w-11 place-items-center rounded-xl border-2 border-neutral-200 text-neutral-500 transition-colors duration-200 hover:border-red-300 hover:bg-red-50 hover:text-red-500 dark:border-neutral-700"
 							aria-label="Delete pet"
 						>
 							<Trash2 size={18} />
@@ -171,7 +171,7 @@ export function PetDetailPage() {
 							<div className="mt-6 flex justify-center gap-3">
 								<button
 									onClick={handleDelete}
-									className="rounded-xl bg-red-500 px-6 py-2 text-white hover:bg-red-600"
+									className="rounded-xl bg-red-500 px-6 py-2 text-white transition-colors duration-200 hover:bg-red-600"
 								>
 									Delete
 								</button>
@@ -272,7 +272,7 @@ export function PetDetailPage() {
 									</div>
 									<button
 										onClick={() => removeMedication(pm.id)}
-										className="grid h-10 w-10 place-items-center rounded-xl text-neutral-400 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950"
+										className="grid h-10 w-10 place-items-center rounded-xl text-neutral-400 transition-colors duration-200 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950"
 										aria-label="Remove medication"
 									>
 										<X size={18} />
@@ -328,7 +328,7 @@ export function PetDetailPage() {
 											id="med-select"
 											value={selectedMedId}
 											onChange={e => setSelectedMedId(e.target.value)}
-											className="input"
+											className="select"
 										>
 											<option value="">Choose a medication...</option>
 											{availableMeds.map(med => (
