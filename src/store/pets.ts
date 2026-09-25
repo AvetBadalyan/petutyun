@@ -80,7 +80,7 @@ const defaultPets: Pet[] = [
 const defaultMedications: PetMedication[] = [
 	{
 		id: 'demo-med-1',
-		medicationId: 'carprofen',
+		medicationId: 'med-1',
 		petId: 'demo-pet-1',
 		startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
 		active: true,
@@ -88,7 +88,7 @@ const defaultMedications: PetMedication[] = [
 	},
 	{
 		id: 'demo-med-2',
-		medicationId: 'omega3',
+		medicationId: 'med-11',
 		petId: 'demo-pet-1',
 		startDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
 		active: true,
