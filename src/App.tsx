@@ -10,6 +10,9 @@ const HomePage = lazy(() =>
 const MyPetsPage = lazy(() =>
 	import('@/pages/MyPetsPage').then(m => ({ default: m.MyPetsPage }))
 )
+const PetDetailPage = lazy(() =>
+	import('@/pages/PetDetailPage').then(m => ({ default: m.PetDetailPage }))
+)
 const SymptomCheckerPage = lazy(() =>
 	import('@/pages/SymptomCheckerPage').then(m => ({
 		default: m.SymptomCheckerPage
@@ -60,6 +63,14 @@ export default function App() {
 						element={
 							<Page>
 								<MyPetsPage />
+							</Page>
+						}
+					/>
+					<Route
+						path="/my-pets/:id"
+						element={
+							<Page>
+								<PetDetailPage />
 							</Page>
 						}
 					/>

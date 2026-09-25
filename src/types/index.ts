@@ -77,3 +77,14 @@ export interface SymptomCheck {
 	area: SymptomArea
 	result: SymptomResult
 }
+
+// ---- Medication Tracking ----
+
+export interface PetMedication {
+	id: string
+	medicationId: string // References medication from medications.ts
+	petId: string
+	startDate: string // ISO string
+	active: boolean
+	notes?: string
+}

@@ -14,7 +14,26 @@ adoptable pets, and build personalized wellness boxes.
 - Add, edit, and delete pet profiles
 - Store pet details: name, species, breed, age, weight, photo
 - Select an "active pet" for personalized features
+- **Medication tracking** - Track which medications each pet is taking
 - Data persisted in localStorage
+
+### 💊 Dosage Calculator & Interaction Checker
+
+- **Weight-based dosage calculation** for 12+ common pet medications
+- Real-time calculation: enter pet's weight, select medication, get recommended
+  dose
+- Handles dose rounding, min/max limits, and per-kg calculations
+- **Medication interaction warnings** - Detects dangerous drug combinations
+- 10 real veterinary drug interactions (NSAIDs, steroids, sedatives,
+  antibiotics)
+- Three severity levels: Avoid, Caution, Monitor
+- Clear warnings with medical reasoning
+
+**Technical Details:**
+
+- Dosage formula: `dose = weight_kg × perKg_rate`, with min/max clamping
+- O(n²) pairwise interaction checking (acceptable for small medication lists)
+- All warnings include disclaimers — this is demo code, not medical advice!
 
 ### 🩺 Symptom Checker
 
@@ -85,12 +104,16 @@ src/
 ├── data/
 │   ├── adoptablePets.ts # Mock adoption data
 │   ├── symptoms.ts      # Symptom checker decision tree
-│   └── wellnessProducts.ts # Wellness box products
+│   ├── wellnessProducts.ts # Wellness box products
+│   ├── medications.ts   # 12 pet medications with dosage rules
+│   └── interactions.ts  # Drug interaction database
 ├── lib/
-│   └── format.ts        # Utility functions
+│   ├── format.ts        # Utility functions
+│   └── dosage.ts        # Weight-based dosage calculator
 ├── pages/
 │   ├── HomePage.tsx
 │   ├── MyPetsPage.tsx
+│   ├── PetDetailPage.tsx    # Dosage calculator & medications
 │   ├── SymptomCheckerPage.tsx
 │   ├── AdoptPage.tsx
 │   ├── AdoptDetailPage.tsx
@@ -98,7 +121,7 @@ src/
 │   ├── WellnessBoxPage.tsx
 │   └── ...
 ├── store/
-│   ├── pets.ts          # Pet profiles state
+│   ├── pets.ts          # Pet profiles + medication tracking
 │   ├── favorites.ts     # Adoption favorites
 │   └── theme.ts         # Dark/light mode
 ├── types/
@@ -108,6 +131,21 @@ src/
 ```
 
 ## 💡 Interview Talking Points
+
+### "How does the dosage calculator work?"
+
+> "Each medication has a dosage rule with a per-kg rate. I multiply the pet's
+> weight by this rate, apply min/max limits, and round appropriately
+> (half-tablets for tablets, one decimal for mL). The formula handles minimum
+> weight requirements too — if a pet is too small for a medication, it shows a
+> clear warning."
+
+### "How do you detect medication interactions?"
+
+> "I store interactions as pairs of active ingredients with severity levels.
+> When a pet has multiple medications, I check all pairwise combinations — it's
+> O(n²) but n is always small (a few medications per pet). Found interactions
+> are sorted by severity and displayed with color-coded warnings."
 
 ### "How does the symptom checker work?"
 
@@ -137,7 +175,9 @@ src/
 
 - This is a portfolio project — no real adoptions or purchases are processed
 - Pet data is stored locally in your browser
-- Symptom checker is for educational purposes only, not medical advice
+- **Dosage calculator and interaction checker are for DEMO PURPOSES ONLY**
+- Always consult a veterinarian for medical advice!
+- Symptom checker is for educational purposes only
 - Mock pet images use placeholder services
 
 ## 🙏 Credits
