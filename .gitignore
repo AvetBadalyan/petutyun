@@ -32,3 +32,8 @@ build
 .env
 .env.local
 .env.*.local
+
+# Raw/unoptimized personal media — only committed, web-sized assets belong in the repo
+*.mp4
+src/assets/dina/
+src/assets/dina-optimized/

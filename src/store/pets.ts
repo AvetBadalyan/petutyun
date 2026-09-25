@@ -43,16 +43,16 @@ const generateId = (prefix: string) =>
 	`${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
 
 // Default demo pets so portfolio isn't empty on first visit
+// Dina is the developer's real dog - a pitbull affectionately called "Dina-saur" 🦖
 const defaultPets: Pet[] = [
 	{
 		id: 'demo-pet-1',
-		name: 'Archie',
+		name: 'Dina',
 		species: 'dog',
-		breed: 'Golden Retriever',
-		age: 3,
-		weight: 28,
-		photo:
-			'https://images.unsplash.com/photo-1552053831-71594a27632d?w=200&h=200&fit=crop'
+		breed: 'Pitbull',
+		age: 5,
+		weight: 40,
+		photo: '/dina-profile.jpg'
 	},
 	{
 		id: 'demo-pet-2',
