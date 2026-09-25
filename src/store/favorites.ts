@@ -25,6 +25,6 @@ export const useFavorites = create<FavoritesState>()(
 
 			clear: () => set({ ids: [] })
 		}),
-		{ name: 'petcare-favorites' }
+		{ name: 'petutyun-favorites' }
 	)
 )

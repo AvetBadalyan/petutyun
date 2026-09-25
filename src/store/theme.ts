@@ -18,7 +18,7 @@ export const useTheme = create<ThemeState>()(
 				applyTheme(next)
 			}
 		}),
-		{ name: 'petcare-theme' }
+		{ name: 'petutyun-theme' }
 	)
 )
 

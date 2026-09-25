@@ -180,6 +180,6 @@ export const usePets = create<PetsState>()(
 				return get().medications.filter(m => m.petId === petId)
 			}
 		}),
-		{ name: 'petcare-pets' }
+		{ name: 'petutyun-pets' }
 	)
 )
