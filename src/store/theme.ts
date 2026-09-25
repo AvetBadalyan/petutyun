@@ -6,7 +6,6 @@ type Theme = 'light' | 'dark'
 interface ThemeState {
 	theme: Theme
 	toggle: () => void
-	set: (t: Theme) => void
 }
 
 export const useTheme = create<ThemeState>()(
@@ -17,10 +16,6 @@ export const useTheme = create<ThemeState>()(
 				const next = get().theme === 'light' ? 'dark' : 'light'
 				set({ theme: next })
 				applyTheme(next)
-			},
-			set: t => {
-				set({ theme: t })
-				applyTheme(t)
 			}
 		}),
 		{ name: 'petcare-theme' }

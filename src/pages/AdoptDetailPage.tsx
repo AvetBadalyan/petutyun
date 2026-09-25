@@ -55,7 +55,7 @@ export function AdoptDetailPage() {
 							className="aspect-square w-full object-cover"
 							onError={e => {
 								e.currentTarget.onerror = null
-								e.currentTarget.src = imageFallback(pet.name)
+								e.currentTarget.src = imageFallback()
 							}}
 						/>
 						{/* Favorite button */}

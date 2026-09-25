@@ -280,7 +280,7 @@ export function WellnessBoxPage() {
 											className="h-16 w-16 rounded-xl object-cover"
 											onError={e => {
 												e.currentTarget.onerror = null
-												e.currentTarget.src = imageFallback(item.name)
+												e.currentTarget.src = imageFallback()
 											}}
 										/>
 										<div className="min-w-0 flex-1">

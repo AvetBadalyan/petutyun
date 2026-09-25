@@ -80,7 +80,7 @@ export function FavoritesPage() {
 									className="h-full w-full object-cover"
 									onError={e => {
 										e.currentTarget.onerror = null
-										e.currentTarget.src = imageFallback(pet.name)
+										e.currentTarget.src = imageFallback()
 									}}
 								/>
 								<span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-sm">

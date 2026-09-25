@@ -366,7 +366,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 					className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
 					onError={e => {
 						e.currentTarget.onerror = null
-						e.currentTarget.src = imageFallback(pet.name)
+						e.currentTarget.src = imageFallback()
 					}}
 				/>
 				{/* Favorite button */}

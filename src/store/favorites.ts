@@ -3,9 +3,8 @@ import { persist } from 'zustand/middleware'
 
 interface FavoritesState {
 	ids: string[]
-	add: (id: string) => void
-	remove: (id: string) => void
 	toggle: (id: string) => void
+	remove: (id: string) => void
 	has: (id: string) => boolean
 	clear: () => void
 }
@@ -15,30 +14,17 @@ export const useFavorites = create<FavoritesState>()(
 		(set, get) => ({
 			ids: [],
 
-			add: id => {
-				if (!get().ids.includes(id)) {
-					set(s => ({ ids: [...s.ids, id] }))
-				}
-			},
+			toggle: id =>
+				set(s => ({
+					ids: s.ids.includes(id) ? s.ids.filter(x => x !== id) : [...s.ids, id]
+				})),
 
-			remove: id => {
-				set(s => ({ ids: s.ids.filter(x => x !== id) }))
-			},
-
-			toggle: id => {
-				if (get().ids.includes(id)) {
-					get().remove(id)
-				} else {
-					get().add(id)
-				}
-			},
+			remove: id => set(s => ({ ids: s.ids.filter(x => x !== id) })),
 
 			has: id => get().ids.includes(id),
 
 			clear: () => set({ ids: [] })
 		}),
-		{
-			name: 'petcare-favorites'
-		}
+		{ name: 'petcare-favorites' }
 	)
 )

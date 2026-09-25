@@ -1,144 +1,37 @@
 import { Layout } from '@/components/layout/Layout'
-import { PageLoader } from '@/components/ui/PageLoader'
-import { lazy, Suspense } from 'react'
+import { AdoptDetailPage } from '@/pages/AdoptDetailPage'
+import { AdoptPage } from '@/pages/AdoptPage'
+import { FavoritesPage } from '@/pages/FavoritesPage'
+import { HomePage } from '@/pages/HomePage'
+import { HowItWorksPage } from '@/pages/HowItWorksPage'
+import { MyPetsPage } from '@/pages/MyPetsPage'
+import { NotFoundPage } from '@/pages/NotFoundPage'
+import { PetDetailPage } from '@/pages/PetDetailPage'
+import { SymptomCheckerPage } from '@/pages/SymptomCheckerPage'
+import { WellnessBoxPage } from '@/pages/WellnessBoxPage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
-// Lazy load all pages for better performance
-const HomePage = lazy(() =>
-	import('@/pages/HomePage').then(m => ({ default: m.HomePage }))
-)
-const MyPetsPage = lazy(() =>
-	import('@/pages/MyPetsPage').then(m => ({ default: m.MyPetsPage }))
-)
-const PetDetailPage = lazy(() =>
-	import('@/pages/PetDetailPage').then(m => ({ default: m.PetDetailPage }))
-)
-const SymptomCheckerPage = lazy(() =>
-	import('@/pages/SymptomCheckerPage').then(m => ({
-		default: m.SymptomCheckerPage
-	}))
-)
-const AdoptPage = lazy(() =>
-	import('@/pages/AdoptPage').then(m => ({ default: m.AdoptPage }))
-)
-const AdoptDetailPage = lazy(() =>
-	import('@/pages/AdoptDetailPage').then(m => ({ default: m.AdoptDetailPage }))
-)
-const FavoritesPage = lazy(() =>
-	import('@/pages/FavoritesPage').then(m => ({ default: m.FavoritesPage }))
-)
-const WellnessBoxPage = lazy(() =>
-	import('@/pages/WellnessBoxPage').then(m => ({ default: m.WellnessBoxPage }))
-)
-const HowItWorksPage = lazy(() =>
-	import('@/pages/HowItWorksPage').then(m => ({ default: m.HowItWorksPage }))
-)
-const NotFoundPage = lazy(() =>
-	import('@/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage }))
-)
-
-function Page({ children }: { children: React.ReactNode }) {
-	return <Suspense fallback={<PageLoader />}>{children}</Suspense>
-}
 
 export default function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
 				<Route element={<Layout />}>
-					{/* Dashboard / Home */}
-					<Route
-						path="/"
-						element={
-							<Page>
-								<HomePage />
-							</Page>
-						}
-					/>
+					<Route path="/" element={<HomePage />} />
 
-					{/* My Pets - CRUD */}
-					<Route
-						path="/my-pets"
-						element={
-							<Page>
-								<MyPetsPage />
-							</Page>
-						}
-					/>
-					<Route
-						path="/my-pets/:id"
-						element={
-							<Page>
-								<PetDetailPage />
-							</Page>
-						}
-					/>
+					<Route path="/my-pets" element={<MyPetsPage />} />
+					<Route path="/my-pets/:id" element={<PetDetailPage />} />
 
-					{/* Symptom Checker - Wizard */}
-					<Route
-						path="/symptom-checker"
-						element={
-							<Page>
-								<SymptomCheckerPage />
-							</Page>
-						}
-					/>
+					<Route path="/symptom-checker" element={<SymptomCheckerPage />} />
 
-					{/* Adoption */}
-					<Route
-						path="/adopt"
-						element={
-							<Page>
-								<AdoptPage />
-							</Page>
-						}
-					/>
-					<Route
-						path="/adopt/favorites"
-						element={
-							<Page>
-								<FavoritesPage />
-							</Page>
-						}
-					/>
-					<Route
-						path="/adopt/:id"
-						element={
-							<Page>
-								<AdoptDetailPage />
-							</Page>
-						}
-					/>
+					<Route path="/adopt" element={<AdoptPage />} />
+					<Route path="/adopt/favorites" element={<FavoritesPage />} />
+					<Route path="/adopt/:id" element={<AdoptDetailPage />} />
 
-					{/* Wellness Box Quiz */}
-					<Route
-						path="/wellness-box"
-						element={
-							<Page>
-								<WellnessBoxPage />
-							</Page>
-						}
-					/>
+					<Route path="/wellness-box" element={<WellnessBoxPage />} />
 
-					{/* Info pages */}
-					<Route
-						path="/how-it-works"
-						element={
-							<Page>
-								<HowItWorksPage />
-							</Page>
-						}
-					/>
+					<Route path="/how-it-works" element={<HowItWorksPage />} />
 
-					{/* 404 */}
-					<Route
-						path="*"
-						element={
-							<Page>
-								<NotFoundPage />
-							</Page>
-						}
-					/>
+					<Route path="*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
