@@ -27,7 +27,7 @@ const steps = [
 		icon: Heart,
 		title: '3. Adopt a Friend',
 		description:
-			'Browse adoptable pets from local shelters. Filter by species, size, and compatibility. Save your favorites.',
+			'Browse adoptable pets from shelters across Armenia — from Yerevan to Gyumri and Dilijan. Filter by species, size, and compatibility. Save your favorites.',
 		link: '/adopt'
 	},
 	{
@@ -63,7 +63,7 @@ export function HowItWorksPage() {
 		<div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
 			<div className="text-center">
 				<h1 className="font-serif text-4xl text-neutral-900 dark:text-white">
-					How PetCare Hub Works
+					How Shnik Works
 				</h1>
 				<p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
 					Everything you need to care for your pets, in one simple app.

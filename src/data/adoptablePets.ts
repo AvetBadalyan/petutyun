@@ -1,297 +1,294 @@
 import type { AdoptablePet } from '@/types'
 
 /**
- * Mock adoptable pets data
- * In a real app, this would come from an API like Petfinder
- *
- * Photo URLs use placeholder service - in production you'd use real shelter photos
+ * Mock adoptable pets from shelters across Armenia.
+ * In a real app this would come from an API like Petfinder.
  */
 
-// Helper to generate placeholder pet images
 const petImage = (seed: string) => `https://placedog.net/400/300?id=${seed}`
 
 const catImage = (seed: string) =>
 	`https://placekitten.com/400/300?image=${seed}`
 
 export const adoptablePets: AdoptablePet[] = [
-	// === DOGS - Including Pitbulls! ===
+	// === DOGS ===
 	{
 		id: 'dog-1',
-		name: 'Rocky',
+		name: 'Bidzo',
 		species: 'dog',
-		breed: 'American Pitbull Terrier',
+		breed: 'Gampr',
 		age: '3 years',
 		size: 'large',
 		gender: 'male',
 		photo: petImage('1'),
-		bio: "Rocky is a gentle giant with a heart of gold. He loves belly rubs, long walks, and thinks he's a lap dog. Great with older kids and would thrive as your loyal companion.",
+		bio: 'Bidzo is a proud Armenian Gampr — a gentle giant bred to guard flocks in the highlands. He loves long mountain walks and thinks he is a lap dog. Great with older kids and endlessly loyal.',
 		goodWithKids: true,
 		goodWithPets: false,
-		shelter: 'Happy Tails Rescue',
-		location: 'Austin, TX'
+		shelter: 'Yerevan Animal Shelter',
+		location: 'Yerevan'
 	},
 	{
 		id: 'dog-2',
-		name: 'Luna',
+		name: 'Nairi',
 		species: 'dog',
-		breed: 'Pitbull Mix',
+		breed: 'Gampr Mix',
 		age: '2 years',
 		size: 'medium',
 		gender: 'female',
 		photo: petImage('2'),
-		bio: "Luna is an energetic sweetheart who loves to play fetch and cuddle on the couch. She's house-trained, knows basic commands, and gives the best kisses!",
+		bio: 'Nairi is an energetic sweetheart who loves to play fetch in the park and cuddle on the couch. She is house-trained, knows basic commands, and gives the best kisses!',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Second Chance Shelter',
-		location: 'Denver, CO'
+		shelter: 'Dilijan Paws Rescue',
+		location: 'Dilijan'
 	},
 	{
 		id: 'dog-3',
-		name: 'Duke',
+		name: 'Vazgen',
 		species: 'dog',
-		breed: 'American Staffordshire Terrier',
+		breed: 'Caucasian Shepherd',
 		age: '4 years',
 		size: 'large',
 		gender: 'male',
 		photo: petImage('3'),
-		bio: "Duke is a certified therapy dog who brings joy everywhere he goes. He's calm, well-trained, and perfect for a family looking for a mature, loving companion.",
+		bio: 'Vazgen is a certified therapy dog who brings joy everywhere he goes. He is calm, well-trained, and perfect for a family looking for a mature, loving companion.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Paws & Love Rescue',
-		location: 'Phoenix, AZ'
+		shelter: 'Ararat Rescue',
+		location: 'Artashat'
 	},
 	{
 		id: 'dog-4',
-		name: 'Bella',
+		name: 'Tsolak',
 		species: 'dog',
 		breed: 'Labrador Retriever',
 		age: '1 year',
 		size: 'large',
-		gender: 'female',
+		gender: 'male',
 		photo: petImage('4'),
-		bio: 'Bella is a playful young Lab who loves swimming, fetching, and making new friends. She has endless energy and would love an active family!',
+		bio: 'Tsolak is a playful young Lab who loves swimming in Lake Sevan, fetching, and making new friends. He has endless energy and would love an active family!',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Golden Hearts Animal Shelter',
-		location: 'Seattle, WA'
+		shelter: 'Sevan Lake Animal Shelter',
+		location: 'Sevan'
 	},
 	{
 		id: 'dog-5',
-		name: 'Max',
+		name: 'Aram',
 		species: 'dog',
 		breed: 'German Shepherd',
 		age: '5 years',
 		size: 'large',
 		gender: 'male',
 		photo: petImage('5'),
-		bio: 'Max is intelligent and loyal. He knows over 20 commands and is looking for someone who appreciates a well-trained companion. Great guard dog instincts.',
+		bio: 'Aram is intelligent and loyal. He knows over 20 commands and is looking for someone who appreciates a well-trained companion. Great guard-dog instincts.',
 		goodWithKids: true,
 		goodWithPets: false,
-		shelter: 'Shepherd Rescue Network',
-		location: 'Chicago, IL'
+		shelter: 'Gyumri Shepherd Rescue',
+		location: 'Gyumri'
 	},
 	{
 		id: 'dog-6',
-		name: 'Daisy',
+		name: 'Manushak',
 		species: 'dog',
 		breed: 'Beagle',
 		age: '6 years',
 		size: 'medium',
 		gender: 'female',
 		photo: petImage('6'),
-		bio: 'Daisy is a sweet senior girl who still has plenty of pep! She loves sniffing around the yard and curling up by your feet. Low maintenance and full of love.',
+		bio: 'Manushak is a sweet senior girl who still has plenty of pep! She loves sniffing around the yard and curling up by your feet. Low maintenance and full of love.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Beagle Freedom Project',
-		location: 'Los Angeles, CA'
+		shelter: 'Vanadzor Animal Care',
+		location: 'Vanadzor'
 	},
 	{
 		id: 'dog-7',
-		name: 'Cooper',
+		name: 'Areg',
 		species: 'dog',
 		breed: 'Golden Retriever',
 		age: '2 years',
 		size: 'large',
 		gender: 'male',
 		photo: petImage('7'),
-		bio: 'Cooper is the definition of a good boy. Friendly with everyone he meets, loves kids, and dreams of a family with a big backyard to explore.',
+		bio: 'Areg is the definition of a good boy. Friendly with everyone he meets, loves kids, and dreams of a family with a big yard in the countryside to explore.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Golden Rescue Foundation',
-		location: 'Boston, MA'
+		shelter: 'Ijevan Forest Rescue',
+		location: 'Ijevan'
 	},
 	{
 		id: 'dog-8',
-		name: 'Coco',
+		name: 'Loosik',
 		species: 'dog',
 		breed: 'French Bulldog',
 		age: '3 years',
 		size: 'small',
 		gender: 'female',
 		photo: petImage('8'),
-		bio: "Coco is a charming little lady who loves attention. She's great for apartment living, doesn't need much exercise, and has the cutest snore!",
+		bio: 'Loosik is a charming little lady who loves attention. She is great for apartment living in the city, does not need much exercise, and has the cutest snore!',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Frenchie Friends Rescue',
-		location: 'Miami, FL'
+		shelter: 'Kentron City Rescue',
+		location: 'Yerevan'
 	},
 	{
 		id: 'dog-9',
-		name: 'Zeus',
+		name: 'Zoravar',
 		species: 'dog',
-		breed: 'Pitbull Terrier',
+		breed: 'Gampr',
 		age: '1 year',
 		size: 'large',
 		gender: 'male',
 		photo: petImage('9'),
-		bio: "Zeus is a young pup with tons of potential! He's eager to learn, loves training sessions with treats, and bonds deeply with his people. Looking for his forever home.",
+		bio: 'Zoravar is a young pup with tons of potential! He is eager to learn, loves training sessions with treats, and bonds deeply with his people. Looking for his forever home.',
 		goodWithKids: true,
 		goodWithPets: false,
-		shelter: 'Pitbull Pride Rescue',
-		location: 'Atlanta, GA'
+		shelter: 'Kapan Mountain Rescue',
+		location: 'Kapan'
 	},
 	{
 		id: 'dog-10',
-		name: 'Molly',
+		name: 'Chalik',
 		species: 'dog',
 		breed: 'Chihuahua Mix',
 		age: '4 years',
 		size: 'small',
 		gender: 'female',
 		photo: petImage('10'),
-		bio: "Molly may be small but she has a big personality! She's sassy, loves to burrow under blankets, and will be your devoted shadow.",
+		bio: 'Chalik may be small but she has a big personality! She is sassy, loves to burrow under blankets, and will be your devoted shadow.',
 		goodWithKids: false,
 		goodWithPets: true,
-		shelter: 'Tiny Paws Rescue',
-		location: 'San Diego, CA'
+		shelter: 'Ashtarak Tiny Paws',
+		location: 'Ashtarak'
 	},
 	{
 		id: 'dog-11',
-		name: 'Bear',
+		name: 'Arjuk',
 		species: 'dog',
 		breed: 'Husky',
 		age: '2 years',
 		size: 'large',
 		gender: 'male',
 		photo: petImage('11'),
-		bio: 'Bear is a gorgeous Husky who loves to run and howl! He needs an experienced owner who understands the breed. Escape artist extraordinaire.',
+		bio: 'Arjuk is a gorgeous Husky who loves to run through the snow of the highlands and howl! He needs an experienced owner who understands the breed. Escape artist extraordinaire.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Northern Lights Husky Rescue',
-		location: 'Minneapolis, MN'
+		shelter: 'Lori Highland Husky Rescue',
+		location: 'Vanadzor'
 	},
 	{
 		id: 'dog-12',
-		name: 'Sadie',
+		name: 'Shoghik',
 		species: 'dog',
 		breed: 'Boxer',
 		age: '5 years',
 		size: 'large',
 		gender: 'female',
 		photo: petImage('12'),
-		bio: "Sadie is a goofy, lovable Boxer who will make you laugh every day. She's great with kids and loves being part of family activities.",
+		bio: 'Shoghik is a goofy, lovable Boxer who will make you laugh every day. She is great with kids and loves being part of family activities.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Boxer Buddies Rescue',
-		location: 'Dallas, TX'
+		shelter: 'Hrazdan Valley Rescue',
+		location: 'Hrazdan'
 	},
 
 	// === CATS ===
 	{
 		id: 'cat-1',
-		name: 'Whiskers',
+		name: 'Mirouk',
 		species: 'cat',
 		breed: 'Domestic Shorthair',
 		age: '2 years',
 		size: 'medium',
 		gender: 'male',
 		photo: catImage('1'),
-		bio: "Whiskers is a curious explorer who loves watching birds from the window. He's independent but enjoys evening cuddle sessions.",
+		bio: 'Mirouk is a curious explorer who loves watching birds from the window over the old city. He is independent but enjoys evening cuddle sessions.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Feline Friends Shelter',
-		location: 'Portland, OR'
+		shelter: 'Feline Friends Yerevan',
+		location: 'Yerevan'
 	},
 	{
 		id: 'cat-2',
-		name: 'Mittens',
+		name: 'Nazeli',
 		species: 'cat',
 		breed: 'Ragdoll',
 		age: '3 years',
 		size: 'large',
 		gender: 'female',
 		photo: catImage('2'),
-		bio: 'Mittens is a fluffy sweetheart who goes limp when you pick her up (true to her breed!). She loves being held and will follow you room to room.',
+		bio: 'Nazeli is a fluffy sweetheart who goes limp when you pick her up (true to her breed!). She loves being held and will follow you room to room.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Purr-fect Match Adoption',
-		location: 'San Francisco, CA'
+		shelter: 'Gyumri Cat Haven',
+		location: 'Gyumri'
 	},
 	{
 		id: 'cat-3',
-		name: 'Shadow',
+		name: 'Storun',
 		species: 'cat',
 		breed: 'Black Domestic Shorthair',
 		age: '1 year',
 		size: 'medium',
 		gender: 'male',
 		photo: catImage('3'),
-		bio: "Shadow is a sleek, playful cat who loves chasing laser pointers and toy mice. He's bonded with his sister Luna and they'd love to be adopted together!",
+		bio: 'Storun is a sleek, playful cat who loves chasing laser pointers and toy mice. He is bonded with his sister Nairi and they would love to be adopted together!',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Black Cat Rescue',
-		location: 'Salem, MA'
+		shelter: 'Dilijan Cat Rescue',
+		location: 'Dilijan'
 	},
 	{
 		id: 'cat-4',
-		name: 'Princess',
+		name: 'Takouhi',
 		species: 'cat',
 		breed: 'Persian',
 		age: '6 years',
 		size: 'medium',
 		gender: 'female',
 		photo: catImage('4'),
-		bio: 'Princess lives up to her name — she expects the royal treatment! A quiet home with gentle handling would be perfect for this elegant lady.',
+		bio: 'Takouhi lives up to her name (it means "queen") — she expects the royal treatment! A quiet home with gentle handling would be perfect for this elegant lady.',
 		goodWithKids: false,
 		goodWithPets: false,
-		shelter: 'Fancy Felines Rescue',
-		location: 'Beverly Hills, CA'
+		shelter: 'Fancy Felines Yerevan',
+		location: 'Yerevan'
 	},
 	{
 		id: 'cat-5',
-		name: 'Oliver',
+		name: 'Kcitten',
 		species: 'cat',
 		breed: 'Orange Tabby',
 		age: '4 years',
 		size: 'large',
 		gender: 'male',
 		photo: catImage('5'),
-		bio: "Oliver is a big orange boy with an even bigger appetite for love (and treats). He's laid-back, friendly, and gets along with everyone.",
+		bio: 'Kcitten is a big orange boy with an even bigger appetite for love (and treats). He is laid-back, friendly, and gets along with everyone.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Tabby Town Shelter',
-		location: 'Nashville, TN'
+		shelter: 'Vanadzor Tabby Town',
+		location: 'Vanadzor'
 	},
 	{
 		id: 'cat-6',
-		name: 'Luna',
+		name: 'Sona',
 		species: 'cat',
 		breed: 'Siamese Mix',
 		age: '2 years',
 		size: 'medium',
 		gender: 'female',
 		photo: catImage('6'),
-		bio: "Luna is vocal and will chat with you all day! She's intelligent, loves puzzle feeders, and needs mental stimulation to stay happy.",
+		bio: 'Sona is vocal and will chat with you all day! She is intelligent, loves puzzle feeders, and needs mental stimulation to stay happy.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Siamese Rescue Center',
-		location: 'Houston, TX'
+		shelter: 'Ararat Siamese Rescue',
+		location: 'Artashat'
 	},
 
 	// === BIRDS ===
 	{
 		id: 'bird-1',
-		name: 'Sunny',
+		name: 'Arev',
 		species: 'bird',
 		breed: 'Cockatiel',
 		age: '3 years',
@@ -299,15 +296,15 @@ export const adoptablePets: AdoptablePet[] = [
 		gender: 'male',
 		photo:
 			'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=400&h=300&fit=crop',
-		bio: "Sunny loves to whistle tunes and will learn your favorite songs! He's hand-tamed and enjoys sitting on shoulders while you work.",
+		bio: 'Arev (meaning "sun") loves to whistle tunes and will learn your favorite songs! He is hand-tamed and enjoys sitting on shoulders while you work.',
 		goodWithKids: true,
 		goodWithPets: false,
-		shelter: 'Feathered Friends Sanctuary',
-		location: 'Tucson, AZ'
+		shelter: 'Feathered Friends Yerevan',
+		location: 'Yerevan'
 	},
 	{
 		id: 'bird-2',
-		name: 'Kiwi',
+		name: 'Tsiran',
 		species: 'bird',
 		breed: 'Parakeet',
 		age: '1 year',
@@ -315,17 +312,17 @@ export const adoptablePets: AdoptablePet[] = [
 		gender: 'female',
 		photo:
 			'https://images.unsplash.com/photo-1544923246-77307dd628b4?w=400&h=300&fit=crop',
-		bio: 'Kiwi is a bright green bundle of energy! She loves mirrors, bells, and chattering. Perfect for someone new to bird ownership.',
+		bio: 'Tsiran (named after the apricot, Armenia\u2019s beloved fruit) is a bright bundle of energy! She loves mirrors, bells, and chattering. Perfect for someone new to bird ownership.',
 		goodWithKids: true,
 		goodWithPets: false,
-		shelter: 'Wings of Hope Bird Rescue',
-		location: 'Orlando, FL'
+		shelter: 'Wings of Hope Gyumri',
+		location: 'Gyumri'
 	},
 
 	// === OTHER (Small animals) ===
 	{
 		id: 'other-1',
-		name: 'Thumper',
+		name: 'Poqrik',
 		species: 'other',
 		breed: 'Holland Lop Rabbit',
 		age: '2 years',
@@ -333,15 +330,15 @@ export const adoptablePets: AdoptablePet[] = [
 		gender: 'male',
 		photo:
 			'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&h=300&fit=crop',
-		bio: "Thumper is an adorable lop-eared bunny who loves hay, fresh veggies, and gentle pets. He's litter-trained and loves to binky around!",
+		bio: 'Poqrik (meaning "little one") is an adorable lop-eared bunny who loves hay, fresh veggies, and gentle pets. He is litter-trained and loves to binky around!',
 		goodWithKids: true,
 		goodWithPets: false,
-		shelter: 'Bunny Bunch Rescue',
-		location: 'Reno, NV'
+		shelter: 'Ashtarak Small Wonders',
+		location: 'Ashtarak'
 	},
 	{
 		id: 'other-2',
-		name: 'Peanut',
+		name: 'Nuka',
 		species: 'other',
 		breed: 'Guinea Pig',
 		age: '1 year',
@@ -349,15 +346,15 @@ export const adoptablePets: AdoptablePet[] = [
 		gender: 'female',
 		photo:
 			'https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=400&h=300&fit=crop',
-		bio: "Peanut wheeks with excitement at veggie time! She's social and would love a guinea pig companion or a family who gives her lots of attention.",
+		bio: 'Nuka wheeks with excitement at veggie time! She is social and would love a guinea pig companion or a family who gives her lots of attention.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Small Wonders Rescue',
-		location: 'Boise, ID'
+		shelter: 'Abovyan Small Pets Rescue',
+		location: 'Abovyan'
 	},
 	{
 		id: 'other-3',
-		name: 'Spike',
+		name: 'Voskan',
 		species: 'other',
 		breed: 'Hedgehog',
 		age: '1 year',
@@ -365,30 +362,28 @@ export const adoptablePets: AdoptablePet[] = [
 		gender: 'male',
 		photo:
 			'https://images.unsplash.com/photo-1497752531616-c3afd9760a11?w=400&h=300&fit=crop',
-		bio: 'Spike is a curious little hedgehog who loves to explore at night. He needs a quiet home and patient owner to help him come out of his shell!',
+		bio: 'Voskan is a curious little hedgehog who loves to explore at night. He needs a quiet home and patient owner to help him come out of his shell!',
 		goodWithKids: false,
 		goodWithPets: false,
-		shelter: 'Exotic Pet Rescue',
-		location: 'Austin, TX'
+		shelter: 'Goris Exotic Pet Rescue',
+		location: 'Goris'
 	},
 	{
 		id: 'dog-13',
-		name: 'Athena',
+		name: 'Tsaghik',
 		species: 'dog',
-		breed: 'American Bully',
+		breed: 'Gampr Mix',
 		age: '2 years',
 		size: 'medium',
 		gender: 'female',
 		photo: petImage('13'),
-		bio: "Athena is a gorgeous blue bully with impeccable manners. She's gentle, loves car rides, and will be your best adventure buddy. Pittie lovers, she's the one!",
+		bio: 'Tsaghik (meaning "flower") is a gorgeous girl with impeccable manners. She is gentle, loves car rides through the mountains, and will be your best adventure buddy.',
 		goodWithKids: true,
 		goodWithPets: true,
-		shelter: 'Bully Breed Rescue',
-		location: 'Philadelphia, PA'
+		shelter: 'Echmiadzin Rescue',
+		location: 'Echmiadzin'
 	}
 ]
-
-// === Helper functions ===
 
 export function getAdoptablePetById(id: string): AdoptablePet | undefined {
 	return adoptablePets.find(pet => pet.id === id)

@@ -29,9 +29,9 @@ export function AdoptDetailPage() {
 	const isFavorite = has(pet.id)
 
 	const shelterContact = {
-		phone: '(555) 123-4567',
-		email: `adopt@${pet.shelter.toLowerCase().replace(/\s+/g, '')}.org`,
-		hours: 'Mon-Sat: 10am - 6pm, Sun: 12pm - 5pm'
+		phone: '+374 10 55-12-34',
+		email: `adopt@${pet.shelter.toLowerCase().replace(/\s+/g, '')}.am`,
+		hours: 'Mon-Sat: 10:00 - 18:00, Sun: 12:00 - 17:00'
 	}
 
 	return (

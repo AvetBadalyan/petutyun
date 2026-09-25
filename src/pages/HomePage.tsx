@@ -73,14 +73,16 @@ export function HomePage() {
 						transition={motionTransition.base}
 						className="text-center"
 					>
-						<span className="chip mb-4">🐾 Your All-in-One Pet Companion</span>
+						<span className="chip mb-4">
+							🐾 Armenia&apos;s All-in-One Pet Companion
+						</span>
 						<h1 className="font-serif text-5xl text-neutral-900 dark:text-white sm:text-6xl">
-							Welcome to <span className="text-coral-500">PetCare</span>
-							<span className="text-teal-500">Hub</span>
+							Welcome to <span className="text-coral-500">Shni</span>
+							<span className="text-teal-500">k</span>
 						</h1>
 						<p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
-							Manage your pets, check symptoms, find adoptable pets, and build
-							personalized wellness boxes — all in one place.
+							Care for your pets, check symptoms, adopt from shelters across
+							Armenia, and build personalized wellness boxes — all in one place.
 						</p>
 						<div className="mt-8 flex flex-wrap justify-center gap-4">
 							<Link to="/my-pets" className="btn-primary">

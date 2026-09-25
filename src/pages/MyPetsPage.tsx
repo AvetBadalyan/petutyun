@@ -162,7 +162,7 @@ export function MyPetsPage() {
 										type="text"
 										value={form.name}
 										onChange={e => handleChange('name', e.target.value)}
-										placeholder="e.g., Max"
+										placeholder="e.g., Bidzo"
 										className="input"
 										required
 									/>
@@ -202,7 +202,7 @@ export function MyPetsPage() {
 										type="text"
 										value={form.breed}
 										onChange={e => handleChange('breed', e.target.value)}
-										placeholder="e.g., Pitbull, Persian"
+										placeholder="e.g., Gampr, Persian"
 										className="input"
 									/>
 								</div>
