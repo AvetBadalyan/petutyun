@@ -217,14 +217,8 @@ export const symptomAreas: SymptomAreaData[] = [
 	}
 ]
 
-/**
- * Symptom Result Lookup
- *
- * This is a simplified lookup based on key answer combinations.
- * The "algorithm" is just matching patterns - easily explainable in an interview!
- */
-
-// Results database - keyed by area + main symptom
+// Results keyed by "area-mainSymptom[-acuity]"; see getSymptomResult for how
+// the key is assembled from the wizard answers.
 const resultsMap: Record<string, SymptomResult> = {
 	// SKIN
 	'skin-scratching-chronic': {
@@ -386,51 +380,40 @@ const resultsMap: Record<string, SymptomResult> = {
 }
 
 /**
- * Get result based on symptom answers
- *
- * This is the "algorithm" - just pattern matching!
- * In an interview: "I look up results based on the combination of answers"
+ * Maps a set of wizard answers to a result by building a lookup key from the
+ * affected area and the user's answers. "Acuity" (how long/often) is derived
+ * separately from the result's clinical severity.
  */
+type Acuity = 'acute' | 'chronic'
+
 export function getSymptomResult(
 	area: string,
 	answers: Record<string, string>
 ): SymptomResult {
-	// Build a lookup key based on the area and main answers
 	let key = ''
-	let severity = 'medium'
 
-	// Determine severity based on duration/frequency answers
 	const duration = answers['skin-duration'] || answers['behavior-duration']
 	const frequency = answers['stomach-frequency']
 	const other = answers['stomach-other']
 
-	if (
+	// Long-running or high-frequency symptoms are treated as chronic; anything
+	// recent or one-off (including the default) is acute.
+	const longRunning =
 		duration === 'weeks' ||
 		duration === 'months' ||
 		frequency === 'multiple' ||
 		frequency === 'constant'
-	) {
-		severity = 'severe'
-	} else if (
-		duration === 'days' ||
-		duration === 'today' ||
-		frequency === 'once'
-	) {
-		severity = 'mild'
-	}
+	const acuity: Acuity = longRunning ? 'chronic' : 'acute'
 
-	// Blood or bloating = always severe
-	if (other === 'blood' || other === 'bloated') {
-		severity = 'severe'
-	}
+	// Blood or bloating is an emergency regardless of how long it has been going.
+	const emergency = other === 'blood' || other === 'bloated'
 
-	// Build lookup key based on area
 	switch (area) {
-		case 'skin':
+		case 'skin': {
 			const skinMain = answers['skin-main']
 			if (skinMain === 'scratching') {
 				key =
-					severity === 'severe' || severity === 'medium'
+					acuity === 'chronic'
 						? 'skin-scratching-chronic'
 						: 'skin-scratching-acute'
 			} else if (skinMain === 'hair-loss') {
@@ -441,30 +424,32 @@ export function getSymptomResult(
 				key = 'skin-dry'
 			}
 			break
+		}
 
-		case 'stomach':
+		case 'stomach': {
 			const stomachMain = answers['stomach-main']
+			const stomachSevere = emergency || acuity === 'chronic'
 			if (stomachMain === 'vomiting') {
-				key =
-					severity === 'severe'
-						? 'stomach-vomiting-severe'
-						: 'stomach-vomiting-mild'
+				key = stomachSevere
+					? 'stomach-vomiting-severe'
+					: 'stomach-vomiting-mild'
 			} else if (stomachMain === 'diarrhea') {
-				key =
-					severity === 'severe'
-						? 'stomach-diarrhea-severe'
-						: 'stomach-diarrhea-mild'
+				key = stomachSevere
+					? 'stomach-diarrhea-severe'
+					: 'stomach-diarrhea-mild'
 			} else {
 				key = 'stomach-no-appetite'
 			}
 			break
+		}
 
-		case 'behavior':
+		case 'behavior': {
 			const behaviorMain = answers['behavior-main']
 			key = `behavior-${behaviorMain}`
 			break
+		}
 
-		case 'mobility':
+		case 'mobility': {
 			const mobilityMain = answers['mobility-main']
 			const injury = answers['mobility-injury']
 			if (mobilityMain === 'limping') {
@@ -476,21 +461,23 @@ export function getSymptomResult(
 				key = 'mobility-stiff'
 			}
 			break
+		}
 
-		case 'eyes-ears':
+		case 'eyes-ears': {
 			const eyesEarsArea = answers['eyes-ears-area']
 			const smell = answers['eyes-ears-smell']
-			if (smell === 'strong' || smell === 'mild') {
-				key = 'ears-smell'
-			} else if (eyesEarsArea === 'ears') {
-				key = 'ears-discharge'
-			} else {
+			if (eyesEarsArea === 'eyes') {
 				key = 'eyes-discharge'
+			} else if (smell === 'strong' || smell === 'mild') {
+				// A smell only points to an ear infection when the ears are involved.
+				key = 'ears-smell'
+			} else {
+				key = 'ears-discharge'
 			}
 			break
+		}
 	}
 
-	// Return the result or a default
 	return (
 		resultsMap[key] || {
 			cause: 'Unable to determine specific cause',

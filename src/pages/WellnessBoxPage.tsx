@@ -1,5 +1,7 @@
 import { buildWellnessBox, getAlternatives } from '@/data/wellnessProducts'
 import { cn } from '@/lib/format'
+import { motionTransition } from '@/lib/motion'
+import { imageFallback } from '@/lib/species'
 import type { QuizAnswers, WellnessProduct } from '@/types'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
@@ -90,14 +92,12 @@ const questions = {
 }
 
 export function WellnessBoxPage() {
-	// Quiz state
 	const [step, setStep] = useState<QuizStep>('species')
 	const [answers, setAnswers] = useState<Partial<QuizAnswers>>({})
 	const [boxItems, setBoxItems] = useState<WellnessProduct[]>([])
 	const [showSuccess, setShowSuccess] = useState(false)
 	const [swapOpen, setSwapOpen] = useState<string | null>(null)
 
-	// Calculate progress
 	const steps: QuizStep[] = [
 		'species',
 		'size',
@@ -109,17 +109,14 @@ export function WellnessBoxPage() {
 	const currentStepIndex = steps.indexOf(step)
 	const progress = (currentStepIndex / (steps.length - 1)) * 100
 
-	// Handle answer selection
 	const handleAnswer = (questionKey: string, value: string) => {
 		const newAnswers = { ...answers, [questionKey]: value }
 		setAnswers(newAnswers)
 
-		// Move to next step
 		const nextIndex = currentStepIndex + 1
 		if (nextIndex < steps.length - 1) {
 			setStep(steps[nextIndex])
 		} else {
-			// Build the box
 			const box = buildWellnessBox(
 				newAnswers.species as 'dog' | 'cat',
 				newAnswers.size as 'small' | 'medium' | 'large',
@@ -132,14 +129,12 @@ export function WellnessBoxPage() {
 		}
 	}
 
-	// Go back
 	const goBack = () => {
 		if (currentStepIndex > 0) {
 			setStep(steps[currentStepIndex - 1])
 		}
 	}
 
-	// Start over
 	const startOver = () => {
 		setStep('species')
 		setAnswers({})
@@ -148,7 +143,6 @@ export function WellnessBoxPage() {
 		setSwapOpen(null)
 	}
 
-	// Swap item
 	const swapItem = (oldId: string, newProduct: WellnessProduct) => {
 		setBoxItems(items =>
 			items.map(item => (item.id === oldId ? newProduct : item))
@@ -156,10 +150,8 @@ export function WellnessBoxPage() {
 		setSwapOpen(null)
 	}
 
-	// Calculate total price
 	const totalPrice = boxItems.reduce((sum, item) => sum + item.price, 0)
 
-	// Handle subscribe
 	const handleSubscribe = () => {
 		setShowSuccess(true)
 	}
@@ -201,10 +193,7 @@ export function WellnessBoxPage() {
 
 			{/* Back button */}
 			{step !== 'species' && step !== 'results' && (
-				<button
-					onClick={goBack}
-					className="btn-ghost mb-4 -ml-2"
-				>
+				<button onClick={goBack} className="btn-ghost mb-4 -ml-2">
 					<ArrowLeft size={16} /> Back
 				</button>
 			)}
@@ -217,7 +206,7 @@ export function WellnessBoxPage() {
 						initial={{ opacity: 0, x: 20 }}
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: -20 }}
-						transition={{ duration: 0.2 }}
+						transition={motionTransition.fast}
 					>
 						<h2 className="font-serif text-2xl text-neutral-900 dark:text-white">
 							{questions[step].title}
@@ -245,10 +234,7 @@ export function WellnessBoxPage() {
 											</p>
 										)}
 									</div>
-									<ArrowRight
-										size={20}
-										className="text-neutral-400"
-									/>
+									<ArrowRight size={20} className="text-neutral-400" />
 								</button>
 							))}
 						</div>
@@ -281,25 +267,20 @@ export function WellnessBoxPage() {
 						{/* Box items */}
 						<div className="card p-6">
 							<h3 className="flex items-center gap-2 font-serif text-xl text-neutral-900 dark:text-white">
-								<Sparkles
-									size={20}
-									className="text-teal-500"
-								/>
+								<Sparkles size={20} className="text-teal-500" />
 								Your Custom Box
 							</h3>
 
 							<div className="mt-4 divide-y divide-neutral-200 dark:divide-neutral-700">
 								{boxItems.map(item => (
-									<div
-										key={item.id}
-										className="flex items-center gap-4 py-4"
-									>
+									<div key={item.id} className="flex items-center gap-4 py-4">
 										<img
 											src={item.image}
 											alt={item.name}
 											className="h-16 w-16 rounded-xl object-cover"
 											onError={e => {
-												e.currentTarget.src = `https://placehold.co/100x100/f5f5f4/a8a29e?text=${encodeURIComponent(item.name.charAt(0))}`
+												e.currentTarget.onerror = null
+												e.currentTarget.src = imageFallback(item.name)
 											}}
 										/>
 										<div className="min-w-0 flex-1">
@@ -331,38 +312,47 @@ export function WellnessBoxPage() {
 												{/* Swap dropdown */}
 												<AnimatePresence>
 													{swapOpen === item.id && (
-														<motion.div
-															initial={{ opacity: 0, y: -10 }}
-															animate={{ opacity: 1, y: 0 }}
-															exit={{ opacity: 0, y: -10 }}
-															className="absolute right-0 top-6 z-10 w-64 rounded-xl border border-neutral-200 bg-white p-2 shadow-lg dark:border-neutral-700 dark:bg-neutral-900"
-														>
-															<p className="mb-2 px-2 text-xs font-medium text-neutral-500">
-																Swap with:
-															</p>
-															{getAlternatives(
-																item.id,
-																answers.species as 'dog' | 'cat'
-															).map(alt => (
-																<button
-																	key={alt.id}
-																	onClick={() => swapItem(item.id, alt)}
-																	className="flex w-full items-center gap-2 rounded-lg p-2 text-left text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800"
-																>
-																	<img
-																		src={alt.image}
-																		alt=""
-																		className="h-8 w-8 rounded object-cover"
-																	/>
-																	<span className="flex-1 truncate text-neutral-900 dark:text-white">
-																		{alt.name}
-																	</span>
-																	<span className="text-xs text-neutral-500">
-																		${alt.price.toFixed(2)}
-																	</span>
-																</button>
-															))}
-														</motion.div>
+														<>
+															{/* Click-away backdrop to dismiss the dropdown */}
+															<button
+																type="button"
+																aria-label="Close swap menu"
+																onClick={() => setSwapOpen(null)}
+																className="fixed inset-0 z-10 cursor-default"
+															/>
+															<motion.div
+																initial={{ opacity: 0, y: -10 }}
+																animate={{ opacity: 1, y: 0 }}
+																exit={{ opacity: 0, y: -10 }}
+																className="absolute right-0 top-6 z-20 w-64 rounded-xl border border-neutral-200 bg-white p-2 shadow-lg dark:border-neutral-700 dark:bg-neutral-900"
+															>
+																<p className="mb-2 px-2 text-xs font-medium text-neutral-500">
+																	Swap with:
+																</p>
+																{getAlternatives(
+																	item.id,
+																	answers.species as 'dog' | 'cat'
+																).map(alt => (
+																	<button
+																		key={alt.id}
+																		onClick={() => swapItem(item.id, alt)}
+																		className="flex w-full items-center gap-2 rounded-lg p-2 text-left text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800"
+																	>
+																		<img
+																			src={alt.image}
+																			alt=""
+																			className="h-8 w-8 rounded object-cover"
+																		/>
+																		<span className="flex-1 truncate text-neutral-900 dark:text-white">
+																			{alt.name}
+																		</span>
+																		<span className="text-xs text-neutral-500">
+																			${alt.price.toFixed(2)}
+																		</span>
+																	</button>
+																))}
+															</motion.div>
+														</>
 													)}
 												</AnimatePresence>
 											</div>
@@ -381,10 +371,7 @@ export function WellnessBoxPage() {
 										${totalPrice.toFixed(2)}/mo
 									</p>
 								</div>
-								<button
-									onClick={handleSubscribe}
-									className="btn-primary"
-								>
+								<button onClick={handleSubscribe} className="btn-primary">
 									<ShoppingBag size={18} /> Subscribe Now
 								</button>
 							</div>
@@ -395,10 +382,7 @@ export function WellnessBoxPage() {
 						</div>
 
 						{/* Start over */}
-						<button
-							onClick={startOver}
-							className="btn-ghost mx-auto mt-6 flex"
-						>
+						<button onClick={startOver} className="btn-ghost mx-auto mt-6 flex">
 							<RefreshCw size={16} /> Build a different box
 						</button>
 					</motion.div>
@@ -427,24 +411,15 @@ export function WellnessBoxPage() {
 							</h3>
 							<ul className="mt-3 space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
 								<li className="flex items-start gap-2">
-									<Check
-										size={16}
-										className="mt-0.5 shrink-0 text-green-500"
-									/>
+									<Check size={16} className="mt-0.5 shrink-0 text-green-500" />
 									Check your email for order confirmation
 								</li>
 								<li className="flex items-start gap-2">
-									<Check
-										size={16}
-										className="mt-0.5 shrink-0 text-green-500"
-									/>
+									<Check size={16} className="mt-0.5 shrink-0 text-green-500" />
 									Your box ships within 2-3 business days
 								</li>
 								<li className="flex items-start gap-2">
-									<Check
-										size={16}
-										className="mt-0.5 shrink-0 text-green-500"
-									/>
+									<Check size={16} className="mt-0.5 shrink-0 text-green-500" />
 									Manage or pause your subscription anytime
 								</li>
 							</ul>
@@ -452,10 +427,7 @@ export function WellnessBoxPage() {
 						<p className="mt-6 text-xs text-neutral-400">
 							(This is a demo — no real orders are processed)
 						</p>
-						<button
-							onClick={startOver}
-							className="btn-secondary mt-4"
-						>
+						<button onClick={startOver} className="btn-secondary mt-4">
 							Build Another Box
 						</button>
 					</motion.div>

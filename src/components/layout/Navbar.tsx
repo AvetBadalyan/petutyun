@@ -1,4 +1,5 @@
 import { cn } from '@/lib/format'
+import { motionTransition } from '@/lib/motion'
 import { useFavorites } from '@/store/favorites'
 import { useTheme } from '@/store/theme'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -42,10 +43,7 @@ export function Navbar() {
 				</button>
 
 				{/* Logo */}
-				<Link
-					to="/"
-					className="flex shrink-0 items-center gap-2"
-				>
+				<Link to="/" className="flex shrink-0 items-center gap-2">
 					<span className="text-2xl">🐾</span>
 					<span className="font-serif text-xl font-semibold text-neutral-900 dark:text-white">
 						PetCare<span className="text-coral-500">Hub</span>
@@ -107,7 +105,7 @@ export function Navbar() {
 						initial={{ height: 0, opacity: 0 }}
 						animate={{ height: 'auto', opacity: 1 }}
 						exit={{ height: 0, opacity: 0 }}
-						transition={{ duration: 0.2 }}
+						transition={motionTransition.fast}
 						className="overflow-hidden border-t border-neutral-200 dark:border-neutral-800 lg:hidden"
 					>
 						<div className="flex flex-col gap-1 p-4">

@@ -12,16 +12,10 @@ export function NotFoundPage() {
 				Looks like this page wandered off. Let's get you back on track.
 			</p>
 			<div className="mt-8 flex flex-wrap justify-center gap-4">
-				<Link
-					to="/"
-					className="btn-primary"
-				>
+				<Link to="/" className="btn-primary">
 					<Home size={18} /> Go Home
 				</Link>
-				<Link
-					to="/adopt"
-					className="btn-secondary"
-				>
+				<Link to="/adopt" className="btn-secondary">
 					<Search size={18} /> Find Pets
 				</Link>
 			</div>

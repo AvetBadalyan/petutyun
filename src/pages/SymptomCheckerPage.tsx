@@ -1,5 +1,6 @@
 import { getSymptomResult, symptomAreas } from '@/data/symptoms'
 import { cn } from '@/lib/format'
+import { speciesEmoji } from '@/lib/species'
 import { usePets } from '@/store/pets'
 import type { SymptomResult } from '@/types'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -22,7 +23,6 @@ type Step = 'select-pet' | 'select-area' | 'questions' | 'result'
 export function SymptomCheckerPage() {
 	const { pets, activePetId, getPetById } = usePets()
 
-	// Wizard state
 	const [step, setStep] = useState<Step>('select-pet')
 	const [selectedPetId, setSelectedPetId] = useState<string | null>(activePetId)
 	const [selectedArea, setSelectedArea] = useState<string | null>(null)
@@ -30,27 +30,16 @@ export function SymptomCheckerPage() {
 	const [answers, setAnswers] = useState<Record<string, string>>({})
 	const [result, setResult] = useState<SymptomResult | null>(null)
 
-	// Get selected pet and area data
 	const selectedPet = selectedPetId ? getPetById(selectedPetId) : undefined
 	const areaData = selectedArea
 		? symptomAreas.find(a => a.id === selectedArea)
 		: undefined
 
-	// Emoji for species
-	const speciesEmoji: Record<string, string> = {
-		dog: '🐕',
-		cat: '🐱',
-		bird: '🐦',
-		other: '🐾'
-	}
-
-	// Handle pet selection
 	const handleSelectPet = (petId: string) => {
 		setSelectedPetId(petId)
 		setStep('select-area')
 	}
 
-	// Handle area selection
 	const handleSelectArea = (areaId: string) => {
 		setSelectedArea(areaId)
 		setCurrentQuestion(0)
@@ -58,23 +47,19 @@ export function SymptomCheckerPage() {
 		setStep('questions')
 	}
 
-	// Handle answer selection
 	const handleAnswer = (questionId: string, value: string) => {
 		const newAnswers = { ...answers, [questionId]: value }
 		setAnswers(newAnswers)
 
-		// Move to next question or show result
 		if (areaData && currentQuestion < areaData.questions.length - 1) {
 			setCurrentQuestion(currentQuestion + 1)
 		} else {
-			// Calculate result
 			const symptomResult = getSymptomResult(selectedArea!, newAnswers)
 			setResult(symptomResult)
 			setStep('result')
 		}
 	}
 
-	// Go back one step
 	const goBack = () => {
 		if (step === 'questions' && currentQuestion > 0) {
 			setCurrentQuestion(currentQuestion - 1)
@@ -88,7 +73,6 @@ export function SymptomCheckerPage() {
 		}
 	}
 
-	// Start over
 	const startOver = () => {
 		setStep('select-pet')
 		setSelectedPetId(activePetId)
@@ -98,7 +82,6 @@ export function SymptomCheckerPage() {
 		setResult(null)
 	}
 
-	// Severity badge colors
 	const severityConfig = {
 		low: {
 			bg: 'bg-green-100 dark:bg-green-950',
@@ -177,10 +160,7 @@ export function SymptomCheckerPage() {
 
 			{/* Back button */}
 			{step !== 'select-pet' && step !== 'result' && (
-				<button
-					onClick={goBack}
-					className="btn-ghost mb-4 -ml-2"
-				>
+				<button onClick={goBack} className="btn-ghost mb-4 -ml-2">
 					<ArrowLeft size={16} /> Back
 				</button>
 			)}
@@ -200,17 +180,11 @@ export function SymptomCheckerPage() {
 
 						{pets.length === 0 ? (
 							<div className="mt-6 rounded-2xl border-2 border-dashed border-neutral-200 py-12 text-center dark:border-neutral-700">
-								<PawPrint
-									size={40}
-									className="mx-auto text-neutral-400"
-								/>
+								<PawPrint size={40} className="mx-auto text-neutral-400" />
 								<p className="mt-4 text-neutral-600 dark:text-neutral-400">
 									You haven't added any pets yet.
 								</p>
-								<Link
-									to="/my-pets"
-									className="btn-primary mt-4"
-								>
+								<Link to="/my-pets" className="btn-primary mt-4">
 									Add Your Pet First
 								</Link>
 							</div>
@@ -297,10 +271,7 @@ export function SymptomCheckerPage() {
 											{area.description}
 										</p>
 									</div>
-									<ArrowRight
-										size={20}
-										className="ml-auto text-neutral-400"
-									/>
+									<ArrowRight size={20} className="ml-auto text-neutral-400" />
 								</button>
 							))}
 						</div>
@@ -390,10 +361,7 @@ export function SymptomCheckerPage() {
 							{result.seeVet && (
 								<div className="mt-4 rounded-xl bg-coral-50 p-4 dark:bg-coral-950">
 									<p className="flex items-start gap-2 text-sm text-coral-700 dark:text-coral-300">
-										<AlertTriangle
-											size={18}
-											className="mt-0.5 shrink-0"
-										/>
+										<AlertTriangle size={18} className="mt-0.5 shrink-0" />
 										<span>
 											<strong>We recommend seeing a veterinarian</strong> for a
 											proper diagnosis and treatment plan.
@@ -414,16 +382,10 @@ export function SymptomCheckerPage() {
 
 						{/* Actions */}
 						<div className="mt-8 flex flex-col gap-3 sm:flex-row">
-							<button
-								onClick={startOver}
-								className="btn-secondary flex-1"
-							>
+							<button onClick={startOver} className="btn-secondary flex-1">
 								<RotateCcw size={16} /> Check Another Symptom
 							</button>
-							<Link
-								to="/my-pets"
-								className="btn-primary flex-1 text-center"
-							>
+							<Link to="/my-pets" className="btn-primary flex-1 text-center">
 								Back to My Pets
 							</Link>
 						</div>

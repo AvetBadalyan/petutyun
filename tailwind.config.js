@@ -5,14 +5,14 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				// PetCare Hub palette — warm coral/orange + teal
+				// Brand palette: coral (primary) + teal (accent) over warm neutrals.
 				coral: {
 					50: '#fff5f2',
 					100: '#ffe8e1',
 					200: '#ffd1c7',
 					300: '#ffb09e',
 					400: '#ff8567',
-					500: '#ff6b35', // primary brand orange
+					500: '#ff6b35',
 					600: '#ed5520',
 					700: '#c74316',
 					800: '#a33916',
@@ -25,7 +25,7 @@ export default {
 					200: '#92fee5',
 					300: '#53f5d5',
 					400: '#21e2c1',
-					500: '#2ec4b6', // primary teal accent
+					500: '#2ec4b6',
 					600: '#069e91',
 					700: '#0a7e75',
 					800: '#0e645e',
@@ -44,15 +44,6 @@ export default {
 					800: '#292524',
 					900: '#1c1917',
 					950: '#0c0a09'
-				},
-				// Keep cream/sage for compatibility during transition
-				cream: {
-					DEFAULT: '#fafaf9',
-					dark: '#f5f5f4'
-				},
-				sage: {
-					DEFAULT: '#d6d3d1',
-					soft: '#e7e5e4'
 				}
 			},
 			fontFamily: {

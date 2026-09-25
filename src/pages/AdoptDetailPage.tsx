@@ -1,5 +1,7 @@
 import { getAdoptablePetById } from '@/data/adoptablePets'
 import { cn } from '@/lib/format'
+import { motionTransition } from '@/lib/motion'
+import { imageFallback, speciesEmoji } from '@/lib/species'
 import { useFavorites } from '@/store/favorites'
 import { motion } from 'framer-motion'
 import {
@@ -20,21 +22,12 @@ export function AdoptDetailPage() {
 	const pet = id ? getAdoptablePetById(id) : undefined
 	const { toggle, has } = useFavorites()
 
-	// Pet not found
 	if (!pet) {
 		return <NotFoundPage />
 	}
 
 	const isFavorite = has(pet.id)
 
-	const speciesEmoji: Record<string, string> = {
-		dog: '🐕',
-		cat: '🐱',
-		bird: '🐦',
-		other: '🐾'
-	}
-
-	// Mock shelter contact info
 	const shelterContact = {
 		phone: '(555) 123-4567',
 		email: `adopt@${pet.shelter.toLowerCase().replace(/\s+/g, '')}.org`,
@@ -44,10 +37,7 @@ export function AdoptDetailPage() {
 	return (
 		<div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
 			{/* Back link */}
-			<Link
-				to="/adopt"
-				className="btn-ghost mb-6 -ml-2"
-			>
+			<Link to="/adopt" className="btn-ghost mb-6 -ml-2">
 				<ArrowLeft size={16} /> Back to adoption
 			</Link>
 
@@ -56,7 +46,7 @@ export function AdoptDetailPage() {
 				<motion.div
 					initial={{ opacity: 0, x: -20 }}
 					animate={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.4 }}
+					transition={motionTransition.base}
 				>
 					<div className="relative overflow-hidden rounded-3xl">
 						<img
@@ -64,7 +54,8 @@ export function AdoptDetailPage() {
 							alt={pet.name}
 							className="aspect-square w-full object-cover"
 							onError={e => {
-								e.currentTarget.src = `https://placehold.co/600x600/f5f5f4/a8a29e?text=${encodeURIComponent(pet.name)}`
+								e.currentTarget.onerror = null
+								e.currentTarget.src = imageFallback(pet.name)
 							}}
 						/>
 						{/* Favorite button */}
@@ -77,10 +68,7 @@ export function AdoptDetailPage() {
 									: 'bg-white/90 text-neutral-700 hover:bg-coral-100 hover:text-coral-600'
 							)}
 						>
-							<Heart
-								size={18}
-								fill={isFavorite ? 'currentColor' : 'none'}
-							/>
+							<Heart size={18} fill={isFavorite ? 'currentColor' : 'none'} />
 							{isFavorite ? 'Saved' : 'Save'}
 						</button>
 					</div>
@@ -88,7 +76,10 @@ export function AdoptDetailPage() {
 					{/* Share buttons (mock) */}
 					<div className="mt-4 flex items-center justify-center gap-2">
 						<span className="text-sm text-neutral-500">Share:</span>
-						<button className="grid h-10 w-10 place-items-center rounded-full bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700">
+						<button
+							aria-label={`Share ${pet.name}`}
+							className="grid h-10 w-10 place-items-center rounded-full bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700"
+						>
 							<Share2 size={18} />
 						</button>
 					</div>
@@ -98,7 +89,7 @@ export function AdoptDetailPage() {
 				<motion.div
 					initial={{ opacity: 0, x: 20 }}
 					animate={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.4, delay: 0.1 }}
+					transition={{ ...motionTransition.base, delay: 0.1 }}
 				>
 					{/* Header */}
 					<div className="flex items-start justify-between">

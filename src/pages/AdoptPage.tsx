@@ -1,5 +1,6 @@
 import { adoptablePets } from '@/data/adoptablePets'
 import { cn } from '@/lib/format'
+import { imageFallback, speciesEmoji } from '@/lib/species'
 import { useFavorites } from '@/store/favorites'
 import type { AdoptablePet } from '@/types'
 import { motion } from 'framer-motion'
@@ -7,7 +8,6 @@ import { Filter, Heart, MapPin, Search, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-// Filter options - simple arrays
 const speciesOptions = [
 	{ value: 'all', label: 'All Pets' },
 	{ value: 'dog', label: '🐕 Dogs' },
@@ -30,13 +30,11 @@ const ageOptions = [
 	{ value: 'senior', label: 'Senior (7+ yrs)' }
 ]
 
-// Parse age string to number for filtering
 function parseAge(ageStr: string): number {
 	const match = ageStr.match(/(\d+)/)
 	return match ? parseInt(match[1], 10) : 0
 }
 
-// Get age category
 function getAgeCategory(ageStr: string): string {
 	const years = parseAge(ageStr)
 	if (years <= 2) return 'young'
@@ -45,7 +43,6 @@ function getAgeCategory(ageStr: string): string {
 }
 
 export function AdoptPage() {
-	// Filter state
 	const [search, setSearch] = useState('')
 	const [species, setSpecies] = useState('all')
 	const [size, setSize] = useState('all')
@@ -54,14 +51,11 @@ export function AdoptPage() {
 	const [goodWithPets, setGoodWithPets] = useState(false)
 	const [showFilters, setShowFilters] = useState(false)
 
-	// Favorites
 	const { toggle, has } = useFavorites()
 	const favCount = useFavorites(s => s.ids.length)
 
-	// Filter logic - just filter the array based on selections
 	const filteredPets = useMemo(() => {
 		return adoptablePets.filter(pet => {
-			// Search by name or breed
 			if (search) {
 				const searchLower = search.toLowerCase()
 				const matchesName = pet.name.toLowerCase().includes(searchLower)
@@ -69,26 +63,16 @@ export function AdoptPage() {
 				if (!matchesName && !matchesBreed) return false
 			}
 
-			// Species filter
 			if (species !== 'all' && pet.species !== species) return false
-
-			// Size filter
 			if (size !== 'all' && pet.size !== size) return false
-
-			// Age filter
 			if (age !== 'all' && getAgeCategory(pet.age) !== age) return false
-
-			// Good with kids
 			if (goodWithKids && !pet.goodWithKids) return false
-
-			// Good with pets
 			if (goodWithPets && !pet.goodWithPets) return false
 
 			return true
 		})
 	}, [search, species, size, age, goodWithKids, goodWithPets])
 
-	// Count active filters
 	const activeFilters = [
 		species !== 'all',
 		size !== 'all',
@@ -97,7 +81,6 @@ export function AdoptPage() {
 		goodWithPets
 	].filter(Boolean).length
 
-	// Clear all filters
 	const clearFilters = () => {
 		setSearch('')
 		setSpecies('all')
@@ -120,10 +103,7 @@ export function AdoptPage() {
 						for a forever home
 					</p>
 				</div>
-				<Link
-					to="/adopt/favorites"
-					className="btn-secondary relative"
-				>
+				<Link to="/adopt/favorites" className="btn-secondary relative">
 					<Heart size={18} />
 					Saved Pets
 					{favCount > 0 && (
@@ -176,10 +156,7 @@ export function AdoptPage() {
 						className="input w-auto"
 					>
 						{speciesOptions.map(opt => (
-							<option
-								key={opt.value}
-								value={opt.value}
-							>
+							<option key={opt.value} value={opt.value}>
 								{opt.label}
 							</option>
 						))}
@@ -191,10 +168,7 @@ export function AdoptPage() {
 						className="input w-auto"
 					>
 						{sizeOptions.map(opt => (
-							<option
-								key={opt.value}
-								value={opt.value}
-							>
+							<option key={opt.value} value={opt.value}>
 								{opt.label}
 							</option>
 						))}
@@ -206,10 +180,7 @@ export function AdoptPage() {
 						className="input w-auto"
 					>
 						{ageOptions.map(opt => (
-							<option
-								key={opt.value}
-								value={opt.value}
-							>
+							<option key={opt.value} value={opt.value}>
 								{opt.label}
 							</option>
 						))}
@@ -236,10 +207,7 @@ export function AdoptPage() {
 					</label>
 
 					{activeFilters > 0 && (
-						<button
-							onClick={clearFilters}
-							className="btn-ghost text-coral-600"
-						>
+						<button onClick={clearFilters} className="btn-ghost text-coral-600">
 							<X size={16} /> Clear
 						</button>
 					)}
@@ -265,10 +233,7 @@ export function AdoptPage() {
 								className="input"
 							>
 								{speciesOptions.map(opt => (
-									<option
-										key={opt.value}
-										value={opt.value}
-									>
+									<option key={opt.value} value={opt.value}>
 										{opt.label}
 									</option>
 								))}
@@ -285,10 +250,7 @@ export function AdoptPage() {
 								className="input"
 							>
 								{sizeOptions.map(opt => (
-									<option
-										key={opt.value}
-										value={opt.value}
-									>
+									<option key={opt.value} value={opt.value}>
 										{opt.label}
 									</option>
 								))}
@@ -305,10 +267,7 @@ export function AdoptPage() {
 								className="input"
 							>
 								{ageOptions.map(opt => (
-									<option
-										key={opt.value}
-										value={opt.value}
-									>
+									<option key={opt.value} value={opt.value}>
 										{opt.label}
 									</option>
 								))}
@@ -358,10 +317,7 @@ export function AdoptPage() {
 					<p className="mt-2 text-neutral-500 dark:text-neutral-400">
 						Try adjusting your filters or search term.
 					</p>
-					<button
-						onClick={clearFilters}
-						className="btn-primary mt-6"
-					>
+					<button onClick={clearFilters} className="btn-primary mt-6">
 						Clear Filters
 					</button>
 				</div>
@@ -394,13 +350,6 @@ interface PetCardProps {
 }
 
 function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
-	const speciesEmoji: Record<string, string> = {
-		dog: '🐕',
-		cat: '🐱',
-		bird: '🐦',
-		other: '🐾'
-	}
-
 	return (
 		<motion.div
 			variants={{
@@ -416,8 +365,8 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 					alt={pet.name}
 					className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
 					onError={e => {
-						// Fallback placeholder
-						e.currentTarget.src = `https://placehold.co/400x300/f5f5f4/a8a29e?text=${encodeURIComponent(pet.name)}`
+						e.currentTarget.onerror = null
+						e.currentTarget.src = imageFallback(pet.name)
 					}}
 				/>
 				{/* Favorite button */}
@@ -434,10 +383,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 					)}
 					aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
 				>
-					<Heart
-						size={20}
-						fill={isFavorite ? 'currentColor' : 'none'}
-					/>
+					<Heart size={20} fill={isFavorite ? 'currentColor' : 'none'} />
 				</button>
 				{/* Species badge */}
 				<span className="absolute left-3 top-3 rounded-full bg-white/90 px-2 py-1 text-sm">

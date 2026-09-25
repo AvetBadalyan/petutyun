@@ -1,12 +1,5 @@
-// ============================================
-// PetCare Hub Types
-// Simple, explainable types - nothing fancy
-// ============================================
-
-// Re-export Pet from store for convenience
 export type { Pet } from '@/store/pets'
 
-// Species options
 export type Species = 'dog' | 'cat' | 'bird' | 'other'
 
 // ---- Adoptable Pets ----
@@ -30,11 +23,7 @@ export interface AdoptablePet {
 // ---- Symptom Checker ----
 
 export type SymptomArea =
-	| 'skin'
-	| 'stomach'
-	| 'behavior'
-	| 'mobility'
-	| 'eyes-ears'
+	'skin' | 'stomach' | 'behavior' | 'mobility' | 'eyes-ears'
 
 export interface SymptomResult {
 	cause: string
@@ -51,20 +40,24 @@ export interface WellnessProduct {
 	description: string
 	image: string
 	price: number
-	// Targeting tags
 	forSpecies?: Species[]
-	forSize?: ('small' | 'medium' | 'large')[]
-	forAge?: ('puppy' | 'adult' | 'senior')[]
-	forActivity?: ('lazy' | 'moderate' | 'hyper')[]
-	forHealth?: string // "joints", "digestion", "skin", etc.
+	forSize?: PetSize[]
+	forAge?: PetAge[]
+	forActivity?: PetActivity[]
+	forHealth?: HealthFocus
 }
+
+export type PetSize = 'small' | 'medium' | 'large'
+export type PetAge = 'puppy' | 'adult' | 'senior'
+export type PetActivity = 'lazy' | 'moderate' | 'hyper'
+export type HealthFocus = 'joints' | 'digestion' | 'skin'
 
 export interface QuizAnswers {
 	species: 'dog' | 'cat'
-	size: 'small' | 'medium' | 'large'
-	age: 'puppy' | 'adult' | 'senior'
-	activity: 'lazy' | 'moderate' | 'hyper'
-	healthFocus: 'joints' | 'digestion' | 'skin' | 'none'
+	size: PetSize
+	age: PetAge
+	activity: PetActivity
+	healthFocus: HealthFocus | 'none'
 }
 
 // ---- Symptom History ----

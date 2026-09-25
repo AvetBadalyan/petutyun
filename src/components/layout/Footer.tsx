@@ -21,10 +21,7 @@ export function Footer() {
 				<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
 					{/* Brand */}
 					<div className="lg:col-span-2">
-						<Link
-							to="/"
-							className="flex items-center gap-2"
-						>
+						<Link to="/" className="flex items-center gap-2">
 							<span className="text-2xl">🐾</span>
 							<span className="font-serif text-xl font-semibold text-neutral-900 dark:text-white">
 								PetCare<span className="text-coral-500">Hub</span>
@@ -103,12 +100,8 @@ export function Footer() {
 						© {new Date().getFullYear()} PetCare Hub. Portfolio demo project.
 					</p>
 					<p className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-500">
-						Made with{' '}
-						<Heart
-							size={14}
-							className="text-coral-500"
-						/>{' '}
-						for pets everywhere
+						Made with <Heart size={14} className="text-coral-500" /> for pets
+						everywhere
 					</p>
 				</div>
 			</div>

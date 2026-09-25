@@ -21,6 +21,33 @@
 	::selection {
 		@apply bg-coral-200 text-coral-900;
 	}
+
+	/* App-wide keyboard focus ring. Uses box-shadow so it isn't clipped by
+	   overflow:hidden on pill/card buttons, and offsets from the element. */
+	:focus-visible {
+		@apply outline-none;
+		box-shadow:
+			0 0 0 2px theme('colors.neutral.50'),
+			0 0 0 4px theme('colors.teal.500');
+	}
+	html.dark :focus-visible {
+		box-shadow:
+			0 0 0 2px theme('colors.neutral.950'),
+			0 0 0 4px theme('colors.teal.400');
+	}
+}
+
+/* Respect users who prefer reduced motion: neutralize animations/transitions
+   and disable Framer Motion's transforms via near-instant durations. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
 
 @layer components {

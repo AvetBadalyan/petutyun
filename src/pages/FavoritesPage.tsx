@@ -1,4 +1,5 @@
 import { getAdoptablePetsByIds } from '@/data/adoptablePets'
+import { imageFallback, speciesEmoji } from '@/lib/species'
 import { useFavorites } from '@/store/favorites'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Heart, MapPin, Trash2 } from 'lucide-react'
@@ -8,20 +9,10 @@ export function FavoritesPage() {
 	const { ids, remove, clear } = useFavorites()
 	const savedPets = getAdoptablePetsByIds(ids)
 
-	const speciesEmoji: Record<string, string> = {
-		dog: '🐕',
-		cat: '🐱',
-		bird: '🐦',
-		other: '🐾'
-	}
-
 	return (
 		<div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
 			{/* Back link */}
-			<Link
-				to="/adopt"
-				className="btn-ghost mb-6 -ml-2"
-			>
+			<Link to="/adopt" className="btn-ghost mb-6 -ml-2">
 				<ArrowLeft size={16} /> Back to adoption
 			</Link>
 
@@ -58,10 +49,7 @@ export function FavoritesPage() {
 					<p className="mt-2 text-neutral-500 dark:text-neutral-400">
 						When you find a pet you love, click the heart to save them here.
 					</p>
-					<Link
-						to="/adopt"
-						className="btn-primary mt-6"
-					>
+					<Link to="/adopt" className="btn-primary mt-6">
 						Browse Adoptable Pets
 					</Link>
 				</div>
@@ -91,7 +79,8 @@ export function FavoritesPage() {
 									alt={pet.name}
 									className="h-full w-full object-cover"
 									onError={e => {
-										e.currentTarget.src = `https://placehold.co/200x200/f5f5f4/a8a29e?text=${encodeURIComponent(pet.name)}`
+										e.currentTarget.onerror = null
+										e.currentTarget.src = imageFallback(pet.name)
 									}}
 								/>
 								<span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-sm">
@@ -139,10 +128,7 @@ export function FavoritesPage() {
 									className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border-2 border-neutral-200 text-neutral-500 hover:border-red-300 hover:bg-red-50 hover:text-red-500 dark:border-neutral-700 dark:hover:border-red-800 dark:hover:bg-red-950"
 									aria-label="Remove from favorites"
 								>
-									<Heart
-										size={18}
-										fill="currentColor"
-									/>
+									<Heart size={18} fill="currentColor" />
 								</button>
 							</div>
 						</motion.div>

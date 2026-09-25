@@ -6,6 +6,7 @@ import {
 } from '@/data/medications'
 import { calculateDosage } from '@/lib/dosage'
 import { cn } from '@/lib/format'
+import { speciesEmoji } from '@/lib/species'
 import { usePets } from '@/store/pets'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
@@ -23,14 +24,6 @@ import { useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { NotFoundPage } from './NotFoundPage'
 
-// Emoji for species
-const speciesEmoji: Record<string, string> = {
-	dog: '🐕',
-	cat: '🐱',
-	bird: '🐦',
-	other: '🐾'
-}
-
 export function PetDetailPage() {
 	const { id } = useParams()
 	const navigate = useNavigate()
@@ -39,8 +32,7 @@ export function PetDetailPage() {
 		removePet,
 		medications: petMedications,
 		addMedication,
-		removeMedication,
-		getMedicationsForPet
+		removeMedication
 	} = usePets()
 
 	const pet = id ? getPetById(id) : undefined
@@ -48,32 +40,27 @@ export function PetDetailPage() {
 	const [selectedMedId, setSelectedMedId] = useState<string>('')
 	const [deleteConfirm, setDeleteConfirm] = useState(false)
 
-	// Get this pet's active medications
 	const activeMeds = useMemo(() => {
 		if (!pet) return []
-		return getMedicationsForPet(pet.id).filter(m => m.active)
-	}, [pet, getMedicationsForPet, petMedications])
+		return petMedications.filter(m => m.petId === pet.id && m.active)
+	}, [pet, petMedications])
 
-	// Get the full medication objects for active meds
 	const activeMedDetails = useMemo(() => {
 		return activeMeds
 			.map(pm => getMedicationById(pm.medicationId))
 			.filter((m): m is Medication => m !== undefined)
 	}, [activeMeds])
 
-	// Check for interactions between active medications
 	const interactions = useMemo(() => {
 		const ingredients = activeMedDetails.map(m => m.activeIngredient)
 		return checkInteractions(ingredients)
 	}, [activeMedDetails])
 
-	// Get available medications for this pet's species
 	const availableMeds = useMemo(() => {
 		if (!pet || (pet.species !== 'dog' && pet.species !== 'cat')) return []
 		return getMedicationsForSpecies(pet.species)
 	}, [pet])
 
-	// Calculate dosage for selected medication
 	const selectedMed = selectedMedId
 		? getMedicationById(selectedMedId)
 		: undefined
@@ -101,10 +88,7 @@ export function PetDetailPage() {
 	return (
 		<div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
 			{/* Back link */}
-			<Link
-				to="/my-pets"
-				className="btn-ghost mb-6 -ml-2"
-			>
+			<Link to="/my-pets" className="btn-ghost mb-6 -ml-2">
 				<ArrowLeft size={16} /> Back to My Pets
 			</Link>
 
@@ -128,7 +112,7 @@ export function PetDetailPage() {
 
 					{/* Info */}
 					<div className="flex-1">
-						<h1 className="font-serif text-3xl text-neutral-900 dark:text-white">
+						<h1 className="font-serif text-4xl text-neutral-900 dark:text-white">
 							{pet.name}
 						</h1>
 						<p className="mt-1 text-neutral-600 dark:text-neutral-400">
@@ -219,10 +203,7 @@ export function PetDetailPage() {
 							{interactions.map((interaction, idx) => {
 								const styles = getSeverityStyles(interaction.severity)
 								return (
-									<div
-										key={idx}
-										className={cn('rounded-xl p-4', styles.bg)}
-									>
+									<div key={idx} className={cn('rounded-xl p-4', styles.bg)}>
 										<div className="flex items-center gap-2">
 											<span
 												className={cn(
@@ -277,10 +258,7 @@ export function PetDetailPage() {
 							if (!med) return null
 							const dose = calculateDosage(med, pet)
 							return (
-								<div
-									key={pm.id}
-									className="card flex items-center gap-4 p-4"
-								>
+								<div key={pm.id} className="card flex items-center gap-4 p-4">
 									<div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400">
 										<Pill size={22} />
 									</div>
@@ -340,20 +318,21 @@ export function PetDetailPage() {
 								<>
 									{/* Medication Selector */}
 									<div className="mt-4">
-										<label className="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+										<label
+											htmlFor="med-select"
+											className="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+										>
 											Select Medication
 										</label>
 										<select
+											id="med-select"
 											value={selectedMedId}
 											onChange={e => setSelectedMedId(e.target.value)}
 											className="input"
 										>
 											<option value="">Choose a medication...</option>
 											{availableMeds.map(med => (
-												<option
-													key={med.id}
-													value={med.id}
-												>
+												<option key={med.id} value={med.id}>
 													{med.name} ({med.category})
 												</option>
 											))}

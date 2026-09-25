@@ -1,4 +1,5 @@
 import { cn } from '@/lib/format'
+import { speciesEmoji } from '@/lib/species'
 import { usePets, type Pet } from '@/store/pets'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
@@ -14,15 +15,6 @@ import {
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-// Emoji for each species - simple lookup
-const speciesEmoji: Record<Pet['species'], string> = {
-	dog: '🐕',
-	cat: '🐱',
-	bird: '🐦',
-	other: '🐾'
-}
-
-// Empty form state
 const emptyForm = {
 	name: '',
 	species: 'dog' as Pet['species'],
@@ -37,7 +29,6 @@ export function MyPetsPage() {
 		usePets()
 	const location = useLocation()
 
-	// Form state - just useState, nothing fancy
 	const [isAdding, setIsAdding] = useState(false)
 	const [editingId, setEditingId] = useState<string | null>(
 		// Support opening edit mode via navigation state
@@ -63,7 +54,6 @@ export function MyPetsPage() {
 	})
 	const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
 
-	// Form handlers
 	const handleChange = (field: string, value: string) => {
 		setForm(prev => ({ ...prev, [field]: value }))
 	}
@@ -129,10 +119,7 @@ export function MyPetsPage() {
 					</p>
 				</div>
 				{!isAdding && !editingId && (
-					<button
-						className="btn-primary"
-						onClick={() => setIsAdding(true)}
-					>
+					<button className="btn-primary" onClick={() => setIsAdding(true)}>
 						<Plus size={18} /> Add Pet
 					</button>
 				)}
@@ -147,10 +134,7 @@ export function MyPetsPage() {
 						exit={{ opacity: 0, height: 0 }}
 						className="overflow-hidden"
 					>
-						<form
-							onSubmit={handleSubmit}
-							className="card mt-6 p-6"
-						>
+						<form onSubmit={handleSubmit} className="card mt-6 p-6">
 							<div className="mb-6 flex items-center justify-between">
 								<h2 className="font-serif text-2xl text-neutral-900 dark:text-white">
 									{editingId ? 'Edit Pet' : 'Add New Pet'}
@@ -167,10 +151,14 @@ export function MyPetsPage() {
 							<div className="grid gap-4 sm:grid-cols-2">
 								{/* Name */}
 								<div>
-									<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									<label
+										htmlFor="pet-name"
+										className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+									>
 										Name *
 									</label>
 									<input
+										id="pet-name"
 										type="text"
 										value={form.name}
 										onChange={e => handleChange('name', e.target.value)}
@@ -182,10 +170,14 @@ export function MyPetsPage() {
 
 								{/* Species */}
 								<div>
-									<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									<label
+										htmlFor="pet-species"
+										className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+									>
 										Species *
 									</label>
 									<select
+										id="pet-species"
 										value={form.species}
 										onChange={e => handleChange('species', e.target.value)}
 										className="input"
@@ -199,10 +191,14 @@ export function MyPetsPage() {
 
 								{/* Breed */}
 								<div>
-									<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									<label
+										htmlFor="pet-breed"
+										className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+									>
 										Breed
 									</label>
 									<input
+										id="pet-breed"
 										type="text"
 										value={form.breed}
 										onChange={e => handleChange('breed', e.target.value)}
@@ -213,10 +209,14 @@ export function MyPetsPage() {
 
 								{/* Age */}
 								<div>
-									<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									<label
+										htmlFor="pet-age"
+										className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+									>
 										Age (years)
 									</label>
 									<input
+										id="pet-age"
 										type="number"
 										value={form.age}
 										onChange={e => handleChange('age', e.target.value)}
@@ -229,10 +229,14 @@ export function MyPetsPage() {
 
 								{/* Weight */}
 								<div>
-									<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									<label
+										htmlFor="pet-weight"
+										className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+									>
 										Weight (kg)
 									</label>
 									<input
+										id="pet-weight"
 										type="number"
 										value={form.weight}
 										onChange={e => handleChange('weight', e.target.value)}
@@ -246,10 +250,14 @@ export function MyPetsPage() {
 
 								{/* Photo URL */}
 								<div>
-									<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									<label
+										htmlFor="pet-photo"
+										className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+									>
 										Photo URL
 									</label>
 									<input
+										id="pet-photo"
 										type="url"
 										value={form.photo}
 										onChange={e => handleChange('photo', e.target.value)}
@@ -261,10 +269,7 @@ export function MyPetsPage() {
 
 							{/* Form Actions */}
 							<div className="mt-6 flex gap-3">
-								<button
-									type="submit"
-									className="btn-primary"
-								>
+								<button type="submit" className="btn-primary">
 									<Check size={16} /> {editingId ? 'Save Changes' : 'Add Pet'}
 								</button>
 								<button
@@ -323,22 +328,18 @@ export function MyPetsPage() {
 							)}
 
 							<div className="flex gap-4">
-								{/* Photo or emoji */}
-								<div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800">
-									{pet.photo ? (
+								{/* Photo with emoji shown behind it as the fallback */}
+								<div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-neutral-100 text-3xl dark:bg-neutral-800">
+									<span aria-hidden>{speciesEmoji[pet.species]}</span>
+									{pet.photo && (
 										<img
 											src={pet.photo}
 											alt={pet.name}
-											className="h-full w-full object-cover"
+											className="absolute inset-0 h-full w-full object-cover"
 											onError={e => {
-												// Fallback to emoji if image fails
 												e.currentTarget.style.display = 'none'
 											}}
 										/>
-									) : (
-										<div className="flex h-full w-full items-center justify-center text-3xl">
-											{speciesEmoji[pet.species]}
-										</div>
 									)}
 								</div>
 

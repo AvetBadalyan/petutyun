@@ -37,7 +37,6 @@ const NotFoundPage = lazy(() =>
 	import('@/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage }))
 )
 
-// Simple wrapper for Suspense - nothing fancy
 function Page({ children }: { children: React.ReactNode }) {
 	return <Suspense fallback={<PageLoader />}>{children}</Suspense>
 }

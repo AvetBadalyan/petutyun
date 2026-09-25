@@ -1,4 +1,6 @@
 import { adoptablePets } from '@/data/adoptablePets'
+import { motionTransition } from '@/lib/motion'
+import { imageFallback, speciesEmoji } from '@/lib/species'
 import { useFavorites } from '@/store/favorites'
 import { usePets } from '@/store/pets'
 import { motion } from 'framer-motion'
@@ -51,22 +53,13 @@ const fadeUp = {
 	show: { opacity: 1, y: 0 }
 }
 
-// Emoji for species
-const speciesEmoji: Record<string, string> = {
-	dog: '🐕',
-	cat: '🐱',
-	bird: '🐦',
-	other: '🐾'
-}
-
 export function HomePage() {
 	const { pets, activePetId, setActivePet } = usePets()
 	const activePet = pets.find(p => p.id === activePetId)
 	const { toggle, has } = useFavorites()
 
-	// Get 3 random featured pets for adoption
 	const featuredPets = adoptablePets
-		.filter(p => p.species === 'dog') // Prioritize dogs for featured
+		.filter(p => p.species === 'dog')
 		.slice(0, 3)
 
 	return (
@@ -77,7 +70,7 @@ export function HomePage() {
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5 }}
+						transition={motionTransition.base}
 						className="text-center"
 					>
 						<span className="chip mb-4">🐾 Your All-in-One Pet Companion</span>
@@ -90,16 +83,10 @@ export function HomePage() {
 							personalized wellness boxes — all in one place.
 						</p>
 						<div className="mt-8 flex flex-wrap justify-center gap-4">
-							<Link
-								to="/my-pets"
-								className="btn-primary"
-							>
+							<Link to="/my-pets" className="btn-primary">
 								Get Started <ArrowRight size={18} />
 							</Link>
-							<Link
-								to="/adopt"
-								className="btn-secondary"
-							>
+							<Link to="/adopt" className="btn-secondary">
 								Browse Adoptable Pets
 							</Link>
 						</div>
@@ -115,10 +102,7 @@ export function HomePage() {
 							<h2 className="font-serif text-2xl text-neutral-900 dark:text-white">
 								Your Pets
 							</h2>
-							<Link
-								to="/my-pets"
-								className="btn-ghost text-sm"
-							>
+							<Link to="/my-pets" className="btn-ghost text-sm">
 								Manage <ArrowRight size={14} />
 							</Link>
 						</div>
@@ -151,10 +135,7 @@ export function HomePage() {
 												{pet.name}
 											</span>
 											{activePetId === pet.id && (
-												<Star
-													size={14}
-													className="text-coral-500"
-												/>
+												<Star size={14} className="text-coral-500" />
 											)}
 										</div>
 										<span className="text-sm text-neutral-500 dark:text-neutral-400">
@@ -188,10 +169,7 @@ export function HomePage() {
 					className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
 				>
 					{features.map(feature => (
-						<motion.div
-							key={feature.to}
-							variants={fadeUp}
-						>
+						<motion.div key={feature.to} variants={fadeUp}>
 							<Link
 								to={feature.to}
 								className="card group flex flex-col items-center p-6 text-center hover:shadow-card-hover"
@@ -263,10 +241,7 @@ export function HomePage() {
 							Give a pet a second chance at happiness
 						</p>
 					</div>
-					<Link
-						to="/adopt"
-						className="btn-ghost hidden sm:flex"
-					>
+					<Link to="/adopt" className="btn-ghost hidden sm:flex">
 						View all <ArrowRight size={14} />
 					</Link>
 				</div>
@@ -286,7 +261,8 @@ export function HomePage() {
 									alt={pet.name}
 									className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
 									onError={e => {
-										e.currentTarget.src = `https://placehold.co/400x300/f5f5f4/a8a29e?text=${encodeURIComponent(pet.name)}`
+										e.currentTarget.onerror = null
+										e.currentTarget.src = imageFallback(pet.name)
 									}}
 								/>
 								<button
@@ -330,10 +306,7 @@ export function HomePage() {
 					))}
 				</div>
 
-				<Link
-					to="/adopt"
-					className="btn-secondary mx-auto mt-6 flex sm:hidden"
-				>
+				<Link to="/adopt" className="btn-secondary mx-auto mt-6 flex sm:hidden">
 					View All Pets <ArrowRight size={16} />
 				</Link>
 			</section>
