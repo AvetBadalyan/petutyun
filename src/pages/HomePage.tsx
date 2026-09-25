@@ -73,12 +73,10 @@ export function HomePage() {
 						transition={motionTransition.base}
 						className="text-center"
 					>
-						<span className="chip mb-4">
-							🐾 Armenia&apos;s All-in-One Pet Companion
-						</span>
+						<span className="chip mb-4">🐾 Armenia&apos;s Pet Republic</span>
 						<h1 className="font-serif text-5xl text-neutral-900 dark:text-white sm:text-6xl">
-							Welcome to <span className="text-coral-500">Shni</span>
-							<span className="text-teal-500">k</span>
+							Welcome to <span className="text-coral-500">Pet</span>
+							<span className="text-teal-500">utyun</span>
 						</h1>
 						<p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
 							Care for your pets, check symptoms, adopt from shelters across

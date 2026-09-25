@@ -24,7 +24,8 @@ export function Footer() {
 						<Link to="/" className="flex items-center gap-2">
 							<span className="text-2xl">🐾</span>
 							<span className="font-serif text-xl font-semibold text-neutral-900 dark:text-white">
-								Shni<span className="text-coral-500">k</span>
+								<span className="text-coral-500">Pet</span>
+								<span className="text-teal-500">utyun</span>
 							</span>
 						</Link>
 						<p className="mt-4 max-w-sm text-sm text-neutral-600 dark:text-neutral-400">
@@ -98,7 +99,7 @@ export function Footer() {
 
 				<div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-neutral-200 pt-8 dark:border-neutral-800 sm:flex-row">
 					<p className="text-sm text-neutral-500 dark:text-neutral-500">
-						© {new Date().getFullYear()} Shnik. Portfolio demo project.
+						© {new Date().getFullYear()} Petutyun. Portfolio demo project.
 					</p>
 					<p className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-500">
 						Made with <Heart size={14} className="text-coral-500" /> in Yerevan,

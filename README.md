@@ -1,6 +1,8 @@
-# 🐾 PetCare Hub
+# 🐾 Petutyun
 
-An all-in-one pet care companion app. Manage your pets, check symptoms, find
+> "Pet" + "utyun" (Հdelays = republic in Armenian) = **Pet Republic**
+
+Armenia's all-in-one pet care companion app. Manage your pets, check symptoms, find
 adoptable pets, and build personalized wellness boxes.
 
 **Live Demo:** [Coming Soon]

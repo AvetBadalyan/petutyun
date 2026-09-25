@@ -46,7 +46,8 @@ export function Navbar() {
 				<Link to="/" className="flex shrink-0 items-center gap-2">
 					<span className="text-2xl">🐾</span>
 					<span className="font-serif text-xl font-semibold text-neutral-900 dark:text-white">
-						Shni<span className="text-coral-500">k</span>
+						<span className="text-coral-500">Pet</span>
+						<span className="text-teal-500">utyun</span>
 					</span>
 				</Link>
 
