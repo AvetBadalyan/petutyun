@@ -314,7 +314,7 @@ export function MyPetsPage() {
 							key={pet.id}
 							layout
 							className={cn(
-								'card relative p-5 transition-all',
+								'card relative p-5 transition-all duration-200',
 								activePetId === pet.id && 'ring-2 ring-coral-500'
 							)}
 						>
@@ -372,7 +372,7 @@ export function MyPetsPage() {
 									onClick={() => setActivePet(pet.id)}
 									disabled={activePetId === pet.id}
 									className={cn(
-										'grid h-10 w-10 place-items-center rounded-xl transition-colors',
+										'grid h-10 w-10 place-items-center rounded-xl transition-colors duration-200',
 										activePetId === pet.id
 											? 'bg-coral-100 text-coral-700 dark:bg-coral-950 dark:text-coral-300'
 											: 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700'

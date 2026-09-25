@@ -363,7 +363,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 				<img
 					src={pet.photo}
 					alt={pet.name}
-					className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+					className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
 					onError={e => {
 						e.currentTarget.onerror = null
 						e.currentTarget.src = imageFallback()
@@ -376,7 +376,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 						onToggleFavorite()
 					}}
 					className={cn(
-						'absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-full transition-all',
+						'absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-full transition-all duration-200',
 						isFavorite
 							? 'bg-coral-500 text-white'
 							: 'bg-white/90 text-neutral-600 hover:bg-coral-100 hover:text-coral-600'

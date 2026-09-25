@@ -62,7 +62,7 @@ export function AdoptDetailPage() {
 						<button
 							onClick={() => toggle(pet.id)}
 							className={cn(
-								'absolute right-4 top-4 flex items-center gap-2 rounded-full px-4 py-2 font-medium transition-all',
+								'absolute right-4 top-4 flex items-center gap-2 rounded-full px-4 py-2 font-medium transition-all duration-200',
 								isFavorite
 									? 'bg-coral-500 text-white'
 									: 'bg-white/90 text-neutral-700 hover:bg-coral-100 hover:text-coral-600'

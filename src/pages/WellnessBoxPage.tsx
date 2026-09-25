@@ -185,7 +185,7 @@ export function WellnessBoxPage() {
 							className="h-full rounded-full bg-teal-500"
 							initial={{ width: 0 }}
 							animate={{ width: `${progress}%` }}
-							transition={{ duration: 0.3 }}
+							transition={motionTransition.base}
 						/>
 					</div>
 				</div>
@@ -222,7 +222,7 @@ export function WellnessBoxPage() {
 											option.value
 										)
 									}
-									className="flex items-center gap-4 rounded-2xl border-2 border-neutral-200 p-4 text-left transition-all hover:border-teal-500 hover:bg-teal-50 dark:border-neutral-700 dark:hover:border-teal-400 dark:hover:bg-teal-950"
+									className="flex items-center gap-4 rounded-2xl border-2 border-neutral-200 p-4 text-left transition-all duration-200 hover:border-teal-500 hover:bg-teal-50 dark:border-neutral-700 dark:hover:border-teal-400 dark:hover:bg-teal-950"
 								>
 									<div className="flex-1">
 										<p className="font-medium text-neutral-900 dark:text-white">

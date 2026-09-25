@@ -144,7 +144,7 @@ export function SymptomCheckerPage() {
 					</div>
 					<div className="mt-2 h-2 rounded-full bg-neutral-200 dark:bg-neutral-800">
 						<div
-							className="h-full rounded-full bg-teal-500 transition-all duration-300"
+							className="h-full rounded-full bg-teal-500 transition-all duration-200"
 							style={{
 								width:
 									step === 'select-area'
@@ -195,7 +195,7 @@ export function SymptomCheckerPage() {
 										key={pet.id}
 										onClick={() => handleSelectPet(pet.id)}
 										className={cn(
-											'flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all',
+											'flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all duration-200',
 											selectedPetId === pet.id
 												? 'border-teal-500 bg-teal-50 dark:border-teal-400 dark:bg-teal-950'
 												: 'border-neutral-200 hover:border-neutral-300 dark:border-neutral-700 dark:hover:border-neutral-600'
@@ -260,7 +260,7 @@ export function SymptomCheckerPage() {
 								<button
 									key={area.id}
 									onClick={() => handleSelectArea(area.id)}
-									className="flex items-center gap-4 rounded-2xl border-2 border-neutral-200 p-4 text-left transition-all hover:border-teal-500 hover:bg-teal-50 dark:border-neutral-700 dark:hover:border-teal-400 dark:hover:bg-teal-950"
+									className="flex items-center gap-4 rounded-2xl border-2 border-neutral-200 p-4 text-left transition-all duration-200 hover:border-teal-500 hover:bg-teal-50 dark:border-neutral-700 dark:hover:border-teal-400 dark:hover:bg-teal-950"
 								>
 									<span className="text-3xl">{area.emoji}</span>
 									<div>
@@ -309,7 +309,7 @@ export function SymptomCheckerPage() {
 											option.value
 										)
 									}
-									className="rounded-2xl border-2 border-neutral-200 p-4 text-left transition-all hover:border-teal-500 hover:bg-teal-50 dark:border-neutral-700 dark:hover:border-teal-400 dark:hover:bg-teal-950"
+									className="rounded-2xl border-2 border-neutral-200 p-4 text-left transition-all duration-200 hover:border-teal-500 hover:bg-teal-50 dark:border-neutral-700 dark:hover:border-teal-400 dark:hover:bg-teal-950"
 								>
 									<span className="text-neutral-900 dark:text-white">
 										{option.label}

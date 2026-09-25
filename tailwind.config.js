@@ -77,7 +77,7 @@ export default {
 			},
 			animation: {
 				shimmer: 'shimmer 1.5s infinite',
-				'fade-in': 'fade-in 0.3s ease-out'
+				'fade-in': 'fade-in 0.2s ease-out'
 			}
 		}
 	},

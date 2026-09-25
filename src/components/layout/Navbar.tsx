@@ -59,7 +59,7 @@ export function Navbar() {
 							to={l.to}
 							className={({ isActive }) =>
 								cn(
-									'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-colors',
+									'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-200',
 									isActive
 										? 'bg-coral-100 text-coral-700 dark:bg-coral-950 dark:text-coral-300'
 										: 'text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800'

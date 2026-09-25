@@ -36,21 +36,21 @@ export function Footer() {
 						<div className="mt-6 flex items-center gap-4">
 							<a
 								href="#"
-								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
+								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors duration-200 hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
 								aria-label="Twitter"
 							>
 								<Twitter size={18} />
 							</a>
 							<a
 								href="#"
-								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
+								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors duration-200 hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
 								aria-label="GitHub"
 							>
 								<Github size={18} />
 							</a>
 							<a
 								href="#"
-								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
+								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors duration-200 hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
 								aria-label="Email"
 							>
 								<Mail size={18} />
@@ -68,7 +68,7 @@ export function Footer() {
 								<li key={l.label}>
 									<Link
 										to={l.to}
-										className="text-sm text-neutral-600 transition-colors hover:text-coral-600 dark:text-neutral-400 dark:hover:text-coral-400"
+										className="text-sm text-neutral-600 transition-colors duration-200 hover:text-coral-600 dark:text-neutral-400 dark:hover:text-coral-400"
 									>
 										{l.label}
 									</Link>
@@ -87,7 +87,7 @@ export function Footer() {
 								<li key={l.label}>
 									<Link
 										to={l.to}
-										className="text-sm text-neutral-600 transition-colors hover:text-coral-600 dark:text-neutral-400 dark:hover:text-coral-400"
+										className="text-sm text-neutral-600 transition-colors duration-200 hover:text-coral-600 dark:text-neutral-400 dark:hover:text-coral-400"
 									>
 										{l.label}
 									</Link>

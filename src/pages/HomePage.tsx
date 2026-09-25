@@ -112,7 +112,7 @@ export function HomePage() {
 								<button
 									key={pet.id}
 									onClick={() => setActivePet(pet.id)}
-									className={`flex shrink-0 items-center gap-3 rounded-2xl border-2 p-4 transition-all ${
+									className={`flex shrink-0 items-center gap-3 rounded-2xl border-2 p-4 transition-all duration-200 ${
 										activePetId === pet.id
 											? 'border-coral-500 bg-coral-50 dark:border-coral-400 dark:bg-coral-950'
 											: 'border-neutral-200 bg-white hover:border-neutral-300 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600'
@@ -175,7 +175,7 @@ export function HomePage() {
 								className="card group flex flex-col items-center p-6 text-center hover:shadow-card-hover"
 							>
 								<div
-									className={`grid h-14 w-14 place-items-center rounded-2xl transition-transform group-hover:scale-110 ${
+									className={`grid h-14 w-14 place-items-center rounded-2xl transition-transform duration-200 group-hover:scale-110 ${
 										feature.color === 'coral'
 											? 'bg-coral-100 text-coral-600 dark:bg-coral-950 dark:text-coral-400'
 											: 'bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400'
@@ -259,7 +259,7 @@ export function HomePage() {
 								<img
 									src={pet.photo}
 									alt={pet.name}
-									className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+									className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
 									onError={e => {
 										e.currentTarget.onerror = null
 										e.currentTarget.src = imageFallback()
@@ -270,7 +270,7 @@ export function HomePage() {
 										e.preventDefault()
 										toggle(pet.id)
 									}}
-									className={`absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-full transition-all ${
+									className={`absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-full transition-all duration-200 ${
 										has(pet.id)
 											? 'bg-coral-500 text-white'
 											: 'bg-white/90 text-neutral-600 hover:bg-coral-100 hover:text-coral-600'

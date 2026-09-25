@@ -207,7 +207,7 @@ export function PetDetailPage() {
 										<div className="flex items-center gap-2">
 											<span
 												className={cn(
-													'text-xs font-bold uppercase',
+													'text-xs font-semibold uppercase tracking-wide',
 													styles.text
 												)}
 											>
@@ -355,7 +355,7 @@ export function PetDetailPage() {
 														: 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-200'
 												)}
 											>
-												<p className="text-sm uppercase tracking-wide opacity-80">
+												<p className="text-sm font-semibold uppercase tracking-wide opacity-80">
 													{dosageResult.eligible
 														? 'Recommended Dose'
 														: 'Not Recommended'}
