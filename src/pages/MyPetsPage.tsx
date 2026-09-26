@@ -308,13 +308,13 @@ export function MyPetsPage() {
 
 			{/* Pet Cards Grid */}
 			{pets.length > 0 && (
-				<div className="mt-8 grid gap-4 sm:grid-cols-2">
+				<div className="mt-8 grid gap-6 sm:grid-cols-2">
 					{pets.map(pet => (
 						<motion.div
 							key={pet.id}
 							layout
 							className={cn(
-								'card relative p-5 transition-all duration-200',
+								'card relative p-6 transition-all duration-200',
 								activePetId === pet.id && 'ring-2 ring-coral-500'
 							)}
 						>

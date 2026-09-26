@@ -105,7 +105,7 @@ export function HowItWorksPage() {
 				</h2>
 				<div className="mt-6 space-y-4">
 					{faqs.map(faq => (
-						<div key={faq.q} className="card p-5">
+						<div key={faq.q} className="card p-6">
 							<h4 className="flex items-start gap-2 font-medium text-neutral-900 dark:text-white">
 								<CheckCircle
 									size={18}
