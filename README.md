@@ -7,6 +7,30 @@ adoptable pets, and build personalized wellness boxes.
 
 **Live Demo:** [petutyun.vercel.app](https://petutyun.vercel.app/)
 
+## 📸 Screenshots
+
+### Desktop (Light Mode)
+
+| Home                                   | My Pets                                      | Adopt                                    |
+| -------------------------------------- | -------------------------------------------- | ---------------------------------------- |
+| ![Home](./public/screenshots/home.png) | ![My Pets](./public/screenshots/my-pets.png) | ![Adopt](./public/screenshots/adopt.png) |
+
+| Symptom Checker                                              | Wellness Box                                           |
+| ------------------------------------------------------------ | ------------------------------------------------------ |
+| ![Symptom Checker](./public/screenshots/symptom-checker.png) | ![Wellness Box](./public/screenshots/wellness-box.png) |
+
+### Desktop (Dark Mode)
+
+| Home                                             | My Pets                                                |
+| ------------------------------------------------ | ------------------------------------------------------ |
+| ![Home Dark](./public/screenshots/home-dark.png) | ![My Pets Dark](./public/screenshots/my-pets-dark.png) |
+
+### Mobile
+
+| Home                                                 | Adopt                                                  |
+| ---------------------------------------------------- | ------------------------------------------------------ |
+| ![Home Mobile](./public/screenshots/home-mobile.png) | ![Adopt Mobile](./public/screenshots/adopt-mobile.png) |
+
 ## ✨ Features
 
 ### 🐕 My Pets
