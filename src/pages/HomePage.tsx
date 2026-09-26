@@ -76,7 +76,7 @@ export function HomePage() {
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={motionTransition.base}
+							transition={motionTransition}
 							className="text-center lg:text-left"
 						>
 							<span className="chip mb-4">🐾 Armenia&apos;s Pet Republic</span>
@@ -103,7 +103,7 @@ export function HomePage() {
 						<motion.div
 							initial={{ opacity: 0, scale: 0.9 }}
 							animate={{ opacity: 1, scale: 1 }}
-							transition={{ ...motionTransition.base, delay: 0.2 }}
+							transition={{ ...motionTransition, delay: 0.2 }}
 							className="relative mx-auto lg:mx-0"
 						>
 							<div className="relative pb-6">

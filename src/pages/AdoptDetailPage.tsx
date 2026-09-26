@@ -55,7 +55,7 @@ export function AdoptDetailPage() {
 				<motion.div
 					initial={{ opacity: 0, x: -20 }}
 					animate={{ opacity: 1, x: 0 }}
-					transition={motionTransition.base}
+					transition={motionTransition}
 				>
 					<div className="relative overflow-hidden rounded-3xl">
 						<img
@@ -101,7 +101,7 @@ export function AdoptDetailPage() {
 				<motion.div
 					initial={{ opacity: 0, x: 20 }}
 					animate={{ opacity: 1, x: 0 }}
-					transition={{ ...motionTransition.base, delay: 0.1 }}
+					transition={{ ...motionTransition, delay: 0.1 }}
 				>
 					{/* Header */}
 					<div className="flex items-start justify-between">

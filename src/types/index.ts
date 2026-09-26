@@ -1,4 +1,4 @@
-export type { Pet } from '@/store/pets'
+export type { Pet, PetMedication } from '@/store/pets'
 
 export type Species = 'dog' | 'cat' | 'bird' | 'other'
 
@@ -58,26 +58,4 @@ export interface QuizAnswers {
 	age: PetAge
 	activity: PetActivity
 	healthFocus: HealthFocus | 'none'
-}
-
-// ---- Symptom History ----
-
-export interface SymptomCheck {
-	id: string
-	petId: string
-	petName: string
-	date: string // ISO string
-	area: SymptomArea
-	result: SymptomResult
-}
-
-// ---- Medication Tracking ----
-
-export interface PetMedication {
-	id: string
-	medicationId: string // References medication from medications.ts
-	petId: string
-	startDate: string // ISO string
-	active: boolean
-	notes?: string
 }

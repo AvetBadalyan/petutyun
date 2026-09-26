@@ -89,7 +89,7 @@ export function HowItWorksPage() {
 							</p>
 							<Link
 								to={step.link}
-								className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-coral-600 hover:text-coral-700 dark:text-coral-400"
+								className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-coral-600 transition-colors duration-200 hover:text-coral-700 dark:text-coral-400"
 							>
 								Try it <ArrowRight size={14} />
 							</Link>

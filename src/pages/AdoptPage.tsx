@@ -4,7 +4,7 @@ import { motionTransition } from '@/lib/motion'
 import { imageFallback, speciesEmoji } from '@/lib/species'
 import { useFavorites } from '@/store/favorites'
 import type { AdoptablePet } from '@/types'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Filter, Heart, MapPin, Plus, Search, X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -228,97 +228,99 @@ export function AdoptPage() {
 			</div>
 
 			{/* Mobile Filters Panel */}
-			{showFilters && (
-				<motion.div
-					initial={{ opacity: 0, height: 0 }}
-					animate={{ opacity: 1, height: 'auto' }}
-					exit={{ opacity: 0, height: 0 }}
-					className="mt-4 rounded-2xl border-2 border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-900 lg:hidden"
-				>
-					<div className="grid gap-4 sm:grid-cols-2">
-						<div>
-							<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-								Species
-							</label>
-							<select
-								value={species}
-								onChange={e => setSpecies(e.target.value)}
-								className="select"
+			<AnimatePresence>
+				{showFilters && (
+					<motion.div
+						initial={{ opacity: 0, height: 0 }}
+						animate={{ opacity: 1, height: 'auto' }}
+						exit={{ opacity: 0, height: 0 }}
+						className="mt-4 overflow-hidden rounded-2xl border-2 border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-900 lg:hidden"
+					>
+						<div className="grid gap-4 sm:grid-cols-2">
+							<div>
+								<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									Species
+								</label>
+								<select
+									value={species}
+									onChange={e => setSpecies(e.target.value)}
+									className="select"
+								>
+									{speciesOptions.map(opt => (
+										<option key={opt.value} value={opt.value}>
+											{opt.label}
+										</option>
+									))}
+								</select>
+							</div>
+
+							<div>
+								<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									Size
+								</label>
+								<select
+									value={size}
+									onChange={e => setSize(e.target.value)}
+									className="select"
+								>
+									{sizeOptions.map(opt => (
+										<option key={opt.value} value={opt.value}>
+											{opt.label}
+										</option>
+									))}
+								</select>
+							</div>
+
+							<div>
+								<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+									Age
+								</label>
+								<select
+									value={age}
+									onChange={e => setAge(e.target.value)}
+									className="select"
+								>
+									{ageOptions.map(opt => (
+										<option key={opt.value} value={opt.value}>
+											{opt.label}
+										</option>
+									))}
+								</select>
+							</div>
+
+							<div className="flex flex-col gap-2">
+								<label className="flex cursor-pointer items-center gap-2">
+									<input
+										type="checkbox"
+										checked={goodWithKids}
+										onChange={e => setGoodWithKids(e.target.checked)}
+										className="h-4 w-4 rounded accent-coral-500"
+									/>
+									<span className="text-sm">Good with kids</span>
+								</label>
+								<label className="flex cursor-pointer items-center gap-2">
+									<input
+										type="checkbox"
+										checked={goodWithPets}
+										onChange={e => setGoodWithPets(e.target.checked)}
+										className="h-4 w-4 rounded accent-coral-500"
+									/>
+									<span className="text-sm">Good with other pets</span>
+								</label>
+							</div>
+						</div>
+
+						{activeFilters > 0 && (
+							<button
+								onClick={clearFilters}
+								className="btn-ghost mt-4 w-full text-coral-600"
 							>
-								{speciesOptions.map(opt => (
-									<option key={opt.value} value={opt.value}>
-										{opt.label}
-									</option>
-								))}
-							</select>
-						</div>
-
-						<div>
-							<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-								Size
-							</label>
-							<select
-								value={size}
-								onChange={e => setSize(e.target.value)}
-								className="select"
-							>
-								{sizeOptions.map(opt => (
-									<option key={opt.value} value={opt.value}>
-										{opt.label}
-									</option>
-								))}
-							</select>
-						</div>
-
-						<div>
-							<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
-								Age
-							</label>
-							<select
-								value={age}
-								onChange={e => setAge(e.target.value)}
-								className="select"
-							>
-								{ageOptions.map(opt => (
-									<option key={opt.value} value={opt.value}>
-										{opt.label}
-									</option>
-								))}
-							</select>
-						</div>
-
-						<div className="flex flex-col gap-2">
-							<label className="flex cursor-pointer items-center gap-2">
-								<input
-									type="checkbox"
-									checked={goodWithKids}
-									onChange={e => setGoodWithKids(e.target.checked)}
-									className="h-4 w-4 rounded accent-coral-500"
-								/>
-								<span className="text-sm">Good with kids</span>
-							</label>
-							<label className="flex cursor-pointer items-center gap-2">
-								<input
-									type="checkbox"
-									checked={goodWithPets}
-									onChange={e => setGoodWithPets(e.target.checked)}
-									className="h-4 w-4 rounded accent-coral-500"
-								/>
-								<span className="text-sm">Good with other pets</span>
-							</label>
-						</div>
-					</div>
-
-					{activeFilters > 0 && (
-						<button
-							onClick={clearFilters}
-							className="btn-ghost mt-4 w-full text-coral-600"
-						>
-							<X size={16} /> Clear All Filters
-						</button>
-					)}
-				</motion.div>
-			)}
+								<X size={16} /> Clear All Filters
+							</button>
+						)}
+					</motion.div>
+				)}
+			</AnimatePresence>
 
 			{/* Results Grid */}
 			{filteredPets.length === 0 ? (
@@ -378,7 +380,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
-			transition={motionTransition.base}
+			transition={motionTransition}
 			className="card group flex flex-col overflow-hidden"
 		>
 			{/* Image */}

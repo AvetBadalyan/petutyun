@@ -185,7 +185,7 @@ export function WellnessBoxPage() {
 							className="h-full rounded-full bg-teal-500"
 							initial={{ width: 0 }}
 							animate={{ width: `${progress}%` }}
-							transition={motionTransition.base}
+							transition={motionTransition}
 						/>
 					</div>
 				</div>
@@ -206,7 +206,7 @@ export function WellnessBoxPage() {
 						initial={{ opacity: 0, x: 20 }}
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: -20 }}
-						transition={motionTransition.fast}
+						transition={motionTransition}
 					>
 						<h2 className="font-serif text-2xl text-neutral-900 dark:text-white">
 							{questions[step].title}
@@ -336,7 +336,7 @@ export function WellnessBoxPage() {
 																	<button
 																		key={alt.id}
 																		onClick={() => swapItem(item.id, alt)}
-																		className="flex w-full items-center gap-2 rounded-lg p-2 text-left text-sm transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+																		className="flex w-full items-center gap-2 rounded-xl p-2 text-left text-sm transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
 																	>
 																		<img
 																			src={alt.image}

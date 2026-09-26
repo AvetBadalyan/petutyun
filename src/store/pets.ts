@@ -35,15 +35,14 @@ interface PetsState {
 
 	addMedication: (petId: string, medicationId: string, notes?: string) => void
 	removeMedication: (id: string) => void
-	toggleMedication: (id: string) => void
 	getMedicationsForPet: (petId: string) => PetMedication[]
 }
 
 const generateId = (prefix: string) =>
 	`${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`
 
-// Default demo pets so portfolio isn't empty on first visit
-// Dina is the developer's real dog - a pitbull affectionately called "Dina-saur" 🦖
+// Default demo pets so the portfolio isn't empty on first visit.
+// Dina is the developer's real dog 🦖
 const defaultPets: Pet[] = [
 	{
 		id: 'demo-pet-1',
@@ -165,14 +164,6 @@ export const usePets = create<PetsState>()(
 			removeMedication: id => {
 				set(state => ({
 					medications: state.medications.filter(m => m.id !== id)
-				}))
-			},
-
-			toggleMedication: id => {
-				set(state => ({
-					medications: state.medications.map(m =>
-						m.id === id ? { ...m, active: !m.active } : m
-					)
 				}))
 			},
 

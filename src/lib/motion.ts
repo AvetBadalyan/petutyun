@@ -1,12 +1,8 @@
-/**
- * One shared transition for all animations so motion feels uniform app-wide:
- * a single 200ms duration on one easing curve. Matches the `duration-200`
- * used by CSS hover transitions.
- */
+// Shared Framer Motion transition used app-wide: 200ms matches the
+// CSS `duration-200` used on all hover/focus transitions.
 const ease = [0.16, 1, 0.3, 1] as const
-const DURATION = 0.2
 
 export const motionTransition = {
-	fast: { duration: DURATION, ease },
-	base: { duration: DURATION, ease }
+	duration: 0.2,
+	ease
 } as const

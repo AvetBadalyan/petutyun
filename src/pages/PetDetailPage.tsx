@@ -138,7 +138,7 @@ export function PetDetailPage() {
 						</Link>
 						<button
 							onClick={() => setDeleteConfirm(true)}
-							className="grid h-11 w-11 place-items-center rounded-xl border-2 border-neutral-200 text-neutral-500 transition-colors duration-200 hover:border-red-300 hover:bg-red-50 hover:text-red-500 dark:border-neutral-700"
+							className="grid h-11 w-11 place-items-center rounded-xl border-2 border-neutral-200 text-neutral-500 transition-colors duration-200 hover:border-red-300 hover:bg-red-50 hover:text-red-500 dark:border-neutral-700 dark:hover:border-red-700 dark:hover:bg-red-950 dark:hover:text-red-400"
 							aria-label="Delete pet"
 						>
 							<Trash2 size={18} />

@@ -5,16 +5,17 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				// Brand palette: coral (primary) + teal (accent) over warm neutrals.
-				// Optimized for WCAG AA contrast (4.5:1 for text, 3:1 for UI)
+				// Brand palette: coral (primary) + teal (accent) over a zinc neutral scale.
+				// Zinc reads crisp in dark mode and lets the brand colors pop.
+				// Contrast targets: 4.5:1 for text, 3:1 for UI components (WCAG AA).
 				coral: {
 					50: '#fff5f2',
 					100: '#ffe8e1',
 					200: '#ffd1c7',
 					300: '#ffb09e',
 					400: '#ff8567',
-					500: '#ff6b35', // Primary brand color
-					600: '#e84d1a', // Darkened for better contrast on white
+					500: '#ff6b35',
+					600: '#e84d1a',
 					700: '#c74316',
 					800: '#a33916',
 					900: '#873418',
@@ -26,15 +27,13 @@ export default {
 					200: '#92fee5',
 					300: '#53f5d5',
 					400: '#21e2c1',
-					500: '#2ec4b6', // Secondary brand color
+					500: '#2ec4b6',
 					600: '#069e91',
 					700: '#0a7e75',
 					800: '#0e645e',
 					900: '#11534e',
 					950: '#033331'
 				},
-				// Cool neutral scale (zinc) — a clean slate-gray rather than a warm
-				// brown, so dark mode reads crisp and the coral/teal accents pop.
 				neutral: {
 					50: '#fafafa',
 					100: '#f4f4f5',
@@ -61,9 +60,6 @@ export default {
 					'sans-serif'
 				]
 			},
-			borderRadius: {
-				pill: '1000px'
-			},
 			boxShadow: {
 				card: '0 4px 24px -8px rgba(0, 0, 0, 0.08)',
 				'card-hover': '0 12px 36px -10px rgba(0, 0, 0, 0.15)'
@@ -71,15 +67,10 @@ export default {
 			keyframes: {
 				shimmer: {
 					'100%': { transform: 'translateX(100%)' }
-				},
-				'fade-in': {
-					'0%': { opacity: '0', transform: 'translateY(10px)' },
-					'100%': { opacity: '1', transform: 'translateY(0)' }
 				}
 			},
 			animation: {
-				shimmer: 'shimmer 1.5s infinite',
-				'fade-in': 'fade-in 0.2s ease-out'
+				shimmer: 'shimmer 1.5s infinite'
 			}
 		}
 	},

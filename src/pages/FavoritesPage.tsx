@@ -92,7 +92,7 @@ export function FavoritesPage() {
 							<div className="min-w-0 flex-1">
 								<Link
 									to={`/adopt/${pet.id}`}
-									className="font-serif text-xl text-neutral-900 hover:text-coral-600 dark:text-white dark:hover:text-coral-400"
+									className="font-serif text-xl text-neutral-900 transition-colors duration-200 hover:text-coral-600 dark:text-white dark:hover:text-coral-400"
 								>
 									{pet.name}
 								</Link>
