@@ -234,7 +234,7 @@ export function PetDetailPage() {
 
 			{/* Current Medications */}
 			<section className="mt-8">
-				<div className="flex items-center justify-between">
+				<div className="flex flex-wrap items-center justify-between gap-3">
 					<h2 className="flex items-center gap-2 font-serif text-2xl text-neutral-900 dark:text-white">
 						<Pill size={22} /> Current Medications
 					</h2>

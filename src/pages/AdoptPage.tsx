@@ -131,11 +131,15 @@ export function AdoptPage() {
 			<div className="mt-6 flex flex-wrap gap-3">
 				{/* Search Input */}
 				<div className="relative flex-1 min-w-[200px]">
+					<label className="sr-only" htmlFor="pet-search">
+						Search adoptable pets
+					</label>
 					<Search
 						size={18}
 						className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
 					/>
 					<input
+						id="pet-search"
 						type="text"
 						value={search}
 						onChange={e => setSearch(e.target.value)}
@@ -147,6 +151,8 @@ export function AdoptPage() {
 				{/* Filter Toggle (Mobile) */}
 				<button
 					onClick={() => setShowFilters(!showFilters)}
+					aria-expanded={showFilters}
+					aria-controls="mobile-filters"
 					className={cn(
 						'btn-secondary lg:hidden',
 						activeFilters > 0 && 'border-coral-500 text-coral-600'
@@ -163,7 +169,11 @@ export function AdoptPage() {
 
 				{/* Desktop Filters */}
 				<div className="hidden gap-3 lg:flex">
+					<label className="sr-only" htmlFor="desktop-species-filter">
+						Species
+					</label>
 					<select
+						id="desktop-species-filter"
 						value={species}
 						onChange={e => setSpecies(e.target.value)}
 						className="select w-auto"
@@ -175,7 +185,11 @@ export function AdoptPage() {
 						))}
 					</select>
 
+					<label className="sr-only" htmlFor="desktop-size-filter">
+						Size
+					</label>
 					<select
+						id="desktop-size-filter"
 						value={size}
 						onChange={e => setSize(e.target.value)}
 						className="select w-auto"
@@ -187,7 +201,11 @@ export function AdoptPage() {
 						))}
 					</select>
 
+					<label className="sr-only" htmlFor="desktop-age-filter">
+						Age
+					</label>
 					<select
+						id="desktop-age-filter"
 						value={age}
 						onChange={e => setAge(e.target.value)}
 						className="select w-auto"
@@ -235,13 +253,18 @@ export function AdoptPage() {
 						animate={{ opacity: 1, height: 'auto' }}
 						exit={{ opacity: 0, height: 0 }}
 						className="mt-4 overflow-hidden rounded-2xl border-2 border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-900 lg:hidden"
+						id="mobile-filters"
 					>
 						<div className="grid gap-4 sm:grid-cols-2">
 							<div>
-								<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+								<label
+									htmlFor="mobile-species-filter"
+									className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+								>
 									Species
 								</label>
 								<select
+									id="mobile-species-filter"
 									value={species}
 									onChange={e => setSpecies(e.target.value)}
 									className="select"
@@ -255,10 +278,14 @@ export function AdoptPage() {
 							</div>
 
 							<div>
-								<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+								<label
+									htmlFor="mobile-size-filter"
+									className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+								>
 									Size
 								</label>
 								<select
+									id="mobile-size-filter"
 									value={size}
 									onChange={e => setSize(e.target.value)}
 									className="select"
@@ -272,10 +299,14 @@ export function AdoptPage() {
 							</div>
 
 							<div>
-								<label className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+								<label
+									htmlFor="mobile-age-filter"
+									className="mb-1 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+								>
 									Age
 								</label>
 								<select
+									id="mobile-age-filter"
 									value={age}
 									onChange={e => setAge(e.target.value)}
 									className="select"
@@ -388,6 +419,9 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 				<img
 					src={pet.photo}
 					alt={pet.name}
+					width={400}
+					height={300}
+					loading="lazy"
 					className="dim-on-dark h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
 					onError={e => {
 						e.currentTarget.onerror = null

@@ -11,7 +11,7 @@ import type {
  * suits; buildWellnessBox() scores products against the quiz answers.
  */
 
-export const wellnessProducts: WellnessProduct[] = [
+const products: WellnessProduct[] = [
 	// === JOINT & MOBILITY ===
 	{
 		id: 'wp-1',
@@ -291,6 +291,15 @@ export const wellnessProducts: WellnessProduct[] = [
 		forAge: ['adult', 'senior']
 	}
 ]
+
+export const wellnessProducts: WellnessProduct[] = products.map(product => {
+	const image = new URL(product.image)
+	image.searchParams.set('w', '128')
+	image.searchParams.set('h', '128')
+	image.searchParams.set('auto', 'format')
+	image.searchParams.set('q', '75')
+	return { ...product, image: image.toString() }
+})
 
 /**
  * Build a personalized wellness box from quiz answers: filter by species,

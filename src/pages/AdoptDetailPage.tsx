@@ -61,6 +61,9 @@ export function AdoptDetailPage() {
 						<img
 							src={pet.photo}
 							alt={pet.name}
+							width={400}
+							height={300}
+							fetchPriority="high"
 							className="aspect-square w-full object-cover"
 							onError={e => {
 								e.currentTarget.onerror = null

@@ -1,0 +1,20 @@
+{
+	"specVersion": "1.0",
+	"host": {
+		"displayName": "Petutyun",
+		"documentationUrl": "https://petutyun.vercel.app/how-it-works"
+	},
+	"entries": [
+		{
+			"identifier": "urn:air:petutyun.vercel.app:catalog:petutyun",
+			"displayName": "Petutyun Site Catalog",
+			"type": "application/ai-catalog+json",
+			"url": "https://petutyun.vercel.app/.well-known/ai-catalog.json",
+			"description": "Discovery catalog for the Petutyun pet-care demonstration website. The site does not expose a callable AI agent or API.",
+			"representativeQueries": [
+				"Where can I browse Petutyun's demonstration pet adoption listings?",
+				"What features does the Petutyun pet care demo provide?"
+			]
+		}
+	]
+}

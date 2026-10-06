@@ -77,6 +77,9 @@ export function FavoritesPage() {
 								<img
 									src={pet.photo}
 									alt={pet.name}
+									width={400}
+									height={300}
+									loading="lazy"
 									className="h-full w-full object-cover"
 									onError={e => {
 										e.currentTarget.onerror = null

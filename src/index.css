@@ -21,6 +21,63 @@
 	::selection {
 		@apply bg-coral-200 text-coral-900;
 	}
+	@keyframes home-enter {
+		from {
+			opacity: 0.8;
+			transform: translateY(12px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	@keyframes home-image-enter {
+		from {
+			transform: translateY(10px) scale(0.98);
+		}
+		to {
+			transform: translateY(0) scale(1);
+		}
+	}
+	.home-enter {
+		animation: home-enter 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+	.home-image-enter {
+		animation: home-image-enter 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+		animation-delay: 80ms;
+	}
+	.home-stagger-item {
+		animation: home-enter 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+	.home-stagger-item:nth-child(2) {
+		animation-delay: 60ms;
+	}
+	.home-stagger-item:nth-child(3) {
+		animation-delay: 120ms;
+	}
+	.home-stagger-item:nth-child(4) {
+		animation-delay: 180ms;
+	}
+	.mobile-menu {
+		display: grid;
+		grid-template-rows: 0fr;
+		opacity: 0;
+		visibility: hidden;
+		transition:
+			grid-template-rows 220ms cubic-bezier(0.16, 1, 0.3, 1),
+			opacity 160ms ease,
+			visibility 0s linear 220ms;
+	}
+	.mobile-menu--open {
+		grid-template-rows: 1fr;
+		opacity: 1;
+		visibility: visible;
+		transition-delay: 0s;
+	}
+	.mobile-menu__content {
+		min-height: 0;
+		overflow: hidden;
+	}
 
 	/* App-wide keyboard focus ring. Uses box-shadow so it isn't clipped by
 	   overflow:hidden on pill/card buttons, and offsets from the element. */
@@ -46,16 +103,17 @@
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.01ms !important;
+		transition-delay: 0s !important;
 		scroll-behavior: auto !important;
 	}
 }
 
 @layer components {
 	.btn-primary {
-		@apply inline-flex items-center justify-center gap-2 rounded-xl bg-coral-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-coral-600 hover:shadow-md hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+		@apply inline-flex items-center justify-center gap-2 rounded-xl bg-coral-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-coral-800 hover:shadow-md hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
 	}
 	.btn-secondary {
-		@apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-coral-500 bg-transparent px-6 py-3 text-sm font-semibold text-coral-600 transition-all duration-200 hover:bg-coral-50 hover:border-coral-600 active:scale-95 dark:border-coral-400 dark:text-coral-400 dark:hover:bg-coral-950;
+		@apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-coral-700 bg-transparent px-6 py-3 text-sm font-semibold text-coral-700 transition-all duration-200 hover:bg-coral-50 hover:border-coral-800 active:scale-95 dark:border-coral-400 dark:text-coral-400 dark:hover:bg-coral-950;
 	}
 	.btn-ghost {
 		@apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium text-neutral-700 transition-colors duration-200 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800;

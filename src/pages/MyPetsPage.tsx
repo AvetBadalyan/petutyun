@@ -335,6 +335,7 @@ export function MyPetsPage() {
 										<img
 											src={pet.photo}
 											alt={pet.name}
+											loading="lazy"
 											className="absolute inset-0 h-full w-full object-cover"
 											onError={e => {
 												e.currentTarget.style.display = 'none'

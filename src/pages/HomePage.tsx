@@ -1,9 +1,7 @@
 import { adoptablePets } from '@/data/adoptablePets'
-import { motionTransition } from '@/lib/motion'
 import { imageFallback, speciesEmoji } from '@/lib/species'
 import { useFavorites } from '@/store/favorites'
 import { usePets } from '@/store/pets'
-import { motion } from 'framer-motion'
 import {
 	ArrowRight,
 	Heart,
@@ -16,8 +14,8 @@ import {
 import { Link } from 'react-router-dom'
 
 // Dina photos — the developer's real pitbull mascot
-import dinaCta from '@/assets/dina-images/dina-cta.jpg'
-import dinaHero from '@/assets/dina-images/dina-hero.jpg'
+import dinaCta from '@/assets/dina-images/dina-cta.webp'
+import dinaHero from '@/assets/dina-images/dina-hero.webp'
 
 // Feature cards data
 const features = [
@@ -51,12 +49,6 @@ const features = [
 	}
 ]
 
-// Animation variants
-const fadeUp = {
-	hidden: { opacity: 0, y: 20 },
-	show: { opacity: 1, y: 0 }
-}
-
 export function HomePage() {
 	const { pets, activePetId, setActivePet } = usePets()
 	const activePet = pets.find(p => p.id === activePetId)
@@ -73,16 +65,12 @@ export function HomePage() {
 				<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
 					<div className="grid items-center gap-12 lg:grid-cols-2">
 						{/* Text content */}
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={motionTransition}
-							className="text-center lg:text-left"
-						>
+						<div className="home-enter text-center lg:text-left">
 							<span className="chip mb-4">🐾 Armenia&apos;s Pet Republic</span>
 							<h1 className="font-serif text-5xl text-neutral-900 dark:text-white sm:text-6xl">
-								Welcome to <span className="text-coral-500">Pet</span>
-								<span className="text-teal-500">utyun</span>
+								Welcome to{' '}
+								<span className="text-coral-700 dark:text-coral-400">Pet</span>
+								<span className="text-teal-700 dark:text-teal-400">utyun</span>
 							</h1>
 							<p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400 lg:mx-0">
 								Care for your pets, check symptoms, adopt from shelters across
@@ -97,32 +85,34 @@ export function HomePage() {
 									Browse Adoptable Pets
 								</Link>
 							</div>
-						</motion.div>
+						</div>
 
 						{/* Dina the mascot */}
-						<motion.div
-							initial={{ opacity: 0, scale: 0.9 }}
-							animate={{ opacity: 1, scale: 1 }}
-							transition={{ ...motionTransition, delay: 0.2 }}
-							className="relative mx-auto lg:mx-0"
-						>
+						<div className="home-image-enter relative mx-auto lg:mx-0">
 							<div className="relative pb-6">
 								<img
 									src={dinaHero}
 									alt="Dina the Pitbull with owner"
+									width={700}
+									height={437}
+									fetchPriority="high"
 									className="w-full max-w-md rounded-3xl object-cover shadow-2xl ring-4 ring-white dark:ring-neutral-800"
 								/>
 								{/* Fun badge — offset clear of the image corner */}
 								<div className="absolute -bottom-3 left-6 rounded-2xl bg-white px-4 py-2.5 shadow-lg ring-1 ring-neutral-200 dark:bg-neutral-800 dark:ring-neutral-700">
 									<p className="text-sm font-medium text-neutral-900 dark:text-white">
-										Meet <span className="text-coral-500">Dina</span> 🦖
+										Meet{' '}
+										<span className="text-coral-700 dark:text-coral-400">
+											Dina
+										</span>{' '}
+										🦖
 									</p>
 									<p className="text-xs text-neutral-500">
 										The &quot;Dina-saur&quot; mascot
 									</p>
 								</div>
 							</div>
-						</motion.div>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -156,6 +146,7 @@ export function HomePage() {
 											<img
 												src={pet.photo}
 												alt={pet.name}
+												loading="lazy"
 												className="h-full w-full rounded-xl object-cover"
 											/>
 										) : (
@@ -194,15 +185,9 @@ export function HomePage() {
 
 			{/* Feature Cards */}
 			<section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-				<motion.div
-					initial="hidden"
-					whileInView="show"
-					viewport={{ once: true }}
-					transition={{ staggerChildren: 0.1 }}
-					className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
-				>
+				<div className="home-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 					{features.map(feature => (
-						<motion.div key={feature.to} variants={fadeUp}>
+						<div key={feature.to} className="home-stagger-item">
 							<Link
 								to={feature.to}
 								className="card group flex flex-col items-center p-6 text-center hover:shadow-card-hover"
@@ -210,8 +195,8 @@ export function HomePage() {
 								<div
 									className={`grid h-14 w-14 place-items-center rounded-2xl transition-transform duration-200 group-hover:scale-110 ${
 										feature.color === 'coral'
-											? 'bg-coral-100 text-coral-600 dark:bg-coral-950 dark:text-coral-400'
-											: 'bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400'
+											? 'bg-coral-100 text-coral-700 dark:bg-coral-950 dark:text-coral-400'
+											: 'bg-teal-100 text-teal-700 dark:bg-teal-950 dark:text-teal-400'
 									}`}
 								>
 									<feature.icon size={26} />
@@ -225,22 +210,22 @@ export function HomePage() {
 								<span
 									className={`mt-4 flex items-center gap-1 text-sm font-medium ${
 										feature.color === 'coral'
-											? 'text-coral-600 dark:text-coral-400'
-											: 'text-teal-600 dark:text-teal-400'
+											? 'text-coral-700 dark:text-coral-400'
+											: 'text-teal-700 dark:text-teal-400'
 									}`}
 								>
 									Explore <ArrowRight size={14} />
 								</span>
 							</Link>
-						</motion.div>
+						</div>
 					))}
-				</motion.div>
+				</div>
 			</section>
 
 			{/* CTA Section */}
 			{pets.length === 0 && (
 				<section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-					<div className="overflow-hidden rounded-3xl bg-gradient-to-r from-coral-500 to-coral-600 px-8 py-12 text-white lg:px-14">
+					<div className="overflow-hidden rounded-3xl bg-gradient-to-r from-coral-700 to-coral-800 px-8 py-12 text-white lg:px-14">
 						<div className="grid items-center gap-8 lg:grid-cols-2">
 							<div>
 								<h2 className="font-serif text-3xl leading-tight sm:text-4xl">
@@ -252,7 +237,7 @@ export function HomePage() {
 								</p>
 								<Link
 									to="/my-pets"
-									className="btn-primary mt-6 bg-white text-coral-600 hover:bg-coral-50"
+									className="btn-primary mt-6 bg-white text-coral-700 hover:bg-coral-50"
 								>
 									Add Your Pet <PawPrint size={18} />
 								</Link>
@@ -261,6 +246,9 @@ export function HomePage() {
 								<img
 									src={dinaCta}
 									alt="Dina"
+									width={400}
+									height={400}
+									loading="lazy"
 									className="w-48 h-48 rounded-2xl object-cover opacity-90"
 								/>
 							</div>
@@ -285,19 +273,19 @@ export function HomePage() {
 					</Link>
 				</div>
 
-				<div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				<div className="home-stagger mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 					{featuredPets.map(pet => (
-						<motion.div
+						<div
 							key={pet.id}
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							className="card group flex flex-col overflow-hidden"
+							className="home-stagger-item card group flex flex-col overflow-hidden"
 						>
 							<div className="relative aspect-[4/3] overflow-hidden">
 								<img
 									src={pet.photo}
 									alt={pet.name}
+									width={400}
+									height={300}
+									loading="lazy"
 									className="dim-on-dark h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
 									onError={e => {
 										e.currentTarget.onerror = null
@@ -331,7 +319,7 @@ export function HomePage() {
 								<p className="text-sm text-neutral-500 dark:text-neutral-400">
 									{pet.breed} · {pet.age}
 								</p>
-								<p className="mt-1 flex items-center gap-1 text-xs text-neutral-400">
+								<p className="mt-1 flex items-center gap-1 text-xs text-neutral-600 dark:text-neutral-400">
 									<MapPin size={12} /> {pet.location}
 								</p>
 								<div className="mt-auto" />
@@ -342,7 +330,7 @@ export function HomePage() {
 									Meet {pet.name}
 								</Link>
 							</div>
-						</motion.div>
+						</div>
 					))}
 				</div>
 

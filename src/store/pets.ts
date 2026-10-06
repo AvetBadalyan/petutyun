@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import dinaProfile from '@/assets/dina-images/dina-profile.webp'
 
 export interface Pet {
 	id: string
@@ -51,7 +52,7 @@ const defaultPets: Pet[] = [
 		breed: 'Pitbull',
 		age: 5,
 		weight: 40,
-		photo: '/dina-profile.jpg'
+		photo: dinaProfile
 	},
 	{
 		id: 'demo-pet-2',
@@ -61,7 +62,7 @@ const defaultPets: Pet[] = [
 		age: 2,
 		weight: 4.5,
 		photo:
-			'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&h=200&fit=crop'
+			'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=160&h=160&fit=crop&auto=format&q=75'
 	},
 	{
 		id: 'demo-pet-3',
@@ -71,7 +72,7 @@ const defaultPets: Pet[] = [
 		age: 5,
 		weight: 35,
 		photo:
-			'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=200&h=200&fit=crop'
+			'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=160&h=160&fit=crop&auto=format&q=75'
 	}
 ]
 

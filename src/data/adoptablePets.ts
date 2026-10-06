@@ -7,7 +7,15 @@ import type { AdoptablePet } from '@/types'
  */
 
 // Reliable dog images from Unsplash
-const dogImages = [
+const optimizeUnsplashImages = (images: string[]) =>
+	images.map(image => {
+		const url = new URL(image)
+		url.searchParams.set('auto', 'format')
+		url.searchParams.set('q', '75')
+		return url.toString()
+	})
+
+const dogImages = optimizeUnsplashImages([
 	'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=300&fit=crop', // Golden Retriever
 	'https://images.unsplash.com/photo-1568572933382-74d440642117?w=400&h=300&fit=crop', // Husky
 	'https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?w=400&h=300&fit=crop', // Lab
@@ -21,16 +29,16 @@ const dogImages = [
 	'https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?w=400&h=300&fit=crop', // Husky
 	'https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?w=400&h=300&fit=crop', // Boxer
 	'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=400&h=300&fit=crop' // Mixed
-]
+])
 
-const catImages = [
+const catImages = optimizeUnsplashImages([
 	'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop', // Orange cat
 	'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=300&fit=crop', // Tabby
 	'https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400&h=300&fit=crop', // Black cat
 	'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400&h=300&fit=crop', // Blue eyes
 	'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=300&fit=crop', // White
 	'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&h=300&fit=crop' // Grey
-]
+])
 
 export const adoptablePets: AdoptablePet[] = [
 	// === DOGS ===

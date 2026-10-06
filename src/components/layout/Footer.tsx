@@ -24,8 +24,8 @@ export function Footer() {
 						<Link to="/" className="flex items-center gap-2">
 							<span className="text-2xl">🐾</span>
 							<span className="font-serif text-xl font-semibold text-neutral-900 dark:text-white">
-								<span className="text-coral-500">Pet</span>
-								<span className="text-teal-500">utyun</span>
+								<span className="text-coral-700 dark:text-coral-400">Pet</span>
+								<span className="text-teal-800 dark:text-teal-400">utyun</span>
 							</span>
 						</Link>
 						<p className="mt-4 max-w-sm text-sm text-neutral-600 dark:text-neutral-400">
@@ -60,9 +60,9 @@ export function Footer() {
 
 					{/* Features */}
 					<div>
-						<h6 className="text-sm font-semibold uppercase tracking-wide text-neutral-900 dark:text-white">
+						<h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-900 dark:text-white">
 							Features
-						</h6>
+						</h2>
 						<ul className="mt-4 space-y-3">
 							{features.map(l => (
 								<li key={l.label}>
@@ -79,9 +79,9 @@ export function Footer() {
 
 					{/* Resources */}
 					<div>
-						<h6 className="text-sm font-semibold uppercase tracking-wide text-neutral-900 dark:text-white">
+						<h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-900 dark:text-white">
 							Resources
-						</h6>
+						</h2>
 						<ul className="mt-4 space-y-3">
 							{resources.map(l => (
 								<li key={l.label}>
@@ -98,10 +98,10 @@ export function Footer() {
 				</div>
 
 				<div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-neutral-200 pt-8 dark:border-neutral-800 sm:flex-row">
-					<p className="text-sm text-neutral-500 dark:text-neutral-500">
+					<p className="text-sm text-neutral-600 dark:text-neutral-400">
 						© {new Date().getFullYear()} Petutyun. Portfolio demo project.
 					</p>
-					<p className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-500">
+					<p className="flex items-center gap-1 text-sm text-neutral-600 dark:text-neutral-400">
 						Made with <Heart size={14} className="text-coral-500" /> in Yerevan,
 						Armenia 🇦🇲
 					</p>

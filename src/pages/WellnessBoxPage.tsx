@@ -277,6 +277,9 @@ export function WellnessBoxPage() {
 										<img
 											src={item.image}
 											alt={item.name}
+											width={128}
+											height={128}
+											loading="lazy"
 											className="h-16 w-16 rounded-xl object-cover"
 											onError={e => {
 												e.currentTarget.onerror = null
@@ -341,6 +344,9 @@ export function WellnessBoxPage() {
 																		<img
 																			src={alt.image}
 																			alt=""
+																			width={128}
+																			height={128}
+																			loading="lazy"
 																			className="h-8 w-8 rounded object-cover"
 																		/>
 																		<span className="flex-1 truncate text-neutral-900 dark:text-white">

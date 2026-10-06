@@ -1,0 +1,15 @@
+# Petutyun
+
+> Petutyun is a frontend demo for pet profiles, symptom guidance, adoption browsing, and wellness-box recommendations in Armenia.
+
+All pet, shelter, medication, symptom, and product data is demonstration content stored locally in the browser. The symptom and dosage tools are not veterinary advice. Adoption inquiries and wellness subscriptions do not contact shelters or process payments.
+
+## Pages
+
+- [Home](https://petutyun.vercel.app/): Overview and featured adoptable pets.
+- [My Pets](https://petutyun.vercel.app/my-pets): Local pet profiles and medication tracking.
+- [Symptom Checker](https://petutyun.vercel.app/symptom-checker): General, non-diagnostic symptom guidance.
+- [Adopt](https://petutyun.vercel.app/adopt): Browse and filter demonstration adoption listings.
+- [Saved Pets](https://petutyun.vercel.app/adopt/favorites): Locally saved adoption listings.
+- [Wellness Box](https://petutyun.vercel.app/wellness-box): Product recommendation quiz demonstration.
+- [How It Works](https://petutyun.vercel.app/how-it-works): Feature and demo information.

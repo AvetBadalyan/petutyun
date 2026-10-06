@@ -1,8 +1,6 @@
 import { cn } from '@/lib/format'
-import { motionTransition } from '@/lib/motion'
 import { useFavorites } from '@/store/favorites'
 import { useTheme } from '@/store/theme'
-import { AnimatePresence, motion } from 'framer-motion'
 import {
 	Heart,
 	Home,
@@ -38,6 +36,8 @@ export function Navbar() {
 					className="grid h-10 w-10 place-items-center rounded-xl text-neutral-700 transition-colors duration-200 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800 lg:hidden"
 					onClick={() => setMobileOpen(o => !o)}
 					aria-label="Toggle menu"
+					aria-expanded={mobileOpen}
+					aria-controls="mobile-navigation"
 				>
 					{mobileOpen ? <X size={22} /> : <Menu size={22} />}
 				</button>
@@ -46,8 +46,8 @@ export function Navbar() {
 				<Link to="/" className="flex shrink-0 items-center gap-2">
 					<span className="text-2xl">🐾</span>
 					<span className="font-serif text-xl font-semibold text-neutral-900 dark:text-white">
-						<span className="text-coral-500">Pet</span>
-						<span className="text-teal-500">utyun</span>
+						<span className="text-coral-700 dark:text-coral-400">Pet</span>
+						<span className="text-teal-700 dark:text-teal-400">utyun</span>
 					</span>
 				</Link>
 
@@ -100,18 +100,39 @@ export function Navbar() {
 			</div>
 
 			{/* Mobile menu */}
-			<AnimatePresence>
-				{mobileOpen && (
-					<motion.nav
-						initial={{ height: 0, opacity: 0 }}
-						animate={{ height: 'auto', opacity: 1 }}
-						exit={{ height: 0, opacity: 0 }}
-						transition={motionTransition}
-						className="overflow-hidden border-t border-neutral-200 dark:border-neutral-800 lg:hidden"
-					>
-						<div className="flex flex-col gap-1 p-4">
+			<nav
+				id="mobile-navigation"
+				aria-label="Mobile navigation"
+				aria-hidden={!mobileOpen}
+				inert={!mobileOpen}
+				className={cn(
+					'mobile-menu border-t lg:hidden',
+					mobileOpen
+						? 'mobile-menu--open border-neutral-200 dark:border-neutral-800'
+						: 'border-transparent'
+				)}
+			>
+				<div className="mobile-menu__content">
+					<div className="flex flex-col gap-1 p-4">
+						<NavLink
+							to="/"
+							onClick={() => setMobileOpen(false)}
+							className={({ isActive }) =>
+								cn(
+									'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium',
+									isActive
+										? 'bg-coral-100 text-coral-700 dark:bg-coral-950 dark:text-coral-300'
+										: 'text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800'
+								)
+							}
+						>
+							<Home size={18} />
+							Home
+						</NavLink>
+						{navLinks.map(l => (
 							<NavLink
-								to="/"
+								key={l.to}
+								to={l.to}
 								onClick={() => setMobileOpen(false)}
 								className={({ isActive }) =>
 									cn(
@@ -122,31 +143,13 @@ export function Navbar() {
 									)
 								}
 							>
-								<Home size={18} />
-								Home
+								<l.icon size={18} />
+								{l.label}
 							</NavLink>
-							{navLinks.map(l => (
-								<NavLink
-									key={l.to}
-									to={l.to}
-									onClick={() => setMobileOpen(false)}
-									className={({ isActive }) =>
-										cn(
-											'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium',
-											isActive
-												? 'bg-coral-100 text-coral-700 dark:bg-coral-950 dark:text-coral-300'
-												: 'text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800'
-										)
-									}
-								>
-									<l.icon size={18} />
-									{l.label}
-								</NavLink>
-							))}
-						</div>
-					</motion.nav>
-				)}
-			</AnimatePresence>
+						))}
+					</div>
+				</div>
+			</nav>
 		</header>
 	)
 }
