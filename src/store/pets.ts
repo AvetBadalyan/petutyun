@@ -62,7 +62,7 @@ const defaultPets: Pet[] = [
 		age: 2,
 		weight: 4.5,
 		photo:
-			'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=160&h=160&fit=crop&auto=format&q=75'
+   'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=96&h=96&fit=crop&auto=format&q=75'
 	},
 	{
 		id: 'demo-pet-3',
@@ -72,7 +72,7 @@ const defaultPets: Pet[] = [
 		age: 5,
 		weight: 35,
 		photo:
-			'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=160&h=160&fit=crop&auto=format&q=75'
+   'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=96&h=96&fit=crop&auto=format&q=75'
 	}
 ]
 

@@ -40,12 +40,10 @@
 				min-height: 100vh;
 			}
 		</style>
-		<!--
-			Apply the persisted theme before first paint to avoid a flash of the
-			wrong theme. Loaded as a classic script (not inline) so it satisfies
-			the CSP's `script-src 'self'`. See public/theme-init.js.
-		-->
-		<script src="/theme-init.js"></script>
+  <!-- Inline theme script to eliminate render-blocking request -->
+  <script>
+  	(function(){try{var s=localStorage.getItem('petutyun-theme'),t=s?JSON.parse(s).state.theme:window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark')}catch(e){}})();
+  </script>
 	</head>
 	<body>
 		<div id="root"></div>
