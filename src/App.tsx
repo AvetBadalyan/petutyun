@@ -1,5 +1,6 @@
 import { Layout } from '@/components/layout/Layout'
 import { HomePage } from '@/pages/HomePage'
+import { MotionConfig } from 'framer-motion'
 import { lazy } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
@@ -47,7 +48,8 @@ const WellnessBoxPage = lazy(() =>
 
 export default function App() {
 	return (
-		<BrowserRouter>
+		<MotionConfig reducedMotion="user">
+			<BrowserRouter>
 			<Routes>
 				<Route element={<Layout />}>
 					<Route path="/" element={<HomePage />} />
@@ -68,6 +70,7 @@ export default function App() {
 					<Route path="*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>
-		</BrowserRouter>
+			</BrowserRouter>
+		</MotionConfig>
 	)
 }

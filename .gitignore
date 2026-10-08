@@ -37,3 +37,9 @@ build
 *.mp4
 src/assets/dina/
 src/assets/dina-optimized/
+
+# IDE tooling and temporary reports (not part of the app)
+.codemie/
+AI_MODEL_SELECTION_GUIDE.md
+IMAGE_CONVERSION_REPORT.md
+LIGHTHOUSE_OPTIMIZATION_REPORT.md

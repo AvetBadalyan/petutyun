@@ -1,3 +1,4 @@
+import { PageHead } from '@/components/PageHead'
 import {
 	ArrowRight,
 	CheckCircle,
@@ -59,8 +60,10 @@ const faqs = [
 ]
 
 export function HowItWorksPage() {
-	return (
-		<div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+ return (
+ 	<>
+ 		<PageHead title="How It Works" />
+ 		<div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
 			<div className="text-center">
 				<h1 className="font-serif text-4xl text-neutral-900 dark:text-white">
 					How Petutyun Works
@@ -134,6 +137,7 @@ export function HowItWorksPage() {
 					Add Your Pet <PawPrint size={18} />
 				</Link>
 			</div>
-		</div>
+			</div>
+		</>
 	)
 }

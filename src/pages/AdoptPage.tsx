@@ -1,7 +1,9 @@
+import { PageHead } from '@/components/PageHead'
 import { adoptablePets } from '@/data/adoptablePets'
 import { cn } from '@/lib/format'
 import { motionTransition } from '@/lib/motion'
 import { imageFallback, speciesEmoji } from '@/lib/species'
+import { generateSrcSet, imageSizes, optimizeImage } from '@/lib/images'
 import { useFavorites } from '@/store/favorites'
 import type { AdoptablePet } from '@/types'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -103,8 +105,10 @@ export function AdoptPage() {
 		setGoodWithPets(false)
 	}
 
-	return (
-		<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+ return (
+ 	<>
+ 		<PageHead title="Adopt a Pet" />
+ 		<div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
 			{/* Header */}
 			<div className="flex flex-wrap items-end justify-between gap-4">
 				<div>
@@ -395,7 +399,8 @@ export function AdoptPage() {
 					)}
 				</>
 			)}
-		</div>
+			</div>
+		</>
 	)
 }
 
@@ -414,20 +419,22 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 			transition={motionTransition}
 			className="card group flex flex-col overflow-hidden"
 		>
-			{/* Image */}
-			<div className="relative aspect-[4/3] overflow-hidden">
-				<img
-					src={pet.photo}
-					alt={pet.name}
-					width={400}
-					height={300}
-					loading="lazy"
-					className="dim-on-dark h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-					onError={e => {
-						e.currentTarget.onerror = null
-						e.currentTarget.src = imageFallback()
-					}}
-				/>
+   {/* Image */}
+   <div className="relative aspect-[4/3] overflow-hidden">
+   	<img
+   		src={optimizeImage(pet.photo, 400, 300)}
+   		srcSet={generateSrcSet(pet.photo, [320, 400, 640, 800])}
+   		sizes={imageSizes.card}
+   		alt={pet.name}
+   		width={400}
+   		height={300}
+   		loading="lazy"
+   		className="dim-on-dark h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+   		onError={e => {
+   			e.currentTarget.onerror = null
+   			e.currentTarget.src = imageFallback()
+   		}}
+   	/>
 				{/* Favorite button */}
 				<button
 					onClick={e => {
@@ -471,7 +478,7 @@ function PetCard({ pet, isFavorite, onToggleFavorite }: PetCardProps) {
 				</p>
 
 				{/* Tags - fixed height keeps card bodies aligned */}
-				<div className="mt-3 flex min-h-[28px] flex-wrap gap-1">
+    <div className="mt-3 flex min-h-7 flex-wrap gap-1">
 					{pet.goodWithKids && (
 						<span className="chip-teal text-xs">Kids OK</span>
 					)}

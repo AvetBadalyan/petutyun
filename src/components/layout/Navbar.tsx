@@ -12,7 +12,7 @@ import {
 	Sun,
 	X
 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 const navLinks = [
@@ -23,10 +23,20 @@ const navLinks = [
 ]
 
 export function Navbar() {
-	const [mobileOpen, setMobileOpen] = useState(false)
-	const theme = useTheme(s => s.theme)
-	const toggleTheme = useTheme(s => s.toggle)
-	const favCount = useFavorites(s => s.ids.length)
+ const [mobileOpen, setMobileOpen] = useState(false)
+ const theme = useTheme(s => s.theme)
+ const toggleTheme = useTheme(s => s.toggle)
+ const favCount = useFavorites(s => s.ids.length)
+
+ // Close the mobile menu on Escape, matching the close button/backdrop UX.
+ useEffect(() => {
+ 	if (!mobileOpen) return
+ 	const handleKeyDown = (e: KeyboardEvent) => {
+ 		if (e.key === 'Escape') setMobileOpen(false)
+ 	}
+ 	document.addEventListener('keydown', handleKeyDown)
+ 	return () => document.removeEventListener('keydown', handleKeyDown)
+ }, [mobileOpen])
 
 	return (
 		<header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/80 backdrop-blur-lg dark:border-neutral-800 dark:bg-neutral-950/80">
@@ -82,7 +92,7 @@ export function Navbar() {
 					>
 						<Heart size={20} />
 						{favCount > 0 && (
-							<span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-coral-500 px-1 text-[11px] font-bold text-white">
+       <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-coral-500 px-1 text-xs font-bold text-white">
 								{favCount}
 							</span>
 						)}

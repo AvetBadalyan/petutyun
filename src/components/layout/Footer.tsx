@@ -1,4 +1,4 @@
-import { Github, Heart, Mail, Twitter } from 'lucide-react'
+import { Github, Heart, Mail } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const features = [
@@ -10,8 +10,7 @@ const features = [
 
 const resources = [
 	{ label: 'How It Works', to: '/how-it-works' },
-	{ label: 'Saved Pets', to: '/adopt/favorites' },
-	{ label: 'About', to: '#' }
+	{ label: 'Saved Pets', to: '/adopt/favorites' }
 ]
 
 export function Footer() {
@@ -31,32 +30,27 @@ export function Footer() {
 						<p className="mt-4 max-w-sm text-sm text-neutral-600 dark:text-neutral-400">
 							Armenia&apos;s all-in-one pet companion. Manage your pets, check
 							symptoms, adopt from shelters across the country, and build
-							personalized wellness boxes.
-						</p>
-						<div className="mt-6 flex items-center gap-4">
-							<a
-								href="#"
-								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors duration-200 hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
-								aria-label="Twitter"
-							>
-								<Twitter size={18} />
-							</a>
-							<a
-								href="#"
-								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors duration-200 hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
-								aria-label="GitHub"
-							>
-								<Github size={18} />
-							</a>
-							<a
-								href="#"
-								className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors duration-200 hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
-								aria-label="Email"
-							>
-								<Mail size={18} />
-							</a>
-						</div>
-					</div>
+     			personalized wellness boxes.
+     	</p>
+     	<div className="mt-6 flex items-center gap-4">
+     		<a
+     			href="https://github.com/AvetBadalyan/petutyun"
+     			target="_blank"
+     			rel="noopener noreferrer"
+     			className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors duration-200 hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
+     			aria-label="View source on GitHub"
+     		>
+     			<Github size={18} />
+     		</a>
+     		<a
+     			href="mailto:hello@petutyun.am"
+     			className="grid h-10 w-10 place-items-center rounded-xl bg-neutral-200 text-neutral-600 transition-colors duration-200 hover:bg-coral-100 hover:text-coral-600 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-coral-950 dark:hover:text-coral-400"
+     			aria-label="Contact us"
+     		>
+     			<Mail size={18} />
+     		</a>
+     	</div>
+     </div>
 
 					{/* Features */}
 					<div>

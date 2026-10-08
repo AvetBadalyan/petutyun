@@ -1,9 +1,12 @@
+import { PageHead } from '@/components/PageHead'
 import { Home, Search } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export function NotFoundPage() {
 	return (
-		<div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
+		<>
+			<PageHead title="Page Not Found" />
+			<div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
 			<div className="text-8xl">🐾</div>
 			<h1 className="mt-6 font-serif text-5xl text-neutral-900 dark:text-white">
 				Page Not Found
@@ -19,6 +22,7 @@ export function NotFoundPage() {
 					<Search size={18} /> Find Pets
 				</Link>
 			</div>
-		</div>
+			</div>
+		</>
 	)
 }

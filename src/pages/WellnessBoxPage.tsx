@@ -1,3 +1,4 @@
+import { PageHead } from '@/components/PageHead'
 import { buildWellnessBox, getAlternatives } from '@/data/wellnessProducts'
 import { cn } from '@/lib/format'
 import { motionTransition } from '@/lib/motion'
@@ -156,8 +157,10 @@ export function WellnessBoxPage() {
 		setShowSuccess(true)
 	}
 
-	return (
-		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+ return (
+ 	<>
+ 		<PageHead title="Wellness Box" />
+ 		<div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
 			{/* Header */}
 			<div className="mb-8 text-center">
 				<div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400">
@@ -439,6 +442,7 @@ export function WellnessBoxPage() {
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</div>
+			</div>
+		</>
 	)
 }

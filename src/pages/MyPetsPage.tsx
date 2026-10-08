@@ -1,3 +1,4 @@
+import { PageHead } from '@/components/PageHead'
 import { cn } from '@/lib/format'
 import { speciesEmoji } from '@/lib/species'
 import { usePets, type Pet } from '@/store/pets'
@@ -105,8 +106,10 @@ export function MyPetsPage() {
 		setDeleteConfirm(null)
 	}
 
-	return (
-		<div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+ return (
+ 	<>
+ 		<PageHead title="My Pets" />
+ 		<div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
 			{/* Header */}
 			<div className="flex flex-wrap items-end justify-between gap-4">
 				<div>
@@ -438,6 +441,7 @@ export function MyPetsPage() {
 					))}
 				</div>
 			)}
-		</div>
+			</div>
+		</>
 	)
 }

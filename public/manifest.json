@@ -1,0 +1,18 @@
+{
+  "name": "Petutyun · Armenia's Pet Republic",
+  "short_name": "Petutyun",
+  "description": "Care for your pets, check symptoms, adopt from shelters across Armenia, and build personalized wellness boxes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#ff6b35",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

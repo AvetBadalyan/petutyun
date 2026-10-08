@@ -1,5 +1,6 @@
 import { getAdoptablePetsByIds } from '@/data/adoptablePets'
 import { imageFallback, speciesEmoji } from '@/lib/species'
+import { generateSrcSet, optimizeImage } from '@/lib/images'
 import { useFavorites } from '@/store/favorites'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Heart, MapPin, Trash2 } from 'lucide-react'
@@ -70,22 +71,24 @@ export function FavoritesPage() {
 							className="card flex flex-col gap-4 p-4 sm:flex-row sm:items-center"
 						>
 							{/* Image */}
-							<Link
-								to={`/adopt/${pet.id}`}
-								className="relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl"
-							>
-								<img
-									src={pet.photo}
-									alt={pet.name}
-									width={400}
-									height={300}
-									loading="lazy"
-									className="h-full w-full object-cover"
-									onError={e => {
-										e.currentTarget.onerror = null
-										e.currentTarget.src = imageFallback()
-									}}
-								/>
+       <Link
+       	to={`/adopt/${pet.id}`}
+       	className="relative h-32 w-32 shrink-0 overflow-hidden rounded-2xl"
+       >
+       	<img
+       		src={optimizeImage(pet.photo, 128, 128)}
+       		srcSet={generateSrcSet(pet.photo, [128, 256])}
+       		sizes="128px"
+       		alt={pet.name}
+       		width={128}
+       		height={128}
+       		loading="lazy"
+       		className="h-full w-full object-cover"
+       		onError={e => {
+       			e.currentTarget.onerror = null
+       			e.currentTarget.src = imageFallback()
+       		}}
+       	/>
 								<span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-sm">
 									{speciesEmoji[pet.species]}
 								</span>

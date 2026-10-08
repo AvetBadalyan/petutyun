@@ -2,22 +2,50 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<!-- Preconnect to external domains -->
+		<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+		<link rel="dns-prefetch" href="https://images.unsplash.com" />
+		<!-- Preload critical images -->
 		<link
 			rel="preload"
 			as="image"
 			href="/src/assets/dina-images/dina-hero.webp"
 			fetchpriority="high"
 		/>
-		<link
-			rel="icon"
-			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>"
-		/>
+  <link
+  	rel="icon"
+  	href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>"
+  />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ff6b35" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta
 			name="description"
 			content="Petutyun — Armenia's Pet Republic. Care for your pets, check symptoms, adopt from shelters across Armenia, and build personalized wellness boxes."
 		/>
 		<title>Petutyun · Armenia's Pet Republic</title>
+		<!-- Critical CSS for preventing layout shift -->
+		<style>
+			body {
+				margin: 0;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				background-color: #fafafa;
+			}
+			html.dark body {
+				background-color: #0f0f11;
+			}
+			#root {
+				min-height: 100vh;
+			}
+		</style>
+		<!--
+			Apply the persisted theme before first paint to avoid a flash of the
+			wrong theme. Loaded as a classic script (not inline) so it satisfies
+			the CSP's `script-src 'self'`. See public/theme-init.js.
+		-->
+		<script src="/theme-init.js"></script>
 	</head>
 	<body>
 		<div id="root"></div>

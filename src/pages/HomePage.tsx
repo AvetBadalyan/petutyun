@@ -1,5 +1,7 @@
+import { PageHead } from '@/components/PageHead'
 import { adoptablePets } from '@/data/adoptablePets'
 import { imageFallback, speciesEmoji } from '@/lib/species'
+import { generateSrcSet, imageSizes, optimizeImage } from '@/lib/images'
 import { useFavorites } from '@/store/favorites'
 import { usePets } from '@/store/pets'
 import {
@@ -58,8 +60,13 @@ export function HomePage() {
 		.filter(p => p.species === 'dog')
 		.slice(0, 3)
 
-	return (
-		<div>
+ return (
+ 	<>
+ 		<PageHead
+ 			title="Armenia's Pet Republic"
+ 			description="Care for your pets, check symptoms, adopt from shelters across Armenia, and build personalized wellness boxes."
+ 		/>
+ 		<div>
 			{/* Hero Section */}
 			<section className="relative overflow-hidden bg-gradient-to-br from-coral-50 via-white to-teal-50 dark:from-neutral-900 dark:via-neutral-950 dark:to-neutral-900">
 				<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
@@ -131,28 +138,40 @@ export function HomePage() {
 						</div>
 
 						<div className="mt-4 flex gap-4 overflow-x-auto pb-2 no-scrollbar">
-							{pets.map(pet => (
-								<button
-									key={pet.id}
-									onClick={() => setActivePet(pet.id)}
-									className={`flex shrink-0 items-center gap-3 rounded-2xl border-2 p-4 transition-all duration-200 ${
-										activePetId === pet.id
-											? 'border-coral-500 bg-coral-50 dark:border-coral-400 dark:bg-coral-950'
-											: 'border-neutral-200 bg-white hover:border-neutral-300 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600'
-									}`}
-								>
-									<div className="grid h-12 w-12 place-items-center rounded-xl bg-neutral-100 text-2xl dark:bg-neutral-700">
-										{pet.photo ? (
-											<img
-												src={pet.photo}
-												alt={pet.name}
-												loading="lazy"
-												className="h-full w-full rounded-xl object-cover"
-											/>
-										) : (
-											speciesEmoji[pet.species]
-										)}
-									</div>
+       {pets.map(pet => (
+       	<button
+       		key={pet.id}
+       		onClick={() => setActivePet(pet.id)}
+       		className={`flex shrink-0 items-center gap-3 rounded-2xl border-2 p-4 transition-all duration-200 ${
+       			activePetId === pet.id
+       				? 'border-coral-500 bg-coral-50 dark:border-coral-400 dark:bg-coral-950'
+       				: 'border-neutral-200 bg-white hover:border-neutral-300 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600'
+       		}`}
+       	>
+       		<div className="grid h-12 w-12 place-items-center rounded-xl bg-neutral-100 text-2xl dark:bg-neutral-700">
+          {pet.photo ? (
+          	<img
+          		src={
+          			pet.photo.includes('unsplash.com')
+          				? optimizeImage(pet.photo, 48, 48)
+          				: pet.photo
+          		}
+          		{...(pet.photo.includes('unsplash.com')
+          			? {
+          					srcSet: generateSrcSet(pet.photo, [48, 96]),
+          					sizes: '48px'
+          				}
+          			: {})}
+          		alt={pet.name}
+          		loading="lazy"
+          		width="48"
+          		height="48"
+          		className="h-full w-full rounded-xl object-cover"
+          	/>
+          ) : (
+          	speciesEmoji[pet.species]
+          )}
+       		</div>
 									<div className="text-left">
 										<div className="flex items-center gap-2">
 											<span className="font-medium text-neutral-900 dark:text-white">
@@ -242,16 +261,16 @@ export function HomePage() {
 									Add Your Pet <PawPrint size={18} />
 								</Link>
 							</div>
-							<div className="hidden lg:block">
-								<img
-									src={dinaCta}
-									alt="Dina"
-									width={400}
-									height={400}
-									loading="lazy"
-									className="w-48 h-48 rounded-2xl object-cover opacity-90"
-								/>
-							</div>
+       <div className="hidden lg:block">
+       	<img
+       		src={dinaCta}
+       		alt="Dina"
+       		width={192}
+       		height={192}
+       		loading="lazy"
+       		className="w-48 h-48 rounded-2xl object-cover opacity-90"
+       	/>
+       </div>
 						</div>
 					</div>
 				</section>
@@ -279,19 +298,21 @@ export function HomePage() {
 							key={pet.id}
 							className="home-stagger-item card group flex flex-col overflow-hidden"
 						>
-							<div className="relative aspect-[4/3] overflow-hidden">
-								<img
-									src={pet.photo}
-									alt={pet.name}
-									width={400}
-									height={300}
-									loading="lazy"
-									className="dim-on-dark h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-									onError={e => {
-										e.currentTarget.onerror = null
-										e.currentTarget.src = imageFallback()
-									}}
-								/>
+       <div className="relative aspect-[4/3] overflow-hidden">
+       	<img
+       		src={optimizeImage(pet.photo, 400, 300)}
+       		srcSet={generateSrcSet(pet.photo, [320, 400, 640, 800])}
+       		sizes={imageSizes.card}
+       		alt={pet.name}
+       		width={400}
+       		height={300}
+       		loading="lazy"
+       		className="dim-on-dark h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+       		onError={e => {
+       			e.currentTarget.onerror = null
+       			e.currentTarget.src = imageFallback()
+       		}}
+       	/>
 								<button
 									onClick={e => {
 										e.preventDefault()
@@ -338,6 +359,7 @@ export function HomePage() {
 					View All Pets <ArrowRight size={16} />
 				</Link>
 			</section>
-		</div>
+			</div>
+		</>
 	)
 }

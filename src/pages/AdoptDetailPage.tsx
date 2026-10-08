@@ -1,7 +1,9 @@
+import { PageHead } from '@/components/PageHead'
 import { getAdoptablePetById } from '@/data/adoptablePets'
 import { cn } from '@/lib/format'
 import { motionTransition } from '@/lib/motion'
 import { imageFallback, speciesEmoji } from '@/lib/species'
+import { generateSrcSet, optimizeImage } from '@/lib/images'
 import { useFavorites } from '@/store/favorites'
 import { motion } from 'framer-motion'
 import {
@@ -43,8 +45,13 @@ export function AdoptDetailPage() {
 		hours: 'Mon-Sat: 10:00 - 18:00, Sun: 12:00 - 17:00'
 	}
 
-	return (
-		<div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+ return (
+ 	<>
+ 		<PageHead
+ 			title={pet.name}
+ 			description={`Meet ${pet.name}, a ${pet.age} ${pet.breed} available for adoption at ${pet.shelter} in ${pet.location}.`}
+ 		/>
+ 		<div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
 			{/* Back link */}
 			<Link to="/adopt" className="btn-ghost mb-6 -ml-2">
 				<ArrowLeft size={16} /> Back to adoption
@@ -57,19 +64,21 @@ export function AdoptDetailPage() {
 					animate={{ opacity: 1, x: 0 }}
 					transition={motionTransition}
 				>
-					<div className="relative overflow-hidden rounded-3xl">
-						<img
-							src={pet.photo}
-							alt={pet.name}
-							width={400}
-							height={300}
-							fetchPriority="high"
-							className="aspect-square w-full object-cover"
-							onError={e => {
-								e.currentTarget.onerror = null
-								e.currentTarget.src = imageFallback()
-							}}
-						/>
+     <div className="relative overflow-hidden rounded-3xl">
+     	<img
+     		src={optimizeImage(pet.photo, 600, 600)}
+     		srcSet={generateSrcSet(pet.photo, [400, 600, 800, 1000])}
+     		sizes="(max-width: 1024px) 100vw, 600px"
+     		alt={pet.name}
+     		width={600}
+     		height={600}
+     		fetchPriority="high"
+     		className="aspect-square w-full object-cover"
+     		onError={e => {
+     			e.currentTarget.onerror = null
+     			e.currentTarget.src = imageFallback()
+     		}}
+     	/>
 						{/* Favorite button */}
 						<button
 							onClick={() => toggle(pet.id)}
@@ -255,5 +264,6 @@ export function AdoptDetailPage() {
 				</motion.div>
 			</div>
 		</div>
+	</>
 	)
 }

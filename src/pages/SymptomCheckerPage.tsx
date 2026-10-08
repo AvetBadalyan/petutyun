@@ -1,3 +1,4 @@
+import { PageHead } from '@/components/PageHead'
 import { getSymptomResult, symptomAreas } from '@/data/symptoms'
 import { cn } from '@/lib/format'
 import { speciesEmoji } from '@/lib/species'
@@ -103,8 +104,10 @@ export function SymptomCheckerPage() {
 		}
 	}
 
-	return (
-		<div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 lg:px-8">
+ return (
+ 	<>
+ 		<PageHead title="Symptom Checker" />
+ 		<div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 lg:px-8">
 			{/* Header */}
 			<div className="mb-8 text-center">
 				<div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400">
@@ -392,6 +395,7 @@ export function SymptomCheckerPage() {
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</div>
+			</div>
+		</>
 	)
 }
