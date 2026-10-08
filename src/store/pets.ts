@@ -54,26 +54,26 @@ const defaultPets: Pet[] = [
 		weight: 40,
 		photo: dinaProfile
 	},
-	{
-		id: 'demo-pet-2',
-		name: 'Luna',
-		species: 'cat',
-		breed: 'Persian',
-		age: 2,
-		weight: 4.5,
-		photo:
-   'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=96&h=96&fit=crop&auto=format&q=75'
-	},
-	{
-		id: 'demo-pet-3',
-		name: 'Max',
-		species: 'dog',
-		breed: 'German Shepherd',
-		age: 5,
-		weight: 35,
-		photo:
-   'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=96&h=96&fit=crop&auto=format&q=75'
-	}
+ {
+ 	id: 'demo-pet-2',
+ 	name: 'Luna',
+ 	species: 'cat',
+ 	breed: 'Persian',
+ 	age: 2,
+ 	weight: 4.5,
+ 	photo:
+   'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=48&h=48&fit=crop&auto=format&q=75'
+ },
+ {
+ 	id: 'demo-pet-3',
+ 	name: 'Max',
+ 	species: 'dog',
+ 	breed: 'German Shepherd',
+ 	age: 5,
+ 	weight: 35,
+ 	photo:
+   'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=48&h=48&fit=crop&auto=format&q=75'
+ }
 ]
 
 // Default medications for demo

@@ -12,12 +12,12 @@
 			href="/src/assets/dina-images/dina-hero.webp"
 			fetchpriority="high"
 		/>
-  <link
-  	rel="icon"
-  	href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>"
-  />
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#ff6b35" />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>"
+		/>
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="theme-color" content="#ff6b35" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta
 			name="description"
@@ -28,7 +28,10 @@
 		<style>
 			body {
 				margin: 0;
-				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+				font-family:
+					-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+					'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+					sans-serif;
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
 				background-color: #fafafa;
@@ -40,10 +43,20 @@
 				min-height: 100vh;
 			}
 		</style>
-  <!-- Inline theme script to eliminate render-blocking request -->
-  <script>
-  	(function(){try{var s=localStorage.getItem('petutyun-theme'),t=s?JSON.parse(s).state.theme:window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark')}catch(e){}})();
-  </script>
+		<!-- Inline theme script to eliminate render-blocking request -->
+		<script>
+			;(function () {
+				try {
+					var s = localStorage.getItem('petutyun-theme'),
+						t = s
+							? JSON.parse(s).state.theme
+							: window.matchMedia('(prefers-color-scheme: dark)').matches
+								? 'dark'
+								: 'light'
+					if (t === 'dark') document.documentElement.classList.add('dark')
+				} catch (e) {}
+			})()
+		</script>
 	</head>
 	<body>
 		<div id="root"></div>
